@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="castelo_maldoso.vcxproj" Id="63df8217-6085-425f-b232-152d20d0e624" />
+</Solution>
