@@ -1,17 +1,108 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Arquivos de Origem">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="src">
+      <UniqueIdentifier>{d2f1d91f-27b4-49f8-9f70-d1c70ead810a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Arquivos de Cabeçalho">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="include">
+      <UniqueIdentifier>{235b0859-4ccd-4a52-94d8-e47456a6a2c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Arquivos de Recurso">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="include\Gerenciador">
+      <UniqueIdentifier>{e80fa85d-50f2-4870-a760-79e7bb8e3428}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Gerenciador">
+      <UniqueIdentifier>{92733cc8-4896-45bf-adc6-edce0484b54f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Entidade">
+      <UniqueIdentifier>{105b6400-ebe3-44e8-b4d9-5e5bda7835a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Entidade\Personagem">
+      <UniqueIdentifier>{1bf3a4ca-56ba-47b8-a463-56627a07c3a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Entidade\Personagem\Inimigo">
+      <UniqueIdentifier>{8d1536bc-3656-4554-bbe5-427b03517eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Entidade\Personagem\Jogador">
+      <UniqueIdentifier>{a4e6b1cc-3ec1-4f03-8d8c-3b96d6887798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entidade">
+      <UniqueIdentifier>{9e890e67-f81c-4434-90ad-49f289dc8f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entidade\Personagem">
+      <UniqueIdentifier>{894ebb3c-75fd-42e1-8d60-dd409bee5b6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entidade\Personagem\Inimigo">
+      <UniqueIdentifier>{08db0b73-ff04-4982-b303-72adcbad7dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entidade\Personagem\Jogador">
+      <UniqueIdentifier>{f03086eb-f3f7-4e3c-b934-479170f188c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Lista">
+      <UniqueIdentifier>{109f9623-a1cc-4902-92cc-dd168ed735c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Lista">
+      <UniqueIdentifier>{d61f5be6-7450-4ee9-ae3a-7037f53198c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Principal.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Personagem.cpp">
+      <Filter>src\Entidade\Personagem</Filter>
+    </ClCompile>
+    <ClCompile Include="Inimigo.cpp">
+      <Filter>src\Entidade\Personagem\Inimigo</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogador.cpp">
+      <Filter>src\Entidade\Personagem\Jogador</Filter>
+    </ClCompile>
+    <ClCompile Include="GerenciadorGrafico.cpp">
+      <Filter>src\Gerenciador</Filter>
+    </ClCompile>
+    <ClCompile Include="GerenciadorEventos.cpp">
+      <Filter>src\Gerenciador</Filter>
+    </ClCompile>
+    <ClCompile Include="Entidade.cpp">
+      <Filter>src\Entidade</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaEntidade.cpp">
+      <Filter>src\Lista</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Principal.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Personagem.hpp">
+      <Filter>include\Entidade\Personagem</Filter>
+    </ClInclude>
+    <ClInclude Include="Inimigo.hpp">
+      <Filter>include\Entidade\Personagem\Inimigo</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogador.hpp">
+      <Filter>include\Entidade\Personagem\Jogador</Filter>
+    </ClInclude>
+    <ClInclude Include="GerenciadorGrafico.hpp">
+      <Filter>include\Gerenciador</Filter>
+    </ClInclude>
+    <ClInclude Include="GerenciadorEventos.hpp">
+      <Filter>include\Gerenciador</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidade.hpp">
+      <Filter>include\Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="Lista.hpp">
+      <Filter>include\Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaEntidade.hpp">
+      <Filter>include\Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="Elemento.hpp">
+      <Filter>include\Lista</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
