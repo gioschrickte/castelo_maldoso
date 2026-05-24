@@ -18,6 +18,7 @@ namespace Entidade
 				Jogador(const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f));
 				~Jogador();
 				void atualizar();
+				void colisao(Entidade* outraEntidade, sf::Vector2f ds);
 			};
 		}
 	}

@@ -2,8 +2,8 @@
 
 #include "Personagem.hpp"
 
-Entidade::Personagem::Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
-	: Entidade::Entidade(pos, tam), velFinal(sf::Vector2f(vel, vel)), relogio()
+Entidade::Personagem::Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam, const float vel, IDs::IDs id)
+	: Entidade::Entidade(pos, tam, id), velFinal(sf::Vector2f(vel, vel)), relogio()
 {
 	podeAndar = 0;
 	paraEsquerda = 0;
@@ -19,7 +19,7 @@ void Entidade::Personagem::Personagem::andar(const bool paraEsquerda)
 {
 	podeAndar = true;
 	this->paraEsquerda = paraEsquerda;
-}
+} 
 void Entidade::Personagem::Personagem::parar()
 {
 	podeAndar = false;

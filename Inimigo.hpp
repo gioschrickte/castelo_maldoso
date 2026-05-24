@@ -22,6 +22,9 @@ namespace Entidade
 				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo);
 				void movAleatorio();
 				void atualizar();
+				void colisao(Entidade* outraEntidade, sf::Vector2f ds);
+
+				
 			};
 		}
 	}
