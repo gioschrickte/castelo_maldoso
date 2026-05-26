@@ -122,5 +122,8 @@
     <ClInclude Include="IDs.hpp">
       <Filter>include\Entidade</Filter>
     </ClInclude>
+    <ClInclude Include="Obstaculo.hpp">
+      <Filter>include\Entidade</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

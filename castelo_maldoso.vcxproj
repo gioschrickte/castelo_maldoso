@@ -175,6 +175,7 @@
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Lista.hpp" />
     <ClInclude Include="ListaEntidade.hpp" />
+    <ClInclude Include="Obstaculo.hpp" />
     <ClInclude Include="Personagem.hpp" />
     <ClInclude Include="Plataforma.hpp" />
     <ClInclude Include="Principal.hpp" />

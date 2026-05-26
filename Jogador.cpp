@@ -22,17 +22,7 @@ void Entidade::Personagem::Jogador::Jogador::atualizar()
 	relogio.restart();
 }
 
-void Entidade::Personagem::Jogador::Jogador::colisao(Entidade* outraEntidade, sf::Vector2f ds)
+void Entidade::Personagem::Jogador::Jogador::colidir(Inimigo::Inimigo* pIn)
 {
-	switch (outraEntidade->getID()) {
-		case(IDs::IDs::inimigo):
-		{
-
-		}
-		break;
-		case(IDs::IDs::plataforma):
-		{
-			
-		}
-	}
+	pIn->danificar(this);
 }

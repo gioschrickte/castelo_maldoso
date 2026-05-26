@@ -1,21 +1,27 @@
 #include "GerenciadorColisoes.hpp"
 
-Gerenciador::GerenciadorColisoes::GerenciadorColisoes(Lista::ListaEntidade* listaPersonagem, Lista::ListaEntidade* listaObstaculo) :
-	listaPersonagem(listaPersonagem), listaObstaculo(listaObstaculo)
+void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
+{
+	for (int i = 0; i < LIs.size(); i++)
+	{
+		bool col = verificarColisao(static_cast<Entidade::Entidade*> (pJog1), static_cast<Entidade::Entidade*> (LIs[i]));
+		if (col) // se colidiu
+		{
+			pJog1->colidir(LIs[i]);
+		}
+	}
+}
+
+
+Gerenciador::GerenciadorColisoes::GerenciadorColisoes(Entidade::Personagem::Jogador::Jogador* p) :
+	LIs(), LOs(), pJog1(p)
 {
 
 }
 
 Gerenciador::GerenciadorColisoes::~GerenciadorColisoes()
 {
-	if (listaPersonagem)
-	{
-		delete(listaPersonagem);
-	}
-	if (listaObstaculo)
-	{
-		delete(listaObstaculo);
-	}
+	// DELETAR TODAS AS INSTANCIAS EM LI E LO
 }
 
 const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidade::Entidade* ent1, Entidade::Entidade* ent2)
@@ -34,31 +40,40 @@ const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidade::En
 	return sf::Vector2f(distanciaEntreCentros.x - somaMetadeRectangulo.x, distanciaEntreCentros.y - somaMetadeRectangulo.y);
 }
 
-void Gerenciador::GerenciadorColisoes::executar() {
-	for (int i = 0; i < listaPersonagem->getTam() - 1; i++) {
-		Entidade::Entidade* ent1 = listaPersonagem->operator[](i);
-		for (int j = i + 1; j < listaPersonagem->getTam(); j++) {
-			Entidade::Entidade* ent2 = listaPersonagem->operator[](j);
-			sf::Vector2f ds = calculaColisao(ent1, ent2);
-			if (ds.x < 0.0f && ds.y < 0.0f) {
-				ent1->colisao(ent2, ds);
-			}
-		}
-	}
+const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidade::Entidade* ent1, Entidade::Entidade* ent2)
+{
+	sf::Vector2f ds = calculaColisao(ent1, ent2);
+	if (ds.x < 0.0f && ds.y < 0.0f)
+		return true;
+	return false;
+}
 
-	for (int i = 0; i < listaPersonagem->getTam(); i++) {
-		Entidade::Entidade* ent1 = listaPersonagem->operator[](i);
-		for (int j = 0; j < listaObstaculo->getTam(); j++) {
-			Entidade::Entidade* ent2 = listaObstaculo->operator[](j);
-			sf::Vector2f ds = calculaColisao(ent1, ent2);
-			if (ds.x < 0.0f && ds.y < 0.0f) {
-				if (ent2->getID() == IDs::IDs::plataforma) {
-					ent2->colisao(ent1, ds);
-				}
-				else {
-					// outro obstáculo
-				}
-			}
-		}
+void Gerenciador::GerenciadorColisoes::executar() {
+	tratarColisoesJogsInimgs();
+	// tratarColisoesEntsObstacs();
+	tratarColisoesJogsObstacs();
+	
+}
+
+
+void Gerenciador::GerenciadorColisoes::incluirInimigo(Entidade::Personagem::Inimigo::Inimigo* pInim)
+{
+	if (pInim)
+	{
+		LIs.push_back(pInim);
+	}
+	else
+		printf("Erro, pInim Nulo");
+}
+
+void Gerenciador::GerenciadorColisoes::incluirObstaculo(Entidade::Obstaculo::Obstaculo* pObst)
+{
+	if (pObst)
+	{
+		LOs.push_back(pObst);
+	}
+	else
+	{
+		printf("Erro, pObst nulo");
 	}
 }
