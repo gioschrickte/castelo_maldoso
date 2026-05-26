@@ -11,12 +11,12 @@ Lista::ListaEntidade::~ListaEntidade()
 
 }
 
-void Lista::ListaEntidade::addEntidade(Entidade::Entidade* entidade)
+void Lista::ListaEntidade::addEntidade(Entidades::Entidade* entidade)
 {
 	objListaEntidade.addElemento(entidade);
 }
 
-void Lista::ListaEntidade::removerEntidade(Entidade::Entidade* entidade)
+void Lista::ListaEntidade::removerEntidade(Entidades::Entidade* entidade)
 {
 	objListaEntidade.removerElemento(entidade);
 }
@@ -36,7 +36,7 @@ void Lista::ListaEntidade::limpaLista()
 	objListaEntidade.limpaLista();
 }
 
-Entidade::Entidade* Lista::ListaEntidade::operator[](int pos)
+Entidades::Entidade* Lista::ListaEntidade::operator[](int pos)
 {
 	return objListaEntidade.operator[](pos);
 }
@@ -44,11 +44,11 @@ Entidade::Entidade* Lista::ListaEntidade::operator[](int pos)
 void Lista::ListaEntidade::executar(sf::RenderWindow* window)
 {
 	int tam = objListaEntidade.getTam();
-	Entidade::Entidade* aux = nullptr;
+	Entidades::Entidade* aux = nullptr;
 	for (int i = 0; i < tam; i++)
 	{
 		aux = objListaEntidade[i];
-		aux->atualizar();
+		aux->executar();
 		window->draw(aux->getCorpo());
 	}
 }

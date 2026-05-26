@@ -1,28 +1,28 @@
 #include "Entidade.hpp"
 
-Entidade::Entidade::Entidade()
-	: corpo(), id(IDs::IDs::jogador)
+Entidades::Entidade::Entidade()
+	: corpo()
 {
 
 }
 
-Entidade::Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam, IDs::IDs id)
-	: corpo(sf::RectangleShape(tam)), id(id)
+Entidades::Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam)
+	: corpo(sf::RectangleShape(tam))
 {
 	corpo.setPosition(pos);
 }
 
-Entidade::Entidade::~Entidade()
+Entidades::Entidade::~Entidade()
 {
 
 }
 
-const sf::RectangleShape Entidade::Entidade::getCorpo() const
+const sf::RectangleShape Entidades::Entidade::getCorpo() const
 {
 	return corpo;
 }
 
-void Entidade::Entidade::mover(sf::Vector2f ds)
+void Entidades::Entidade::mover(sf::Vector2f ds)
 {
 	corpo.move(ds);
 }

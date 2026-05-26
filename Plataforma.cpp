@@ -1,14 +1,14 @@
 #include "Plataforma.hpp"
 
-Entidade::Obstaculo::Plataforma::Plataforma(const sf::Vector2f pos, const sf::Vector2f tam)
-    : Obstaculo(pos, tam, IDs::IDs::plataforma)
+Entidades::Obstaculos::Plataforma::Plataforma(const sf::Vector2f pos, const sf::Vector2f tam)
+    : Entidades::Obstaculos::Obstaculo(pos, tam)
 {
     corpo.setFillColor(sf::Color::Green);
 }
 
-Entidade::Obstaculo::Plataforma::~Plataforma() {}
+Entidades::Obstaculos::Plataforma::~Plataforma() {}
 
-void Entidade::Obstaculo::Plataforma::colisao(Entidade* outraEntidade, sf::Vector2f ds)
+void Entidades::Obstaculos::Plataforma::colisao(Entidades::Entidade* outraEntidade, sf::Vector2f ds)
 {
     sf::Vector2f posOutra = outraEntidade->getCorpo().getPosition();
     sf::Vector2f posEsta = getCorpo().getPosition();

@@ -1,13 +1,17 @@
 #pragma once
-#include "Entidade.hpp"
 
-namespace Entidade {
-    namespace Obstaculo {
+#include "Jogador.hpp"
+
+namespace Entidades {
+    namespace Obstaculos {
         class Obstaculo : public Entidade {
+        private:
+            bool danoso;
         public:
-            Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam, IDs::IDs id);
+            Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam);
             ~Obstaculo();
-            void atualizar() override;
+            void executar();
+            virtual void obstaculizar(Personagens::Jogadores::Jogador* pjog) {}
         };
     }
 }

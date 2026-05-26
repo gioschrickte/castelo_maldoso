@@ -1,18 +1,19 @@
 #include "Jogador.hpp"
+#include "Inimigo.hpp"
 
-Entidade::Personagem::Jogador::Jogador::Jogador(const sf::Vector2f pos, const sf::Vector2f tam)
-	: Personagem(pos, tam, 200.0f,IDs::IDs::jogador)
+Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, const sf::Vector2f tam)
+	: Personagem(pos, tam, 200.0f)
 {
 	corpo.setFillColor(sf::Color::Blue);
 }
 
-Entidade::Personagem::Jogador::Jogador::~Jogador()
+Entidades::Personagens::Jogadores::Jogador::~Jogador()
 {
 
 }
 
 
-void Entidade::Personagem::Jogador::Jogador::atualizar()
+void Entidades::Personagens::Jogadores::Jogador::executar()
 {
 	if (podeAndar)
 	{
@@ -22,7 +23,8 @@ void Entidade::Personagem::Jogador::Jogador::atualizar()
 	relogio.restart();
 }
 
-void Entidade::Personagem::Jogador::Jogador::colidir(Inimigo::Inimigo* pIn)
+void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Personagens::Inimigos::Inimigo* pIn)
 {
+	// Da pra fazer o jogador ficar um pouco vermelho, ou receber um knock-back
 	pIn->danificar(this);
 }

@@ -1,14 +1,19 @@
 #include "Inimigo.hpp"
+#include "Jogador.hpp"
 
-Entidade::Personagem::Inimigo::Inimigo::Inimigo(Jogador::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
-	: Personagem(pos, tam, 100.0f,IDs::IDs::inimigo), jogador(pjogador)
+Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
+	: Personagem(pos, tam, 100.0f), jogador(pjogador)
 {
 	corpo.setFillColor(sf::Color::Red);
 	srand(time(NULL));
 	moveAleatorio = rand() % 4;
 }
 
-void Entidade::Personagem::Inimigo::Inimigo::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
+Entidades::Personagens::Inimigos::Inimigo::~Inimigo()
+{
+}
+
+void Entidades::Personagens::Inimigos::Inimigo::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
 {
 	if (posJogador.x - posInimigo.x > 0.0f) // à direita
 	{
@@ -20,7 +25,7 @@ void Entidade::Personagem::Inimigo::Inimigo::persegueJogador(sf::Vector2f posJog
 	}
 }
 
-void Entidade::Personagem::Inimigo::Inimigo::movAleatorio()
+void Entidades::Personagens::Inimigos::Inimigo::movAleatorio()
 {
 	if (moveAleatorio == 0)
 	{
@@ -41,7 +46,7 @@ void Entidade::Personagem::Inimigo::Inimigo::movAleatorio()
 	}
 
 }
-void Entidade::Personagem::Inimigo::Inimigo::atualizar()
+void Entidades::Personagens::Inimigos::Inimigo::executar()
 {
 	sf::Vector2f posJogador = jogador->getCorpo().getPosition();
 	sf::Vector2f posInimigo = corpo.getPosition();
@@ -61,9 +66,4 @@ void Entidade::Personagem::Inimigo::Inimigo::atualizar()
 	}
 
 	relogio.restart();
-}
-
-void Entidade::Personagem::Inimigo::Inimigo::colisao(Entidade* outraEntidade, sf::Vector2f ds)
-{
-	// vazio por enquanto
 }

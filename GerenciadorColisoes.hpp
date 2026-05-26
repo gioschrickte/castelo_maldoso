@@ -1,9 +1,7 @@
 #pragma once
-#include "Lista.hpp"
 #include "ListaEntidade.hpp"
-#include "Entidade.hpp"
 #include "Inimigo.hpp"
-#include "Personagem.hpp"
+#include "Jogador.hpp"
 #include "Obstaculo.hpp"
 #include <vector>
 #include <list>
@@ -14,26 +12,28 @@ namespace Gerenciador {
 	class GerenciadorColisoes 
 	{
 		private:
-			vector<Entidade::Personagem::Inimigo::Inimigo*>LIs;
-			list<Entidade::Obstaculo::Obstaculo*>LOs;
+			vector<Entidades::Personagens::Inimigos::Inimigo*>LIs;
+			list<Entidades::Obstaculos::Obstaculo*>LOs;
 			//Projetil
-			Entidade::Personagem::Jogador::Jogador* pJog1;
-			//Entidade::Personagem::Jogador::Jogador* pJog2;
+			Entidades::Personagens::Jogadores::Jogador* pJog1;
 
-
-			
+			//Entidades::Personagens::Jogadores::Jogador* pJog2;		
+			GerenciadorColisoes();	 // Padrão singleton: Construtora como atributo privado
+			static GerenciadorColisoes* pGC;
 
 		public:
-			GerenciadorColisoes(Entidade::Personagem::Jogador::Jogador* p);
 			~GerenciadorColisoes();
-			const sf::Vector2f calculaColisao(Entidade::Entidade* ent1, Entidade::Entidade* ent2);
+			static GerenciadorColisoes* getGerenciadorColisoes();
+			void setJogador1(Entidades::Personagens::Jogadores::Jogador* p);
+			const sf::Vector2f calculaColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
 			void executar();
-			const bool verificarColisao(Entidade::Entidade* ent1, Entidade::Entidade* ent2);
+			const bool verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
 			void tratarColisoesJogsObstacs();
 			void tratarColisoesJogsInimgs();
-			void tratarColisoesJogsProjeteis();
-			void incluirInimigo(Entidade::Personagem::Inimigo::Inimigo* pInim);
-			void incluirObstaculo(Entidade::Obstaculo::Obstaculo* pObst);
+			//void tratarColisoesJogsProjeteis();
+			void tratarColisoesInimgsObstacs();
+			void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pInim);
+			void incluirObstaculo(Entidades::Obstaculos::Obstaculo* pObst);
 			//void incluirProjetil(pj: *Projetil);
 			
 			

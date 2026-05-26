@@ -6,7 +6,7 @@ Principal::Principal()
 	: listaEntidade(), 
 	pGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
 	pEvento(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), 
-	pColisoes(new Gerenciador::GerenciadorColisoes(&listaEntidade, &listaObstaculo))
+	pColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes())
 	
 {
 	instanciaEntidades();
@@ -24,17 +24,17 @@ Principal::~Principal()
 void Principal::instanciaEntidades()
 {
 	// Cria dinamicamente os objetos
-	Entidade::Personagem::Jogador::Jogador* jogador = new Entidade::Personagem::Jogador::Jogador(sf::Vector2f(50.0f, 50.0f));
-	Entidade::Personagem::Inimigo::Inimigo* inimigo1 = new Entidade::Personagem::Inimigo::Inimigo(jogador, sf::Vector2f(100.0f, 100.0f));
-	Entidade::Personagem::Inimigo::Inimigo* inimigo2 = new Entidade::Personagem::Inimigo::Inimigo(jogador, sf::Vector2f(150.0f, 150.0f));
-	Entidade::Obstaculo::Plataforma* plataforma = new Entidade::Obstaculo::Plataforma(sf::Vector2f(300.0f, 50.0f), sf::Vector2f(200.0f, 20.0f));
+	Entidades::Personagens::Jogadores::Jogador* jogador = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(50.0f, 50.0f));
+	Entidades::Personagens::Inimigos::Inimigo* inimigo1 = new Entidades::Personagens::Inimigos::Inimigo(jogador, sf::Vector2f(100.0f, 100.0f));
+	Entidades::Personagens::Inimigos::Inimigo* inimigo2 = new Entidades::Personagens::Inimigos::Inimigo(jogador, sf::Vector2f(150.0f, 150.0f));
+	Entidades::Obstaculos::Plataforma* plataforma = new Entidades::Obstaculos::Plataforma(sf::Vector2f(300.0f, 50.0f), sf::Vector2f(200.0f, 20.0f));
 		
 
 	// Faz o gerenciador gráfico conhecer as Entidades
-	listaEntidade.addEntidade(static_cast<Entidade::Entidade*>(jogador));
-	listaEntidade.addEntidade(static_cast<Entidade::Entidade*>(inimigo1));
-	listaEntidade.addEntidade(static_cast<Entidade::Entidade*>(inimigo2));
-	listaObstaculo.addEntidade(static_cast<Entidade::Entidade*>(plataforma));
+	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jogador));
+	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(inimigo1));
+	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(inimigo2));
+	listaObstaculo.addEntidade(static_cast<Entidades::Entidade*>(plataforma));
 
 
 	
@@ -55,11 +55,11 @@ void Principal::executar()
 
 		for (int i = 0; i < listaEntidade.getTam(); i++)
 		{
-			listaEntidade[i]->atualizar();
+			listaEntidade[i]->executar();
 			pGrafico->desenhaElemento(listaEntidade[i]->getCorpo());
 		}
 		for (int i = 0; i < listaObstaculo.getTam(); i++) {
-			listaObstaculo[i]->atualizar();
+			listaObstaculo[i]->executar();
 			pGrafico->desenhaElemento(listaObstaculo[i]->getCorpo());
 		}
 

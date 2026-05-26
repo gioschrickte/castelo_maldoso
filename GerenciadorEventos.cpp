@@ -24,7 +24,7 @@ Gerenciador::GerenciadorEvento* Gerenciador::GerenciadorEvento::getGerenciadorEv
 }
 
 
-void Gerenciador::GerenciadorEvento::setJogador(Entidade::Personagem::Jogador::Jogador* pJ)
+void Gerenciador::GerenciadorEvento::setJogador(Entidades::Personagens::Jogadores::Jogador* pJ)
 {
 	pJogador = pJ;
 }

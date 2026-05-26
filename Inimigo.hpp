@@ -1,32 +1,28 @@
 #pragma once
 
-#include "Jogador.hpp"
+#include "Personagem.hpp"
 #define RAIO_PERSEGUIR 200.0f
 
-namespace Entidade
-{
-	namespace Personagem
-	{
-		namespace Inimigo
-		{
-			class Inimigo : public Personagem
-			{
+namespace Entidades {
+	namespace Personagens {
+		// forward declaration do Jogador (evita incluir Jogador.hpp aqui)
+		namespace Jogadores { class Jogador; }
+
+		namespace Inimigos {
+			class Inimigo : public Personagem {
 			private:
-				Jogador::Jogador* jogador;
+				Entidades::Personagens::Jogadores::Jogador* jogador;
 				short moveAleatorio;
 				sf::Clock relogioAleatorio;
 				void inicializa();
 			public:
-				Inimigo(Jogador::Jogador* pjogador, const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f), const float vel = 0.01f);
+				Inimigo(Entidades::Personagens::Jogadores::Jogador* pjogador, const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f), const float vel = 0.01f);
 				~Inimigo();
 				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo);
 				void movAleatorio();
-				void atualizar();
-				void danificar(Jogador::Jogador* pJog) = 0;
-				
+				void executar();
+				virtual void danificar(Entidades::Personagens::Jogadores::Jogador* pJog) {}
 			};
 		}
 	}
 }
-
-

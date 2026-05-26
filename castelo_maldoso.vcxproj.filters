@@ -119,9 +119,6 @@
     <ClInclude Include="Plataforma.hpp">
       <Filter>include\Entidade</Filter>
     </ClInclude>
-    <ClInclude Include="IDs.hpp">
-      <Filter>include\Entidade</Filter>
-    </ClInclude>
     <ClInclude Include="Obstaculo.hpp">
       <Filter>include\Entidade</Filter>
     </ClInclude>

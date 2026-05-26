@@ -129,5 +129,6 @@ namespace Lista {
 			}
 			return pAux->getElemento();
 		}
+		return nullptr;
 	}
 }
