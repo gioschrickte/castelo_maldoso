@@ -1,7 +1,7 @@
 #include "Inimigo.hpp"
 
 Entidade::Personagem::Inimigo::Inimigo::Inimigo(Jogador::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
-	: Personagem(pos, tam, 100.0f), jogador(pjogador)
+	: Personagem(pos, tam, 100.0f,IDs::IDs::inimigo), jogador(pjogador)
 {
 	corpo.setFillColor(sf::Color::Red);
 	srand(time(NULL));
@@ -61,4 +61,9 @@ void Entidade::Personagem::Inimigo::Inimigo::atualizar()
 	}
 
 	relogio.restart();
+}
+
+void Entidade::Personagem::Inimigo::Inimigo::colisao(Entidade* outraEntidade, sf::Vector2f ds)
+{
+	// vazio por enquanto
 }

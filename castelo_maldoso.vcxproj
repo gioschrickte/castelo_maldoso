@@ -77,13 +77,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\gssar\Documentos\Estudos\UTFPR\tecprog\castelo_maldoso\SFML-2.6.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\leokr\source\repos\castelo_maldoso\SFML-2.6.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\gssar\Documentos\Estudos\UTFPR\tecprog\castelo_maldoso\SFML-2.6.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\leokr\source\repos\castelo_maldoso\SFML-2.6.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -98,13 +98,13 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\gssar\Documentos\Estudos\UTFPR\tecprog\castelo_maldoso\SFML-2.6.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\leokr\source\repos\castelo_maldoso\SFML-2.6.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\gssar\Documentos\Estudos\UTFPR\tecprog\castelo_maldoso\SFML-2.6.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\leokr\source\repos\castelo_maldoso\SFML-2.6.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;sfml-system.lib</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -152,25 +152,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Entidade.cpp" />
+    <ClCompile Include="GerenciadorColisoes.cpp" />
     <ClCompile Include="GerenciadorEventos.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="ListaEntidade.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Personagem.cpp" />
+    <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Principal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Elemento.hpp" />
     <ClInclude Include="Entidade.hpp" />
+    <ClInclude Include="GerenciadorColisoes.hpp" />
     <ClInclude Include="GerenciadorEventos.hpp" />
     <ClInclude Include="GerenciadorGrafico.hpp" />
+    <ClInclude Include="IDs.hpp" />
     <ClInclude Include="Inimigo.hpp" />
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Lista.hpp" />
     <ClInclude Include="ListaEntidade.hpp" />
+    <ClInclude Include="Obstaculo.hpp" />
     <ClInclude Include="Personagem.hpp" />
+    <ClInclude Include="Plataforma.hpp" />
     <ClInclude Include="Principal.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -72,6 +72,15 @@
     <ClCompile Include="ListaEntidade.cpp">
       <Filter>src\Lista</Filter>
     </ClCompile>
+    <ClCompile Include="GerenciadorColisoes.cpp">
+      <Filter>src\Gerenciador</Filter>
+    </ClCompile>
+    <ClCompile Include="Plataforma.cpp">
+      <Filter>src\Entidade</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstaculo.cpp">
+      <Filter>src\Entidade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Principal.hpp">
@@ -103,6 +112,18 @@
     </ClInclude>
     <ClInclude Include="Elemento.hpp">
       <Filter>include\Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="GerenciadorColisoes.hpp">
+      <Filter>include\Gerenciador</Filter>
+    </ClInclude>
+    <ClInclude Include="Plataforma.hpp">
+      <Filter>include\Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="IDs.hpp">
+      <Filter>include\Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstaculo.hpp">
+      <Filter>include\Entidade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
