@@ -2,7 +2,7 @@
 #include "Jogador.hpp"
 
 Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
-	: Personagem(pos, tam, 100.0f), jogador(pjogador)
+	: Personagem(pos, tam, 100.0f, IDs::IDs::inimigo), jogador(pjogador)
 {
 	corpo.setFillColor(sf::Color::Red);
 	srand(time(NULL));
@@ -66,4 +66,13 @@ void Entidades::Personagens::Inimigos::Inimigo::executar()
 	}
 
 	relogio.restart();
+}
+
+void Entidades::Personagens::Inimigos::Inimigo::colidir(Entidades::Entidade* outraEntidade, sf::Vector2f ds)
+{
+	if (outraEntidade->getId() == IDs::IDs::plataforma)
+	{
+		// Colisão com plataforma: o inimigo para de cair e pode andar novamente
+		podeAndar = false;
+	}
 }

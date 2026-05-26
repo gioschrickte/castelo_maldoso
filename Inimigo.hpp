@@ -21,6 +21,7 @@ namespace Entidades {
 				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo);
 				void movAleatorio();
 				void executar();
+				void colidir(Entidades::Entidade* outraEntidade, sf::Vector2f ds = sf::Vector2f(0.0f, 0.0f));
 				virtual void danificar(Entidades::Personagens::Jogadores::Jogador* pJog) {}
 			};
 		}

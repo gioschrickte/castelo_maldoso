@@ -36,7 +36,10 @@ void Principal::instanciaEntidades()
 	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(inimigo2));
 	listaObstaculo.addEntidade(static_cast<Entidades::Entidade*>(plataforma));
 
-
+	pColisoes->setJogador1(jogador);
+	pColisoes->incluirInimigo(inimigo1);
+	pColisoes->incluirInimigo(inimigo2);
+	pColisoes->incluirObstaculo(plataforma);
 	
 
 

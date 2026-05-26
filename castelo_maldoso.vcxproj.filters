@@ -43,6 +43,12 @@
     <Filter Include="src\Lista">
       <UniqueIdentifier>{d61f5be6-7450-4ee9-ae3a-7037f53198c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\Entidade\Obstaculo">
+      <UniqueIdentifier>{c7ba7a31-9fd0-4edb-8da7-d2ed7242345e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entidade\Obstaculo">
+      <UniqueIdentifier>{64fa8cf0-cfc1-405d-90a8-156f086a05f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,11 +81,11 @@
     <ClCompile Include="GerenciadorColisoes.cpp">
       <Filter>src\Gerenciador</Filter>
     </ClCompile>
-    <ClCompile Include="Plataforma.cpp">
-      <Filter>src\Entidade</Filter>
-    </ClCompile>
     <ClCompile Include="Obstaculo.cpp">
-      <Filter>src\Entidade</Filter>
+      <Filter>src\Entidade\Obstaculo</Filter>
+    </ClCompile>
+    <ClCompile Include="Plataforma.cpp">
+      <Filter>src\Entidade\Obstaculo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,10 +122,13 @@
     <ClInclude Include="GerenciadorColisoes.hpp">
       <Filter>include\Gerenciador</Filter>
     </ClInclude>
-    <ClInclude Include="Plataforma.hpp">
-      <Filter>include\Entidade</Filter>
-    </ClInclude>
     <ClInclude Include="Obstaculo.hpp">
+      <Filter>include\Entidade\Obstaculo</Filter>
+    </ClInclude>
+    <ClInclude Include="Plataforma.hpp">
+      <Filter>include\Entidade\Obstaculo</Filter>
+    </ClInclude>
+    <ClInclude Include="IDs.hpp">
       <Filter>include\Entidade</Filter>
     </ClInclude>
   </ItemGroup>

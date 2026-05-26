@@ -10,24 +10,6 @@ Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
 
 Gerenciador::GerenciadorColisoes::~GerenciadorColisoes()
 {
-	vector<Entidades::Personagens::Inimigos::Inimigo*>::iterator it;
-	it = LIs.begin();
-	while (it != LIs.end())
-	{
-		delete* it;
-		*it = nullptr;
-		it = LIs.erase(it);
-	}
-
-	list<Entidades::Obstaculos::Obstaculo*>::iterator itO;
-	itO = LOs.begin();
-	while (itO != LOs.end())
-	{
-		delete* itO;
-		*itO = nullptr;
-		itO = LOs.erase(itO);
-		it = LIs.erase(it);
-	}
 }
 
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()
@@ -68,34 +50,21 @@ void Gerenciador::GerenciadorColisoes::incluirObstaculo(Entidades::Obstaculos::O
 	}
 }
 
-// Retorna penetração assinada:
-// - componente > 0 = quantidade de sobreposição (penetration depth)
-// - sinal indica direção (positivo: ent1 está à direita/abaixo de ent2)
 const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2)
 {
 	sf::Vector2f pos1 = ent1->getCorpo().getPosition();
 	sf::Vector2f pos2 = ent2->getCorpo().getPosition();
-
 	sf::Vector2f tam1 = ent1->getCorpo().getSize();
 	sf::Vector2f tam2 = ent2->getCorpo().getSize();
 
 	sf::Vector2f centro1(pos1.x + tam1.x / 2.0f, pos1.y + tam1.y / 2.0f);
 	sf::Vector2f centro2(pos2.x + tam2.x / 2.0f, pos2.y + tam2.y / 2.0f);
 
-	sf::Vector2f delta(centro1.x - centro2.x, centro1.y - centro2.y);
-	sf::Vector2f somaMeias(tam1.x / 2.0f + tam2.x / 2.0f, tam1.y / 2.0f + tam2.y / 2.0f);
+	float overlapX = (tam1.x / 2.0f + tam2.x / 2.0f) - fabs(centro1.x - centro2.x);
+	float overlapY = (tam1.y / 2.0f + tam2.y / 2.0f) - fabs(centro1.y - centro2.y);
 
-	// overlap = somaMeias - |delta|  (positivo = sobreposição)
-	float overlapX = somaMeias.x - fabs(delta.x);
-	float overlapY = somaMeias.y - fabs(delta.y);
-
-	// Assinar pela direção de delta: se delta >= 0 ent1 está à direita/abaixo, senão à esquerda/acima
-	sf::Vector2f signedOverlap(
-		(delta.x >= 0.0f) ? overlapX : -overlapX,
-		(delta.y >= 0.0f) ? overlapY : -overlapY
-	);
-
-	return signedOverlap;
+	// ambos > 0  =>  há colisão. Valores são as profundidades de penetração.
+	return sf::Vector2f(overlapX, overlapY);
 }
 
 // Agora considera colisão quando penetração em X e Y for positiva
@@ -124,7 +93,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 		bool col = verificarColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(LIs[i]));
 		if (col) // se colidiu
 		{
-			LIs[i]->danificar(pJog1); // chama a função de danificar do inimigo, passando o jogador
+			pJog1->colidir(LIs[i]); // chama a função de colidir do jogador, passando o inimigo
 		}
 	}
 }
@@ -139,6 +108,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 		{
 			// passa a penetração assinada para a rotina de resolução do jogador
 			(*it)->obstaculizar(pJog1);
+			pJog1->colidir(*it, ds);
 		}
 	}
 }

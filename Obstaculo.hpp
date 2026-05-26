@@ -8,7 +8,7 @@ namespace Entidades {
         private:
             bool danoso;
         public:
-            Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam);
+            Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);
             ~Obstaculo();
             void executar();
             virtual void obstaculizar(Personagens::Jogadores::Jogador* pjog) {}
