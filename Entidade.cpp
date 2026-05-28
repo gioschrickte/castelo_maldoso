@@ -1,15 +1,14 @@
 #include "Entidade.hpp"
 
 Entidades::Entidade::Entidade()
-	: corpo(), id(IDs::IDs::vazio)
+	: Jogo::Ente()
 {
 
 }
 
 Entidades::Entidade::Entidade(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id)
-	: corpo(sf::RectangleShape(tam)), id(id)
+	: Jogo::Ente(pos, tam, id)
 {
-	corpo.setPosition(pos);
 }
 
 Entidades::Entidade::~Entidade()

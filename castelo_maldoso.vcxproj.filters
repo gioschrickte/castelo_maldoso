@@ -49,6 +49,12 @@
     <Filter Include="src\Entidade\Obstaculo">
       <UniqueIdentifier>{64fa8cf0-cfc1-405d-90a8-156f086a05f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\Fase">
+      <UniqueIdentifier>{a5475356-6b77-4d51-94ba-67e088582f72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Fase">
+      <UniqueIdentifier>{8f179fc9-067e-468b-8ea3-9be465b9887f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -86,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="Plataforma.cpp">
       <Filter>src\Entidade\Obstaculo</Filter>
+    </ClCompile>
+    <ClCompile Include="Ente.cpp">
+      <Filter>src\Entidade</Filter>
+    </ClCompile>
+    <ClCompile Include="Fase.cpp">
+      <Filter>src\Fase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="IDs.hpp">
       <Filter>include\Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="Ente.hpp">
+      <Filter>include\Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="Fase.hpp">
+      <Filter>include\Fase</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

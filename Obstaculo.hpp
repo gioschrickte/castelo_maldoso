@@ -4,14 +4,16 @@
 
 namespace Entidades {
     namespace Obstaculos {
-        class Obstaculo : public Entidade {
-        private:
-            bool danoso;
+        class Obstaculo : public Entidade{
         public:
+			virtual bool afetaInimigos() const { return false; } // Por padrão, os obstáculos não afetam os inimigos, mas isso pode ser sobrescrito em classes derivadas
+
             Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);
             ~Obstaculo();
+
+
             void executar();
-            virtual void obstaculizar(Personagens::Jogadores::Jogador* pjog) {}
+			virtual void resolverColisao(Personagens::Personagem* p, sf::Vector2f ds) = 0; // Método para resolver a colisão, que pode ser implementado de forma diferente em cada tipo de obstáculo
         };
     }
 }

@@ -8,10 +8,10 @@ Entidades::Obstaculos::Plataforma::Plataforma(const sf::Vector2f pos, const sf::
 
 Entidades::Obstaculos::Plataforma::~Plataforma() {}
 
-void Entidades::Obstaculos::Plataforma::colidir(Entidades::Entidade* outraEntidade, sf::Vector2f overlap)
+void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
 {
-    sf::Vector2f posOutra = outraEntidade->getCorpo().getPosition();
-    sf::Vector2f tamOutra = outraEntidade->getCorpo().getSize();
+    sf::Vector2f posOutra = p->getCorpo().getPosition();
+    sf::Vector2f tamOutra = p->getCorpo().getSize();
     sf::Vector2f posEsta = getCorpo().getPosition();
     sf::Vector2f tamEsta = getCorpo().getSize();
 
@@ -19,16 +19,16 @@ void Entidades::Obstaculos::Plataforma::colidir(Entidades::Entidade* outraEntida
     sf::Vector2f centroEsta(posEsta.x + tamEsta.x / 2.0f, posEsta.y + tamEsta.y / 2.0f);
 
     // empurra pelo eixo de MENOR penetração
-    if (overlap.x < overlap.y) {
+    if (ds.x < ds.y) {
         if (centroOutra.x < centroEsta.x)
-            outraEntidade->mover(sf::Vector2f(-overlap.x, 0.0f)); // está à esquerda -> empurra p/ esquerda
+            p->mover(sf::Vector2f(-ds.x, 0.0f)); // está à esquerda -> empurra p/ esquerda
         else
-            outraEntidade->mover(sf::Vector2f(overlap.x, 0.0f)); // à direita -> empurra p/ direita
+            p->mover(sf::Vector2f(ds.x, 0.0f)); // à direita -> empurra p/ direita
     }
     else {
         if (centroOutra.y < centroEsta.y)
-            outraEntidade->mover(sf::Vector2f(0.0f, -overlap.y)); // está acima -> empurra p/ cima
+            p->mover(sf::Vector2f(0.0f, -ds.y)); // está acima -> empurra p/ cima
         else
-            outraEntidade->mover(sf::Vector2f(0.0f, overlap.y)); // abaixo -> empurra p/ baixo
+            p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
     }
 }

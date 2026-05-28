@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Personagem.hpp"
 
 Entidades::Personagens::Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam, const float vel, const IDs::IDs id)

@@ -80,13 +80,18 @@ void Gerenciador::GerenciadorColisoes::executar() {
 	// Tratar de todas as colisões
 
 	tratarColisoesJogsInimgs();
-	// tratarColisoesEntsObstacs();
+	tratarColisoesInimgsObstacs();
 	tratarColisoesJogsObstacs();
 
 }
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 {
+	if (!pJog1)
+	{
+		printf("Erro, pJog1 nulo");
+		return;
+	}
 	// Checar se o jogador está colidindo com algum inimigo
 	for (int i = 0; i < LIs.size(); i++)
 	{
@@ -99,7 +104,14 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 }
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
-{// Checar se o jogador está colidindo com algum obstáculo
+{
+	if (!pJog1)
+	{
+		printf("Erro, pJog1 nulo");
+		return;
+	}
+
+	// Checar se o jogador está colidindo com algum obstáculo
 	for (list<Entidades::Obstaculos::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
 	{
 		// calcula uma vez e reutiliza
@@ -107,25 +119,37 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
 			// passa a penetração assinada para a rotina de resolução do jogador
-			(*it)->obstaculizar(pJog1);
-			pJog1->colidir(*it, ds);
+			(*it)->resolverColisao(pJog1, ds);
 		}
 	}
 }
 
-/*void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs()
-{
-	// Checar se algum inimigo está colidindo com algum obstáculo
-	for (int i = 0; i < LIs.size(); i++)
-	{
-		for (list<Entidade::Obstaculo::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
-		{
-			bool col = verificarColisao(static_cast<Entidade::Entidade*>(LIs[i]), static_cast<Entidade::Entidade*>(*it));
-			if (col) // se colidiu
-			{
-				(*it)->obstaculizar(LIs[i]); // chama a função de obstaculizar do obstáculo, passando o inimigo
+
+void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
+	for (list<Entidades::Obstaculos::Obstaculo*>::iterator itO = LOs.begin(); itO != LOs.end(); ++itO) {
+		if ((*itO)->afetaInimigos()) { // se o obstáculo afeta inimigos, ou seja, eles colidem com ele e são empurrados para fora
+			for (int i = 0; i < LIs.size(); i++) {
+				sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(*itO));
+				if (ds.x > 0.0f && ds.y > 0.0f) { // se colidiu
+					(*itO)->resolverColisao(LIs[i], ds); // passa a penetração assinada para a rotina de resolução do inimigo
+				}
 			}
 		}
 	}
 }
-*/
+
+
+void Gerenciador::GerenciadorColisoes::limpar()
+{
+	// Limpa as listas de inimigos e obstáculos, para evitar vazamento de memória. Será chamada no destrutor da fase, para limpar os elementos da fase anterior, caso a fase seja reiniciada.
+	for (int i = 0; i < LIs.size(); i++)
+	{
+		delete LIs[i];
+	}
+	LIs.clear();
+	for (list<Entidades::Obstaculos::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
+	{
+		delete* it;
+	}
+	LOs.clear();
+}

@@ -151,7 +151,9 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
+    <ClCompile Include="Fase.cpp" />
     <ClCompile Include="GerenciadorColisoes.cpp" />
     <ClCompile Include="GerenciadorEventos.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
@@ -166,7 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Elemento.hpp" />
+    <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
+    <ClInclude Include="Fase.hpp" />
     <ClInclude Include="GerenciadorColisoes.hpp" />
     <ClInclude Include="GerenciadorEventos.hpp" />
     <ClInclude Include="GerenciadorGrafico.hpp" />

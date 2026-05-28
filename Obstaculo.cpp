@@ -1,7 +1,7 @@
 #include "Obstaculo.hpp"
 
 Entidades::Obstaculos::Obstaculo::Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id)
-    : Entidade(pos, tam, id), danoso(false)
+    : Entidade(pos, tam, id)
 {
 }
 

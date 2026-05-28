@@ -23,20 +23,6 @@ void Entidades::Personagens::Jogadores::Jogador::executar()
 	relogio.restart();
 }
 
-void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Entidade* outraEntidade, sf::Vector2f ds)
-{
-	if (outraEntidade->getId() == IDs::IDs::inimigo)
-	{
-		// Colisão com inimigo: o jogador é "danificado" (pode ser implementado como perder vida, por exemplo)
-		colidir(static_cast<Entidades::Personagens::Inimigos::Inimigo*>(outraEntidade));
-	}
-	else if (outraEntidade->getId() == IDs::IDs::plataforma)
-	{
-		// Colisão com plataforma: o jogador para de cair e pode andar novamente
-		outraEntidade->colidir(this, ds);
-	}
-}
-
 void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Personagens::Inimigos::Inimigo* inimigo)
 {
 	// Aqui você pode implementar a lógica de dano ao jogador, como reduzir a vida ou reiniciar o jogo

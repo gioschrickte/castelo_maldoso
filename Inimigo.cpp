@@ -5,7 +5,6 @@ Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador,
 	: Personagem(pos, tam, 100.0f, IDs::IDs::inimigo), jogador(pjogador)
 {
 	corpo.setFillColor(sf::Color::Red);
-	srand(time(NULL));
 	moveAleatorio = rand() % 4;
 }
 
@@ -66,13 +65,4 @@ void Entidades::Personagens::Inimigos::Inimigo::executar()
 	}
 
 	relogio.restart();
-}
-
-void Entidades::Personagens::Inimigos::Inimigo::colidir(Entidades::Entidade* outraEntidade, sf::Vector2f ds)
-{
-	if (outraEntidade->getId() == IDs::IDs::plataforma)
-	{
-		// Colisão com plataforma: o inimigo para de cair e pode andar novamente
-		podeAndar = false;
-	}
 }

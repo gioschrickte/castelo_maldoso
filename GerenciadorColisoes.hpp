@@ -36,6 +36,7 @@ namespace Gerenciador {
 			void incluirObstaculo(Entidades::Obstaculos::Obstaculo* pObst);
 			//void incluirProjetil(pj: *Projetil);
 			
+			void limpar(); // Limpa as listas de inimigos e obstáculos, para evitar vazamento de memória. Será chamada no destrutor da fase, para limpar os elementos da fase anterior, caso a fase seja reiniciada.
 			
 	};
 }
