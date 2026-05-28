@@ -31,7 +31,20 @@ void Principal::executar()
 
 	Entidades::Personagens::Jogadores::Jogador* jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));	
 
-	faseAtual = new Jogo::Fases::Fase(jogador1);
-
-	faseAtual->executar();
+	if (jogador1)
+	{
+		faseAtual = new Jogo::Fases::Fase(jogador1);
+	}
+	{
+		printf("Erro ao criar jogador 1");
+	}
+	
+	if (faseAtual)
+	{
+		faseAtual->executar();
+	}
+	else
+	{
+		printf("Erro ao criar fase");
+	}
 }
