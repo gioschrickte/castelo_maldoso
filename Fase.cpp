@@ -22,7 +22,7 @@ Jogo::Fases::Fase::~Fase()
 		delete listaEntidade[i];
 	}
 
-	
+	GerenciadorColisoes->limpar();
 }
 
 void Jogo::Fases::Fase::criarCenario()
