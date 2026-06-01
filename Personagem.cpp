@@ -62,3 +62,8 @@ void Entidades::Personagens::Personagem::aterrissar()
 	velFinal.y = 0.0f;   // sem isto a velocidade continua acumulando no chão
 	noChao = true;
 }
+
+void Entidades::Personagens::Personagem::baterCabeca()
+{
+	velFinal.y = 0.0f;   // sem isto a velocidade continua acumulando no teto
+}

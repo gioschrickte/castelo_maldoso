@@ -32,6 +32,10 @@ void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem*
             p->aterrissar();
         }            
         else
+        {
             p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
+            p->baterCabeca();
+        }
+            
     }
 }

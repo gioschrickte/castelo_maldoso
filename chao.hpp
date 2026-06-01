@@ -35,7 +35,10 @@ namespace Entidades {
                         p->aterrissar();
                     }
                     else
+                    {
                         p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
+                        p->baterCabeca();
+                    }                        
             }
         }
 

@@ -31,6 +31,7 @@ namespace Entidades
 
 			void pular();
 			void aterrissar();
+			void baterCabeca();
 		};
 	}
 }
