@@ -27,7 +27,10 @@ void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem*
     }
     else {
         if (centroOutra.y < centroEsta.y)
+        {
             p->mover(sf::Vector2f(0.0f, -ds.y)); // está acima -> empurra p/ cima
+            p->aterrissar();
+        }            
         else
             p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
     }

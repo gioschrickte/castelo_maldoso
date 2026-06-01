@@ -4,17 +4,12 @@
 #include "Jogador.hpp"
 #include "Plataforma.hpp"
 #include "chao.hpp"
-#include "GerenciadorColisoes.hpp"
 #include "GerenciadorEventos.hpp"
 
 
-/*
-Classe Fase, que é a classe base para as fases do jogo.
-É responsável por criar as entidades, e por executar o loop de jogo, chamando os métodos de cada entidade, e depois pedindo para o gerenciador gráfico desenhá-las.
-Observação: O chão é uma plataforma, pois é apenas um bloco de colisão onde as entidades interagem. 
-
-Os obstaculos e os inimigos estarão agregados na fase. Assim como um gerenciador de colisão
-*/
+namespace Gerenciador {
+	class GerenciadorColisoes;
+}
 
 namespace Jogo
 {
@@ -28,7 +23,7 @@ namespace Jogo
 			Lista::ListaEntidade listaEntidade;
 			Gerenciador::GerenciadorColisoes* GerenciadorColisoes;
 			Gerenciador::GerenciadorEvento* GerenciadorEventos;
-			Entidades::Obstaculos::Chao* chao; 
+			Entidades::Chao* chao; 
 		public:
 			Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
 			~Fase();
@@ -37,7 +32,7 @@ namespace Jogo
 			void criarInimigosFaceis(); // cria em posições aleatórias inimigos
 			void criarPlataformas(); // cria em posições aleatórias plataformas
 			void criarChao();
-			Entidades::Obstaculos::Chao* getChao() { return chao; }
+			Entidades::Chao* getChao() { return chao; }
 
 			// virtual void criarInimigos() = 0;
 			//virtual void criarObstaculos() = 0;

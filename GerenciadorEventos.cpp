@@ -42,6 +42,9 @@ void Gerenciador::GerenciadorEvento::verificaTeclaPressionada(sf::Keyboard::Key 
 	{
 		pGrafico->fecharJanela();
 	}
+	else if (tecla == sf::Keyboard::Space || tecla == sf::Keyboard::W) {
+		pJogador->pular();
+	}
 }
 
 

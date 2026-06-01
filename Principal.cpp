@@ -1,4 +1,5 @@
 #include "Principal.hpp"
+#include "GerenciadorColisoes.hpp"
 #include <iostream>
 using namespace std;
 

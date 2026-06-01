@@ -14,13 +14,10 @@ Entidades::Personagens::Jogadores::Jogador::~Jogador()
 
 
 void Entidades::Personagens::Jogadores::Jogador::executar()
-{
-	if (podeAndar)
-	{
-		atualizarPosicao();
-	}
-	atualizaQueda();
-	relogio.restart();
+{	
+	float dt = calcularDt();
+	if (podeAndar) atualizarX(dt);
+	atualizarY(dt);
 }
 
 void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Personagens::Inimigos::Inimigo* inimigo)

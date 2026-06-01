@@ -1,18 +1,15 @@
 #pragma once
 
-#include "Obstaculo.hpp"
+#include "Entidade.hpp"
 
 namespace Entidades {
-	namespace Obstaculos {
-		class Chao : public Obstaculo {
+		class Chao : public Entidade {
 		public:
 			Chao(const sf::Vector2f pos, const sf::Vector2f tam) :
-				Obstaculo(pos, tam, IDs::IDs::chao)
+				Entidade(pos, tam, IDs::IDs::chao)
 			{
                 corpo.setFillColor(sf::Color::Cyan);
 			}
-
-			bool afetaInimigos() const override { return true; }
 
             void resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
             {
@@ -35,12 +32,15 @@ namespace Entidades {
                     if (centroOutra.y < centroEsta.y)
                     {
                         p->mover(sf::Vector2f(0.0f, -ds.y)); // está acima -> empurra p/ cima
-                        
+                        p->aterrissar();
                     }
                     else
                         p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
-                }
             }
-		};
-	}
+        }
+
+			void executar() {
+				// O chão não tem comportamento, então o método executar é vazio
+			}
+	};
 }

@@ -45,25 +45,19 @@ void Entidades::Personagens::Inimigos::Inimigo::movAleatorio()
 	}
 
 }
+
 void Entidades::Personagens::Inimigos::Inimigo::executar()
 {
+	float dt = calcularDt();
+
 	sf::Vector2f posJogador = jogador->getCorpo().getPosition();
 	sf::Vector2f posInimigo = corpo.getPosition();
 
-	if ((fabs(posJogador.x - posInimigo.x) <= RAIO_PERSEGUIR))
-	{
+	if (fabs(posJogador.x - posInimigo.x) <= RAIO_PERSEGUIR)
 		persegueJogador(posJogador, posInimigo);
-	}
 	else
-	{
 		movAleatorio();
-	}
 
-	if (podeAndar)
-	{
-		atualizarPosicao();
-	}
-	atualizaQueda();
-
-	relogio.restart();
+	if (podeAndar) atualizarX(dt);
+	atualizarY(dt);
 }

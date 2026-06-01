@@ -3,7 +3,7 @@
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
 
 Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
-	LIs(), LOs(), pJog1(nullptr)
+	LIs(), LOs(), pJog1(nullptr), fase(nullptr)
 {
 	// Aqui, o gerenciador de colisoes está com a lista de Inimigos e Objetos vazia, e o ponteiro para o jogador é nulo
 }
@@ -26,6 +26,11 @@ void Gerenciador::GerenciadorColisoes::setJogador1(Entidades::Personagens::Jogad
 {
 	// Será necessária edição depois para incluir um segundo jogador
 	pJog1 = p;
+}
+
+void Gerenciador::GerenciadorColisoes::setFase(Jogo::Fases::Fase* f)
+{
+	fase = f;
 }
 
 void Gerenciador::GerenciadorColisoes::incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pInim)
@@ -82,6 +87,7 @@ void Gerenciador::GerenciadorColisoes::executar() {
 	tratarColisoesJogsInimgs();
 	tratarColisoesInimgsObstacs();
 	tratarColisoesJogsObstacs();
+	tratarColisoesChao();
 
 }
 
@@ -134,6 +140,32 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 					(*itO)->resolverColisao(LIs[i], ds); // passa a penetração assinada para a rotina de resolução do inimigo
 				}
 			}
+		}
+	}
+}
+
+void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
+{
+	Entidades::Chao* chao = fase->getChao();
+	// Checar se o jogador está colidindo com o chão
+	if (!pJog1)
+	{
+		printf("Erro, pJog1 nulo");
+		return;
+	}
+	sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(chao));
+	if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
+	{
+		chao->resolverColisao(pJog1, ds);
+	}
+
+	//Checar se os inimigos estão colidindo com o chao
+	for (int i = 0; i < LIs.size(); i++)
+	{
+		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(chao));
+		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
+		{
+			chao->resolverColisao(LIs[i], ds);
 		}
 	}
 }

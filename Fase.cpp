@@ -1,9 +1,11 @@
 #include "Fase.hpp"
+#include "GerenciadorColisoes.hpp"
 
 Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
 	: Ente(), listaEntidade(), GerenciadorColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()), GerenciadorEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), jog1(jogador), jog2(j2), chao(nullptr)
 {
 	criarCenario();
+	GerenciadorColisoes->setFase(this);
 	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jog1));
 	if (jog2) {
 		listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jog2));
@@ -38,9 +40,8 @@ void Jogo::Fases::Fase::criarCenario()
 void Jogo::Fases::Fase::criarChao()
 {
 	// Por decisão de projeto, chão será um obstaculo, afim de ser possível incluí-lo na lista de obstaculos do gerenciador de colisões
-	chao = new Entidades::Obstaculos::Chao(sf::Vector2f(0.0f, 900), sf::Vector2f(1920.0f, 20.0f));
+	chao = new Entidades::Chao(sf::Vector2f(0.0f, 900), sf::Vector2f(1920.0f, 20.0f));
 	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(chao));
-	GerenciadorColisoes->incluirObstaculo(static_cast<Entidades::Obstaculos::Obstaculo*>(chao));
 }
 
 void Jogo::Fases::Fase::criarInimigosFaceis()
@@ -67,23 +68,17 @@ void Jogo::Fases::Fase::criarPlataformas()
 
 void Jogo::Fases::Fase::executar()
 {
-	// Código que era antes da principal, mas agora está na fase, para que cada fase possa ter um cenário diferente, e o loop de jogo seja tratado pela fase, e não pela principal
-
 	while (pGG->verificaJanelaAberta()) {
 		GerenciadorEventos->executar();
-		pGG->limpaJanela();
-		GerenciadorColisoes->executar();
-
-		// Novamente, esse trabalho será da classe Fase, que chamará o método executar de cada entidade, e depois pedirá para o gerenciador gráfico desenhá-las
-
-		// A principal, então, seria responsável apenas por executar as fases
 
 		for (int i = 0; i < listaEntidade.getTam(); i++)
-		{
 			listaEntidade[i]->executar();
-			listaEntidade[i]->desenhar();
-		}
 
+		GerenciadorColisoes->executar();
+
+		pGG->limpaJanela();
+		for (int i = 0; i < listaEntidade.getTam(); i++)
+			listaEntidade[i]->desenhar();
 		pGG->mostraElementos();
 	}
 }
