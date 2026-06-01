@@ -1,7 +1,7 @@
 #include "Fase.hpp"
 
 Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
-	: Ente(), listaEntidade(), GerenciadorColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()), GerenciadorEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), jog1(jogador), jog2(j2)
+	: Ente(), listaEntidade(), GerenciadorColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()), GerenciadorEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), jog1(jogador), jog2(j2), chao()
 {
 	criarCenario();
 	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jog1));
@@ -11,6 +11,7 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
 
 	GerenciadorEventos->setJogador(jog1);
 	GerenciadorColisoes->setJogador1(jog1);
+	GerenciadorColisoes->setFase(this);
 	// falta GerenciadorEventos->setJogador(jog2); depois de implementar o segundo jogador
 }
 
@@ -28,10 +29,20 @@ Jogo::Fases::Fase::~Fase()
 void Jogo::Fases::Fase::criarCenario()
 {
 	// Cria o cenário da fase, ou seja, os obstáculos e inimigos. Será chamada no construtor da fase, e depois poderá ser chamada para criar um novo cenário, caso a fase seja reiniciada
+	criarChao();
 	criarInimigosFaceis();
 	criarPlataformas();
 
 	// Perceba que está apenas criando os elementos básicos, mas não os desenha, isso será tratado no loop executar() da fase que será chamado na Principal.
+}
+
+void Jogo::Fases::Fase::criarChao()
+{
+	// Chão será tratado como uma série de caixas cinzas, a cor pode variar com a fase
+	// Chão será uma baita caixa cinza ou varias caixas?
+	// Fazer uma classe separada para o chão fere o UML?
+	
+
 }
 
 void Jogo::Fases::Fase::criarInimigosFaceis()
@@ -50,7 +61,7 @@ void Jogo::Fases::Fase::criarPlataformas()
 	// Cria em posições aleatórias plataformas
 	for (int i = 0; i < 5; i++)
 	{
-		Entidades::Obstaculos::Plataforma* plataforma = new Entidades::Obstaculos::Plataforma(sf::Vector2f(rand() % 700 + 50.0f, rand() % 700 + 50.0f), sf::Vector2f(200.0f, 20.0f));
+		Entidades::Obstaculos::Plataforma* plataforma = new Entidades::Obstaculos::Plataforma(sf::Vector2f(rand() % 700 + 50.0f, 50.0f), sf::Vector2f(200.0f, 20.0f));
 		listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(plataforma));
 		GerenciadorColisoes->incluirObstaculo(plataforma);
 	}
@@ -73,6 +84,7 @@ void Jogo::Fases::Fase::executar()
 		{
 			listaEntidade[i]->executar();
 			listaEntidade[i]->desenhar();
+			pGG->desenhaElemento(chao);
 		}
 
 		pGG->mostraElementos();

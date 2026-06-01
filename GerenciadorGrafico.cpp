@@ -53,3 +53,14 @@ const bool Gerenciador::GerenciadorGrafico::verificaJanelaAberta()
 {
 	return window->isOpen();
 }
+
+sf::Texture Gerenciador::GerenciadorGrafico::carregarTextura(const char* caminhoTextura)
+{
+	sf::Texture textura;
+	if (!textura.loadFromFile(caminhoTextura))
+	{
+		std::cout << "ERRO, caminho da textura nao encontrado";
+		exit(1);
+	}
+	return textura;
+}

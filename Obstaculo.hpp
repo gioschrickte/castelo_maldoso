@@ -5,6 +5,9 @@
 namespace Entidades {
     namespace Obstaculos {
         class Obstaculo : public Entidade{
+        protected:
+            sf::Texture textura;
+        
         public:
 			virtual bool afetaInimigos() const { return false; } // Por padrão, os obstáculos não afetam os inimigos, mas isso pode ser sobrescrito em classes derivadas
 
