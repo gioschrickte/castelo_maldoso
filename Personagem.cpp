@@ -1,4 +1,5 @@
 #include "Personagem.hpp"
+#define GRAVIDADE 9.80f
 
 Entidades::Personagens::Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam, const float vel, const IDs::IDs id)
 	: Entidade::Entidade(pos, tam, id), velFinal(sf::Vector2f(vel, vel)), relogio()
@@ -26,10 +27,22 @@ void Entidades::Personagens::Personagem::parar()
 void Entidades::Personagens::Personagem::atualizarPosicao()
 {
 	dt = relogio.getElapsedTime().asSeconds();
-	float ds = velFinal.x * dt;
+	float dsx = velFinal.x * dt;
+
 	if (paraEsquerda)
 	{
-		ds *= -1;
+		dsx *= -1;
 	}
-	corpo.move(ds, 0.0f);
+	corpo.move(dsx, 0.0f);
+}
+
+void Entidades::Personagens::Personagem::atualizaQueda()
+{
+	dt = relogio.getElapsedTime().asSeconds();
+	float dvy = dt * 9.8f;
+	velFinal.y += dvy;
+	float dsy = velFinal.y * dt;
+
+	corpo.move(0.0f, dsy);
+
 }

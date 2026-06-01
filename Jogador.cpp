@@ -19,7 +19,7 @@ void Entidades::Personagens::Jogadores::Jogador::executar()
 	{
 		atualizarPosicao();
 	}
-
+	atualizaQueda();
 	relogio.restart();
 }
 

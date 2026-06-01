@@ -63,6 +63,7 @@ void Entidades::Personagens::Inimigos::Inimigo::executar()
 	{
 		atualizarPosicao();
 	}
+	atualizaQueda();
 
 	relogio.restart();
 }

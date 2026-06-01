@@ -14,6 +14,7 @@ namespace Entidades
 			sf::Vector2f velFinal;
 			bool podeAndar;
 			bool paraEsquerda;
+			// bool podeCair;
 			sf::Clock relogio;
 			float dt;
 		public:
@@ -23,6 +24,7 @@ namespace Entidades
 			void andar(const bool paraEsquerda);
 			void parar();
 			void atualizarPosicao();
+			void atualizaQueda();
 		};
 	}
 }

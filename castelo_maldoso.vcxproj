@@ -167,6 +167,7 @@
     <ClCompile Include="Principal.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chao.hpp" />
     <ClInclude Include="Elemento.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />

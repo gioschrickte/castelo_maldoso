@@ -4,7 +4,7 @@ Gerenciador::GerenciadorGrafico* Gerenciador::GerenciadorGrafico::pGrafico(nullp
 
 
 Gerenciador::GerenciadorGrafico::GerenciadorGrafico()
-	: window(new sf::RenderWindow(sf::VideoMode(800.0f, 800.0f), "Teste"))
+	: window(new sf::RenderWindow(sf::VideoMode(1920.0f, 1080.0f), "Teste"))
 {
 	if (window == NULL)
 	{

@@ -149,5 +149,8 @@
     <ClInclude Include="Fase.hpp">
       <Filter>include\Fase</Filter>
     </ClInclude>
+    <ClInclude Include="chao.hpp">
+      <Filter>include\Entidade\Obstaculo</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "Fase.hpp"
 
 Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
-	: Ente(), listaEntidade(), GerenciadorColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()), GerenciadorEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), jog1(jogador), jog2(j2), chao()
+	: Ente(), listaEntidade(), GerenciadorColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()), GerenciadorEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), jog1(jogador), jog2(j2), chao(nullptr)
 {
 	criarCenario();
 	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jog1));
@@ -11,7 +11,6 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
 
 	GerenciadorEventos->setJogador(jog1);
 	GerenciadorColisoes->setJogador1(jog1);
-	GerenciadorColisoes->setFase(this);
 	// falta GerenciadorEventos->setJogador(jog2); depois de implementar o segundo jogador
 }
 
@@ -38,11 +37,10 @@ void Jogo::Fases::Fase::criarCenario()
 
 void Jogo::Fases::Fase::criarChao()
 {
-	// Chão será tratado como uma série de caixas cinzas, a cor pode variar com a fase
-	// Chão será uma baita caixa cinza ou varias caixas?
-	// Fazer uma classe separada para o chão fere o UML?
-	
-
+	// Por decisão de projeto, chão será um obstaculo, afim de ser possível incluí-lo na lista de obstaculos do gerenciador de colisões
+	chao = new Entidades::Obstaculos::Chao(sf::Vector2f(0.0f, 900), sf::Vector2f(1920.0f, 20.0f));
+	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(chao));
+	GerenciadorColisoes->incluirObstaculo(static_cast<Entidades::Obstaculos::Obstaculo*>(chao));
 }
 
 void Jogo::Fases::Fase::criarInimigosFaceis()
@@ -84,7 +82,6 @@ void Jogo::Fases::Fase::executar()
 		{
 			listaEntidade[i]->executar();
 			listaEntidade[i]->desenhar();
-			pGG->desenhaElemento(chao);
 		}
 
 		pGG->mostraElementos();

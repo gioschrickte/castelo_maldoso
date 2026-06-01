@@ -5,7 +5,8 @@ namespace IDs {
 		vazio = 0,
 		jogador,
 		inimigo,
-		plataforma
+		plataforma,
+		chao
 		// Adicione mais IDs conforme necessário
 	};
 }

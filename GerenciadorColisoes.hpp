@@ -3,7 +3,6 @@
 #include "Inimigo.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
-#include "Fase.hpp"
 #include <vector>
 #include <list>
 #include <set>
@@ -17,7 +16,6 @@ namespace Gerenciador {
 			list<Entidades::Obstaculos::Obstaculo*>LOs;
 			//Projetil
 			Entidades::Personagens::Jogadores::Jogador* pJog1;
-			Jogo::Fases::Fase* pFase;
 
 
 			//Entidades::Personagens::Jogadores::Jogador* pJog2;		
@@ -38,9 +36,6 @@ namespace Gerenciador {
 			void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pInim);
 			void incluirObstaculo(Entidades::Obstaculos::Obstaculo* pObst);
 			//void incluirProjetil(pj: *Projetil);
-			void setFase(Jogo::Fases::Fase* pF);
-			void tratarChao();
-			
 			void limpar(); // Limpa as listas de inimigos e obstáculos, para evitar vazamento de memória. Será chamada no destrutor da fase, para limpar os elementos da fase anterior, caso a fase seja reiniciada.
 			
 	};

@@ -12,11 +12,6 @@ Gerenciador::GerenciadorColisoes::~GerenciadorColisoes()
 {
 }
 
-void Gerenciador::GerenciadorColisoes::setFase(Jogo::Fases::Fase* pF)
-{
-	pFase = pF;
-}
-
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()
 {
 	if (pGC == nullptr)
@@ -140,17 +135,6 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 				}
 			}
 		}
-	}
-}
-
-void Gerenciador::GerenciadorColisoes::tratarChao()
-{
-	sf::RectangleShape* chao = pFase->getChao();
-
-	for (int i = 0; i < LIs.size(); i++)
-	{
-		Entidades::Personagens::Inimigos::Inimigo* inim = LIs[i];
-		if()
 	}
 }
 

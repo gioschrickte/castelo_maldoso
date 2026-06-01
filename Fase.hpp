@@ -3,6 +3,7 @@
 #include "Inimigo.hpp"
 #include "Jogador.hpp"
 #include "Plataforma.hpp"
+#include "chao.hpp"
 #include "GerenciadorColisoes.hpp"
 #include "GerenciadorEventos.hpp"
 
@@ -27,7 +28,7 @@ namespace Jogo
 			Lista::ListaEntidade listaEntidade;
 			Gerenciador::GerenciadorColisoes* GerenciadorColisoes;
 			Gerenciador::GerenciadorEvento* GerenciadorEventos;
-			Entidades::Entidade* chao;
+			Entidades::Obstaculos::Chao* chao; 
 		public:
 			Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
 			~Fase();
@@ -36,7 +37,7 @@ namespace Jogo
 			void criarInimigosFaceis(); // cria em posições aleatórias inimigos
 			void criarPlataformas(); // cria em posições aleatórias plataformas
 			void criarChao();
-			Entidades::Entidade* getChao() { return chao; }
+			Entidades::Obstaculos::Chao* getChao() { return chao; }
 
 			// virtual void criarInimigos() = 0;
 			//virtual void criarObstaculos() = 0;
