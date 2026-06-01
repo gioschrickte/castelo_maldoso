@@ -153,7 +153,10 @@
   <ItemGroup>
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
+    <ClCompile Include="Espinho.cpp" />
     <ClCompile Include="Fase.cpp" />
+    <ClCompile Include="FasePrimeira.cpp" />
+    <ClCompile Include="FaseSegunda.cpp" />
     <ClCompile Include="GerenciadorColisoes.cpp" />
     <ClCompile Include="GerenciadorEventos.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
@@ -171,12 +174,17 @@
     <ClInclude Include="Elemento.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
+    <ClInclude Include="Espinho.hpp" />
     <ClInclude Include="Fase.hpp" />
+    <ClInclude Include="FasePrimeira.hpp" />
+    <ClInclude Include="FaseSegunda.hpp" />
     <ClInclude Include="GerenciadorColisoes.hpp" />
     <ClInclude Include="GerenciadorEventos.hpp" />
     <ClInclude Include="GerenciadorGrafico.hpp" />
     <ClInclude Include="IDs.hpp" />
     <ClInclude Include="Inimigo.hpp" />
+    <ClInclude Include="InimigoFacil.hpp" />
+    <ClInclude Include="InimigoMedio.hpp" />
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Lista.hpp" />
     <ClInclude Include="ListaEntidade.hpp" />

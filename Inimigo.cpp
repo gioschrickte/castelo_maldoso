@@ -4,20 +4,14 @@
 Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
 	: Personagem(pos, tam, 100.0f, IDs::IDs::inimigo), jogador(pjogador)
 {
-	corpo.setFillColor(sf::Color::Red);
 	moveAleatorio = rand() % 4;
 }
 
-Entidades::Personagens::Inimigos::Inimigo::~Inimigo()
-{
-}
+Entidades::Personagens::Inimigos::Inimigo::~Inimigo(){}
 
 void Entidades::Personagens::Inimigos::Inimigo::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
 {
-	if (posJogador.x - posInimigo.x > 0.0f) // à direita
-	{
-		andar(false);
-	}
+	if (posJogador.x - posInimigo.x > 0.0f)	{ andar(false);	}
 	else
 	{
 		andar(true);

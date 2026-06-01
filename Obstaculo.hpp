@@ -12,7 +12,7 @@ namespace Entidades {
 			virtual bool afetaInimigos() const { return false; } // Por padrão, os obstáculos não afetam os inimigos, mas isso pode ser sobrescrito em classes derivadas
 
             Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);
-            ~Obstaculo();
+            virtual ~Obstaculo();
 
 
             void executar();

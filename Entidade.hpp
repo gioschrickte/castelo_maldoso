@@ -15,7 +15,7 @@ namespace Entidades {
 	public:
 		Entidade();
 		Entidade(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);
-		~Entidade();
+		virtual ~Entidade();
 		const sf::RectangleShape getCorpo() const;
 		const IDs::IDs getId() const;
 		const sf::Vector2f getPosicao() const;

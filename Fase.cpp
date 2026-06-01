@@ -1,84 +1,60 @@
+// Fase.cpp
 #include "Fase.hpp"
 #include "GerenciadorColisoes.hpp"
 
 Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
-	: Ente(), listaEntidade(), GerenciadorColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()), GerenciadorEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()), jog1(jogador), jog2(j2), chao(nullptr)
+    : Ente(), jog1(jogador), jog2(j2), listaEntidade(),
+    gerColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()),
+    gerEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
+    chao(nullptr)
 {
-	criarCenario();
-	GerenciadorColisoes->setFase(this);
-	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jog1));
-	if (jog2) {
-		listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(jog2));
-	}
+    criarChao();                          // chão é comum -> criado na base
 
-	GerenciadorEventos->setJogador(jog1);
-	GerenciadorColisoes->setJogador1(jog1);
-	// falta GerenciadorEventos->setJogador(jog2); depois de implementar o segundo jogador
+    listaEntidade.addEntidade(jog1); 
+    if (jog2) listaEntidade.addEntidade(jog2);
+
+    gerColisoes->setFase(this);           // agregação bidirecional (só referência)
+    gerColisoes->setJogador1(jog1);
+    gerEventos->setJogador(jog1);
+
+    // criarInimigos()/criarObstaculos() são chamados no construtor da DERIVADA,
 }
 
 Jogo::Fases::Fase::~Fase()
 {
-	// Como quem está criando as entidades é a fase, ela é responsável por destruí-las, para evitar vazamento de memória
-	for (int i = 0; i < listaEntidade.getTam(); i++)
-	{
-		delete listaEntidade[i];
-	}
-
-	GerenciadorColisoes->limpar();
-}
-
-void Jogo::Fases::Fase::criarCenario()
-{
-	// Cria o cenário da fase, ou seja, os obstáculos e inimigos. Será chamada no construtor da fase, e depois poderá ser chamada para criar um novo cenário, caso a fase seja reiniciada
-	criarChao();
-	criarInimigosFaceis();
-	criarPlataformas();
-
-	// Perceba que está apenas criando os elementos básicos, mas não os desenha, isso será tratado no loop executar() da fase que será chamado na Principal.
+    for (int i = 0; i < listaEntidade.getTam(); i++)
+        delete listaEntidade[i];
+    gerColisoes->limpar();
 }
 
 void Jogo::Fases::Fase::criarChao()
 {
-	// Por decisão de projeto, chão será um obstaculo, afim de ser possível incluí-lo na lista de obstaculos do gerenciador de colisões
-	chao = new Entidades::Chao(sf::Vector2f(0.0f, 900), sf::Vector2f(1920.0f, 20.0f));
-	listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(chao));
+    chao = new Entidades::Chao(sf::Vector2f(0.0f, 900.0f), sf::Vector2f(1920.0f, 20.0f));
+    listaEntidade.addEntidade(chao);
 }
 
-void Jogo::Fases::Fase::criarInimigosFaceis()
+void Jogo::Fases::Fase::adicionarInimigo(Entidades::Personagens::Inimigos::Inimigo* i)
 {
-	// Cria em posições aleatórias inimigos
-	for (int i = 0; i < 5; i++)
-	{
-		Entidades::Personagens::Inimigos::Inimigo* inimigo = new Entidades::Personagens::Inimigos::Inimigo(jog1, sf::Vector2f(rand() % 700 + 50.0f, rand() % 700 + 50.0f));
-		listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(inimigo));
-		GerenciadorColisoes->incluirInimigo(inimigo);
-	}
+    listaEntidade.addEntidade(i);
+    gerColisoes->incluirInimigo(i);
 }
 
-void Jogo::Fases::Fase::criarPlataformas()
+void Jogo::Fases::Fase::adicionarObstaculo(Entidades::Obstaculos::Obstaculo* o)
 {
-	// Cria em posições aleatórias plataformas
-	for (int i = 0; i < 5; i++)
-	{
-		Entidades::Obstaculos::Plataforma* plataforma = new Entidades::Obstaculos::Plataforma(sf::Vector2f(rand() % 700 + 50.0f, 50.0f), sf::Vector2f(200.0f, 20.0f));
-		listaEntidade.addEntidade(static_cast<Entidades::Entidade*>(plataforma));
-		GerenciadorColisoes->incluirObstaculo(plataforma);
-	}
+    listaEntidade.addEntidade(o);
+    gerColisoes->incluirObstaculo(o);
 }
 
 void Jogo::Fases::Fase::executar()
 {
-	while (pGG->verificaJanelaAberta()) {
-		GerenciadorEventos->executar();
-
-		for (int i = 0; i < listaEntidade.getTam(); i++)
-			listaEntidade[i]->executar();
-
-		GerenciadorColisoes->executar();
-
-		pGG->limpaJanela();
-		for (int i = 0; i < listaEntidade.getTam(); i++)
-			listaEntidade[i]->desenhar();
-		pGG->mostraElementos();
-	}
+    while (pGG->verificaJanelaAberta()) {
+        gerEventos->executar();                                   // 1. entrada
+        for (int i = 0; i < listaEntidade.getTam(); i++)
+            listaEntidade[i]->executar();                         // 2. física/IA
+        gerColisoes->executar();                                  // 3. colisões corrigem
+        pGG->limpaJanela();
+        for (int i = 0; i < listaEntidade.getTam(); i++)
+            listaEntidade[i]->desenhar();                         // 4. desenha já corrigido
+        pGG->mostraElementos();
+    }
 }

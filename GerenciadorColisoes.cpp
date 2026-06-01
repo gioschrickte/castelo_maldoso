@@ -173,16 +173,9 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 
 void Gerenciador::GerenciadorColisoes::limpar()
 {
-	// Limpa as listas de inimigos e obstáculos, para evitar vazamento de memória. Será chamada no destrutor da fase, para limpar os elementos da fase anterior, caso a fase seja reiniciada.
-	for (int i = 0; i < LIs.size(); i++)
-	{
-		delete LIs[i];
-	}
 	LIs.clear();
-	for (list<Entidades::Obstaculos::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
-	{
-		delete* it;
-	}
 	LOs.clear();
+	pJog1 = nullptr;
+	fase = nullptr;
 }
 

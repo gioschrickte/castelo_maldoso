@@ -1,5 +1,6 @@
 #include "Principal.hpp"
 #include "GerenciadorColisoes.hpp"
+#include "FasePrimeira.hpp"
 #include <iostream>
 using namespace std;
 
@@ -17,35 +18,25 @@ Principal::Principal()
 
 Principal::~Principal()
 {
-	if (pColisoes) {
-		delete pColisoes;
-		pColisoes = nullptr;
-	}
+	delete faseAtual;
+	faseAtual = nullptr;
+
+	delete pColisoes;
+	pColisoes = nullptr;
 }
 
 
 void Principal::executar()
 {
 	srand(time(NULL));
-
-	Jogo::Ente::setGG(pGrafico); // Passa o ponteiro do gerenciador gráfico para as entidades, para que elas possam desenhar a si mesmas
+	Jogo::Ente::setGG(pGrafico);
 
 	Entidades::Personagens::Jogadores::Jogador* jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));	
-
-	if (jogador1)
-	{
-		faseAtual = new Jogo::Fases::Fase(jogador1);
-	}
-	{
-		printf("Erro ao criar jogador 1");
-	}
 	
-	if (faseAtual)
-	{
-		faseAtual->executar();
-	}
-	else
-	{
-		printf("Erro ao criar fase");
-	}
+	// Essa parte vai virar menu depois
+	faseAtual = new Jogo::Fases::FasePrimeira(jogador1);
+	if(!faseAtual){ printf("Erro ao criar fase"); }
+	faseAtual->executar();
+
+	// antes de criar a segunda fase, tem q dar delete(faseAtual)
 }
