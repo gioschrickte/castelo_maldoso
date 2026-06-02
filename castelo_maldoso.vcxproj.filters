@@ -99,6 +99,12 @@
     <ClCompile Include="Fase.cpp">
       <Filter>src\Fase</Filter>
     </ClCompile>
+    <ClCompile Include="Espinho.cpp" />
+    <ClCompile Include="FasePrimeira.cpp" />
+    <ClCompile Include="FaseSegunda.cpp" />
+    <ClCompile Include="InimigoFacil.cpp">
+      <Filter>src\Entidade\Personagem\Inimigo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Principal.hpp">
@@ -152,5 +158,10 @@
     <ClInclude Include="chao.hpp">
       <Filter>include\Entidade\Obstaculo</Filter>
     </ClInclude>
+    <ClInclude Include="Espinho.hpp" />
+    <ClInclude Include="FasePrimeira.hpp" />
+    <ClInclude Include="FaseSegunda.hpp" />
+    <ClInclude Include="InimigoFacil.hpp" />
+    <ClInclude Include="InimigoMedio.hpp" />
   </ItemGroup>
 </Project>

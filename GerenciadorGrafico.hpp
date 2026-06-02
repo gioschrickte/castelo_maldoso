@@ -18,6 +18,7 @@ namespace Gerenciador
 		sf::RenderWindow* getWindow();
 		void limpaJanela();
 		void desenhaElemento(sf::RectangleShape corpo);
+		void desenhaSprite(sf::Sprite& sprite);
 		void mostraElementos();
 		void fecharJanela();
 		const bool verificaJanelaAberta();

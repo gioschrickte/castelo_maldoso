@@ -56,11 +56,16 @@ const bool Gerenciador::GerenciadorGrafico::verificaJanelaAberta()
 
 sf::Texture Gerenciador::GerenciadorGrafico::carregarTextura(const char* caminhoTextura)
 {
-	sf::Texture textura;
-	if (!textura.loadFromFile(caminhoTextura))
+	sf::Texture tex;
+	if (!tex.loadFromFile(caminhoTextura))
 	{
 		std::cout << "ERRO, caminho da textura nao encontrado";
 		exit(1);
 	}
-	return textura;
+	return tex;
+}
+
+void Gerenciador::GerenciadorGrafico::desenhaSprite(sf::Sprite& sprite)
+{
+	window->draw(sprite);
 }

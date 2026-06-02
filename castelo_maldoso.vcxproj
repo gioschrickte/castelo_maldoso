@@ -161,6 +161,7 @@
     <ClCompile Include="GerenciadorEventos.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
     <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="InimigoFacil.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="ListaEntidade.cpp" />
     <ClCompile Include="main.cpp" />

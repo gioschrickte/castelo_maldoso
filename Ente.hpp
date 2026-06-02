@@ -16,6 +16,9 @@ namespace Jogo
 		sf::RectangleShape corpo;
 		const IDs::IDs id;
 		static Gerenciador::GerenciadorGrafico* pGG; // Ponteiro para o gerenciador gráfico, para que as entidades possam desenhar a si mesmas
+		sf::Texture textura;
+		sf::Sprite sprite;
+		bool temSprite = false;
 	public:
 		Ente();
 		Ente(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);

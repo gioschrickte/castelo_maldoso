@@ -20,7 +20,13 @@ Jogo::Ente::~Ente()
 
 void Jogo::Ente::desenhar()
 {
-	pGG->desenhaElemento(corpo);
+	if (temSprite)
+	{
+		sprite.setPosition(corpo.getPosition());
+		pGG->desenhaSprite(sprite);
+	}
+	else
+		pGG->desenhaElemento(corpo);
 }
 
 void Jogo::Ente::setGG(Gerenciador::GerenciadorGrafico* pgg) // será tratado na Principal, onde o GG é criado e passado para as entidades, para que elas possam desenhar a si mesmas

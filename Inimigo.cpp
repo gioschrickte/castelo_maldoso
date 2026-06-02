@@ -5,6 +5,10 @@ Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador,
 	: Personagem(pos, tam, 100.0f, IDs::IDs::inimigo), jogador(pjogador)
 {
 	moveAleatorio = rand() % 4;
+	temSprite = false;
+	//textura = pGG->carregarTextura("assets/zombie.png");
+	//sprite.setTexture(textura);
+	//sprite.setPosition(pos);
 }
 
 Entidades::Personagens::Inimigos::Inimigo::~Inimigo(){}
