@@ -38,7 +38,18 @@ void Entidades::Personagens::Personagem::atualizarX(float dt)
 {
 	float dsx = velFinal.x * dt;
 	if (paraEsquerda) dsx *= -1;
-	corpo.move(dsx, 0.0f);
+
+	float xAtual = getPosicao().x;
+	float novoX = xAtual + dsx;
+
+	float limiteDireito = static_cast<float>(pGG->getWindow()->getSize().x) - getTamanho().x;
+
+	// Prende a posição dentro dos limites da tela
+	if (novoX < 0.0f)            novoX = 0.0f;
+	if (novoX > limiteDireito)   novoX = limiteDireito;
+
+	// Move apenas o deslocamento que de fato cabe na tela
+	corpo.move(novoX - xAtual, 0.0f);
 }
 
 void Entidades::Personagens::Personagem::atualizarY(float dt)

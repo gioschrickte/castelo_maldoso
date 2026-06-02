@@ -1,9 +1,10 @@
 // InimigoFacil.cpp
 #include "InimigoFacil.hpp"
+#include "Jogador.hpp"
 
 Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
     Jogadores::Jogador* j, const sf::Vector2f pos)
-    : Inimigo(j, pos, sf::Vector2f(50.0f, 50.0f), 90.0f)
+    : Inimigo(j, pos, sf::Vector2f(50.0f, 50.0f), 90.0f), moveAleatorio(0)
 {
     corpo.setFillColor(sf::Color::Red); 
 
@@ -26,4 +27,51 @@ void Entidades::Personagens::Inimigos::InimigoFacil::danificar(
 {
     std::cout << "InimigoFacil causou dano leve!\n";
     // quando houver vida: pJog->receberDano(1);
+}
+
+void Entidades::Personagens::Inimigos::InimigoFacil::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
+{
+	if (posJogador.x - posInimigo.x > 0.0f) { andar(false); }
+	else
+	{
+		andar(true);
+	}
+}
+
+void Entidades::Personagens::Inimigos::InimigoFacil::movAleatorio()
+{
+	if (moveAleatorio == 0)
+	{
+		andar(false);
+	}
+	else if (moveAleatorio == 1)
+	{
+		andar(true);
+	}
+	else
+		parar();
+
+	float dt = relogioAleatorio.getElapsedTime().asSeconds();
+	if (dt >= 1.0f)
+	{
+		moveAleatorio = rand() % 4;
+		relogioAleatorio.restart();
+	}
+
+}
+
+void Entidades::Personagens::Inimigos::InimigoFacil::executar()
+{
+	float dt = calcularDt();
+
+	sf::Vector2f posJogador = jogador->getCorpo().getPosition();
+	sf::Vector2f posInimigo = corpo.getPosition();
+
+	if (fabs(posJogador.x - posInimigo.x) <= RAIO_PERSEGUIR && fabs(posJogador.y - posInimigo.y) <= RAIO_PERSEGUIR)
+		persegueJogador(posJogador, posInimigo);
+	else
+		movAleatorio();
+
+	if (podeAndar) atualizarX(dt);
+	atualizarY(dt);
 }
