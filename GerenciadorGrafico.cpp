@@ -11,6 +11,8 @@ Gerenciador::GerenciadorGrafico::GerenciadorGrafico()
 		cout << "Falha na criação de janela! Encerrando programa..." << endl;
 		exit(1);
 	}
+
+	window->setFramerateLimit(60);
 }
 
 Gerenciador::GerenciadorGrafico::~GerenciadorGrafico()

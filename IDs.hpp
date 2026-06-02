@@ -6,7 +6,9 @@ namespace IDs {
 		jogador,
 		inimigo,
 		plataforma,
-		chao
+		chao,
+		lama,
+		espinho
 		// Adicione mais IDs conforme necessário
 	};
 }

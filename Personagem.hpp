@@ -18,9 +18,14 @@ namespace Entidades
 			bool noChao;
 			float forcaPulo; // altura do pulo = forcaPulo^2 / (2 * GRAVIDADE)
 
+			// Efeitos temporarios (lama etc.). 1.0 = normal; <1 = mais lento / pulo mais fraco.
+			// Sao restaurados para 1.0 a cada frame, em atualizarY.
+			float multiplicadorVel;
+			float multiplicadorPulo;
+
 		public:
 			Personagem(const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f), const float vel = 0.01f,
-					const IDs::IDs id = IDs::IDs::vazio);
+				const IDs::IDs id = IDs::IDs::vazio);
 			virtual ~Personagem();
 			void andar(const bool paraEsquerda);
 			void parar();
@@ -32,8 +37,10 @@ namespace Entidades
 			void pular();
 			void aterrissar();
 			void baterCabeca();
+
+			// Chamado pelos obstaculos de "zona" (ex.: Lama) enquanto ha contato.
+			// Vale por 1 frame; se ninguem chamar, o personagem volta ao normal sozinho.
+			void aplicarLentidao(float fatorVel, float fatorPulo);
 		};
 	}
 }
-
-

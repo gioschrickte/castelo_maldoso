@@ -5,8 +5,7 @@
 #include "InimigoMedio.hpp"
 // #include "Chefao.hpp" (a implementar)
 #include "Plataforma.hpp"
-#include "Espinho.hpp"
-// #include "ObstaculoDificil.hpp" (a implementar)
+#include "Lama.hpp"
 
 namespace Jogo {
     namespace Fases {
@@ -17,6 +16,8 @@ namespace Jogo {
             ~FaseSegunda();
             void criarInimigos()   override;
             void criarObstaculos() override;
+            void criarLama();
+			//void criarChefao();
         };
     }
 }

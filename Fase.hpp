@@ -39,6 +39,7 @@ namespace Jogo {
 
             void executar() override;                      // loop comum a todas as fases
             Entidades::Chao* getChao() { return chao; }
+			//virtual void setBackground();                          // pode ser sobrescrito para cada fase ter um fundo diferente
 
             virtual void criarInimigos() = 0;            // cada fase acrescenta os seus
             virtual void criarObstaculos() = 0;

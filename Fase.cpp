@@ -22,9 +22,6 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     gerColisoes->setFase(this);           // agregação bidirecional (só referência)
     gerColisoes->setJogador1(jog1);
     gerEventos->setJogador(jog1);
-
-    // criarInimigos()/criarObstaculos() são chamados no construtor da DERIVADA,
-    // e cada um deles chama os criadores comuns desta base.
 }
 
 Jogo::Fases::Fase::~Fase()
@@ -104,7 +101,7 @@ void Jogo::Fases::Fase::criarPlataformas()
 {
     using namespace Entidades::Obstaculos;
 
-    const sf::Vector2f tam(200.0f, 20.0f);   // mesmo tamanho usado ao criar a Plataforma
+    const sf::Vector2f tam(200.0f, 20.0f);
     const float folga = 40.0f;               // espaço mínimo exigido entre plataformas
     const int  MAX_TENTATIVAS = 30;          // evita travar quando a tela está cheia
 
@@ -112,19 +109,18 @@ void Jogo::Fases::Fase::criarPlataformas()
     const float chaoTopo = chao->getPosicao().y;
     const float xMin = 0.0f;
     const float xMax = largura - tam.x;      // garante a plataforma INTEIRA dentro da tela
-    const float yMin = 250.0f;               // limite superior
-    const float yMax = chaoTopo - 150.0f;    // limite inferior
+    const float yMin = 250.0f;
+    const float yMax = chaoTopo - 150.0f;
 
     std::vector<sf::FloatRect> colocadas;    // o que já foi posicionado nesta fase
 
-    int n = aleatorio(0, MAX_PLATAFORMAS);
+    int n = aleatorio(3, MAX_PLATAFORMAS);
     for (int i = 0; i < n; i++)
     {
         for (int t = 0; t < MAX_TENTATIVAS; t++)
         {
             sf::Vector2f pos = posicaoAleatoria(xMin, xMax, yMin, yMax);
 
-            // candidato "inflado" pela folga, p/ exigir um respiro entre plataformas
             sf::FloatRect cand(pos.x - folga, pos.y - folga,
                 tam.x + 2 * folga, tam.y + 2 * folga);
 
@@ -134,12 +130,10 @@ void Jogo::Fases::Fase::criarPlataformas()
 
             if (livre)
             {
-                // guarda o retângulo REAL (sem a folga) e cria a plataforma
                 colocadas.push_back(sf::FloatRect(pos.x, pos.y, tam.x, tam.y));
                 adicionarObstaculo(new Plataforma(pos, tam));
-                break;   // colocou esta -> vai para a próxima
+                break;
             }
-            // se não, o laço de tentativas sorteia outra posição
         }
         // se esgotar as tentativas sem achar lugar, simplesmente pula esta plataforma
     }

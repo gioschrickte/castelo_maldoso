@@ -1,6 +1,7 @@
 #include "Principal.hpp"
 #include "GerenciadorColisoes.hpp"
 #include "FasePrimeira.hpp"
+#include "FaseSegunda.hpp"
 #include <iostream>
 using namespace std;
 
@@ -34,7 +35,7 @@ void Principal::executar()
 	Entidades::Personagens::Jogadores::Jogador* jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));	
 	
 	// Essa parte vai virar menu depois
-	faseAtual = new Jogo::Fases::FasePrimeira(jogador1);
+	faseAtual = new Jogo::Fases::FaseSegunda(jogador1);
 	if(!faseAtual){ printf("Erro ao criar fase"); }
 	faseAtual->executar();
 

@@ -1,5 +1,6 @@
 // FaseSegunda.cpp
 #include "FaseSegunda.hpp"
+#define MAX_LAMA 5
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
     : Fase(jogador, j2)
@@ -12,20 +13,28 @@ Jogo::Fases::FaseSegunda::~FaseSegunda() {}
 
 void Jogo::Fases::FaseSegunda::criarInimigos()
 {
-    using namespace Entidades::Personagens::Inimigos;
-    // "alterna entre um desses": aqui troco InimigoMedio e (futuro) Chefao
-    for (int i = 0; i < 6; i++) {
-        sf::Vector2f pos(rand() % 700 + 50.0f, rand() % 500 + 50.0f);
-        if (i % 2 == 0) adicionarInimigo(new InimigoMedio(jog1, pos));
-        else            adicionarInimigo(new InimigoFacil(jog1, pos)); // troque por new Chefao(jog1, pos)
-    }
+    criarInimigosFaceis();   // COMUM -> definido na base (Fase)
+    //criarChefao();
 }
 
 void Jogo::Fases::FaseSegunda::criarObstaculos()
 {
-    using namespace Entidades::Obstaculos;
-    for (int i = 0; i < 6; i++) {
-        if (i % 2 == 0) adicionarObstaculo(new Espinho(sf::Vector2f(rand() % 1600 + 100.0f, 858.0f)));
-        else            adicionarObstaculo(new Plataforma(sf::Vector2f(rand() % 1600 + 100.0f, rand() % 500 + 200.0f)));
-    }
+    criarPlataformas(); 
+    criarLama();
+}
+
+void Jogo::Fases::FaseSegunda::criarLama()
+{
+	using namespace Entidades::Obstaculos;
+	// Específico da fase 2: lama rente ao chão.
+	const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
+	const float chaoTopo = chao->getPosicao().y;
+	const float margem = 100.0f;
+	const float lamaY = chaoTopo - 30.0f;
+	int nLamas = aleatorio(3, MAX_LAMA);
+	for (int i = 0; i < nLamas; i++)
+	{
+		float x = static_cast<float>(aleatorio(static_cast<int>(margem), static_cast<int>(largura - margem)));
+		adicionarObstaculo(new Lama(sf::Vector2f(x, lamaY)));
+	}
 }
