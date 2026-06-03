@@ -24,6 +24,12 @@ Principal::~Principal()
 
 	delete pColisoes;
 	pColisoes = nullptr;
+
+	delete pEvento;
+	pEvento = nullptr;
+
+	delete pGrafico;
+	pGrafico = nullptr;
 }
 
 
