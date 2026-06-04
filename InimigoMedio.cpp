@@ -13,7 +13,7 @@ Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador*
 	sf::Vector2u tSz = textura.getSize();
 	if (tSz.x > 0 && tSz.y > 0)
 	{
-		sprite.setScale(50.0f / tSz.x, 50.0f / tSz.y);
+		sprite.setScale(70.0f / tSz.x, 70.0f / tSz.y);
 	}
 
 	sprite.setPosition(pos);
