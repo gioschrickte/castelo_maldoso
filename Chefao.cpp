@@ -12,7 +12,18 @@ Entidades::Personagens::Inimigos::Chefao::Chefao(Jogadores::Jogador* j, const sf
 	forca(5), projetil(nullptr), projetilEstavaAtivo(false), moveAleatorio(0)
 {
 	corpo.setFillColor(sf::Color::Yellow);
-	temSprite = false;
+	textura = pGG->carregarTextura("assets/mago.png");
+	sprite.setTexture(textura);
+
+	// Ajusta a escala do sprite para cobrir exatamente o corpo (50x50)
+	sf::Vector2u tSz = textura.getSize();
+	if (tSz.x > 0 && tSz.y > 0)
+	{
+		sprite.setScale(100.0f / tSz.x, 100.0f / tSz.y);
+	}
+
+	sprite.setPosition(pos);
+	temSprite = true;
 }
 
 Entidades::Personagens::Inimigos::Chefao::~Chefao() {}

@@ -14,6 +14,7 @@ private:
     Lista::ListaEntidade listaObstaculo;
 
 	Jogo::Fases::Fase* faseAtual;
+    void criarFase(int numFase);
 
 	Entidades::Personagens::Jogadores::Jogador* jogador1;
 public:

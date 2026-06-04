@@ -3,6 +3,7 @@
 #include "FasePrimeira.hpp"
 #include "FaseSegunda.hpp"
 #include <iostream>
+#include "Menu.hpp"
 using namespace std;
 
 Principal::Principal()
@@ -32,18 +33,35 @@ Principal::~Principal()
 	pGrafico = nullptr;
 }
 
+void Principal::criarFase(int numFase)
+{
+	if (faseAtual)
+	{
+		delete faseAtual;
+		faseAtual = nullptr;
+		pColisoes->limpar();   // limpa listas do gerenciador antes de recriar a fase
+	}
+
+	if (numFase == 1) faseAtual = new Jogo::Fases::FasePrimeira(jogador1);
+	else if (numFase == 2) faseAtual = new Jogo::Fases::FaseSegunda(jogador1);
+
+	if (!faseAtual) printf("Erro ao criar fase %d\n", numFase);
+}
+
 
 void Principal::executar()
 {
 	srand(time(NULL));
 	Jogo::Ente::setGG(pGrafico);
 
-	Entidades::Personagens::Jogadores::Jogador* jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));	
+	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));	
 	
-	// Essa parte vai virar menu depois
-	faseAtual = new Jogo::Fases::FasePrimeira(jogador1);
-	if(!faseAtual){ printf("Erro ao criar fase"); }
-	faseAtual->executar();
+	Jogo::Menu menu;
+	int escolha = menu.rodar();   // exibe o menu e aguarda o clique
 
+	if (escolha == -1) return;    // jogador fechou a janela no menu
+
+	criarFase(escolha);
+	faseAtual->executar();
 	// antes de criar a segunda fase, tem q dar delete(faseAtual)
 }

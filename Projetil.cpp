@@ -9,6 +9,20 @@ Entidades::Projetil::Projetil(int dano, const sf::Vector2f tam)
 	ativo(false), dano(dano), velocidade(0.0f, 0.0f), relogio()
 {
 	corpo.setFillColor(sf::Color(255, 180, 40)); 
+	
+	
+	textura = pGG->carregarTextura("assets/fireball.png");
+	sprite.setTexture(textura);
+
+	// Ajusta a escala do sprite para cobrir exatamente o corpo (50x50)
+	sf::Vector2u tSz = textura.getSize();
+	if (tSz.x > 0 && tSz.y > 0)
+	{
+		sprite.setScale(50.0f / tSz.x, 50.0f / tSz.y);
+	}
+
+	sprite.setPosition(this->getPosicao());
+	temSprite = true;
 }
 
 Entidades::Projetil::~Projetil() {}

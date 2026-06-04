@@ -1,0 +1,34 @@
+// Menu.hpp
+#pragma once
+#include "Ente.hpp"
+#include "GerenciadorGrafico.hpp"
+#include <SFML/Graphics.hpp>
+
+namespace Jogo {
+
+    class Menu : public Ente {
+    private:
+        sf::Font fonte;
+        sf::RectangleShape botaoFase1;
+        sf::RectangleShape botaoFase2;
+        sf::Text textoBotao1;
+        sf::Text textoBotao2;
+        sf::Text textoTitulo;
+
+        bool fontCarregada;
+
+        bool carregarFonte();
+        bool clicouEm(const sf::RectangleShape& botao, sf::Vector2i posMouse) const;
+        void atualizarHover(sf::Vector2i posMouse);
+
+    public:
+        Menu();
+        ~Menu();
+
+        // Satisfaz Ente::executar() — não usado diretamente
+        void executar() override {}
+
+        // Chamado pela Principal. Retorna 1, 2 ou -1 (janela fechada)
+        int rodar();
+    };
+}
