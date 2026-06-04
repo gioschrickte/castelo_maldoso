@@ -6,6 +6,18 @@ Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador*
     : Inimigo(j, pos, sf::Vector2f(60.0f, 60.0f), 150.0f)  // maior e mais rápido
 {
     corpo.setFillColor(sf::Color::Magenta);
+	textura = pGG->carregarTextura("assets/ork.png");
+	sprite.setTexture(textura);
+
+	// Ajusta a escala do sprite para cobrir exatamente o corpo (50x50)
+	sf::Vector2u tSz = textura.getSize();
+	if (tSz.x > 0 && tSz.y > 0)
+	{
+		sprite.setScale(50.0f / tSz.x, 50.0f / tSz.y);
+	}
+
+	sprite.setPosition(pos);
+	temSprite = true;
 }
 
 void Entidades::Personagens::Inimigos::InimigoMedio::executar()
