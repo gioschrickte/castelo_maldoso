@@ -6,6 +6,19 @@ Entidades::Obstaculos::Espinho::Espinho(const sf::Vector2f pos, const sf::Vector
 {
     corpo.setFillColor(sf::Color(150, 30, 30)); // vermelho escuro
     danoso = true; // indica que o espinho é dano
+   
+    textura = pGG->carregarTextura("assets/espinho.png");
+    sprite.setTexture(textura);
+
+    // Ajusta a escala do sprite para cobrir exatamente o corpo (50x50)
+    sf::Vector2u tSz = textura.getSize();
+    if (tSz.x > 0 && tSz.y > 0)
+    {
+        sprite.setScale(40.0f / tSz.x, 40.0f / tSz.y);
+    }
+
+    sprite.setPosition(pos);
+    temSprite = true;
 }
 
 Entidades::Obstaculos::Espinho::~Espinho() {}

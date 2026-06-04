@@ -1,4 +1,3 @@
-// Menu.cpp
 #include "Menu.hpp"
 
 // Cores dos botões

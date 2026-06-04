@@ -4,6 +4,20 @@ Entidades::Obstaculos::Plataforma::Plataforma(const sf::Vector2f pos, const sf::
     : Entidades::Obstaculos::Obstaculo(pos, tam, IDs::IDs::plataforma)
 {
     corpo.setFillColor(sf::Color::Green);
+
+
+    textura = pGG->carregarTextura("assets/plataforma.png");
+    sprite.setTexture(textura);
+
+    // Ajusta a escala do sprite para cobrir exatamente o corpo (50x50)
+    sf::Vector2u tSz = textura.getSize();
+    if (tSz.x > 0 && tSz.y > 0)
+    {
+        sprite.setScale(200.0f / tSz.x, 20.0f / tSz.y);
+    }
+
+    sprite.setPosition(pos);
+    temSprite = true;
 }
 
 Entidades::Obstaculos::Plataforma::~Plataforma() {}

@@ -15,6 +15,8 @@ namespace Jogo {
         sf::Text textoBotao2;
         sf::Text textoTitulo;
 
+        //Jogo* pjog;
+
         bool fontCarregada;
 
         bool carregarFonte();
