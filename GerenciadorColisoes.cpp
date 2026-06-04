@@ -3,9 +3,9 @@
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
 
 Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
-	LIs(), LOs(), pJog1(nullptr), fase(nullptr)
+	LIs(), LOs(), projeteis(), pJog1(nullptr), fase(nullptr)
 {
-	// Aqui, o gerenciador de colisoes está com a lista de Inimigos e Objetos vazia, e o ponteiro para o jogador é nulo
+	// Aqui, o gerenciador de colisoes está com as listas vazias, e o ponteiro para o jogador é nulo
 }
 
 Gerenciador::GerenciadorColisoes::~GerenciadorColisoes()
@@ -55,6 +55,18 @@ void Gerenciador::GerenciadorColisoes::incluirObstaculo(Entidades::Obstaculos::O
 	}
 }
 
+void Gerenciador::GerenciadorColisoes::incluirProjetil(Entidades::Projetil* pProj)
+{
+	if (pProj)
+	{
+		projeteis.insert(pProj);
+	}
+	else
+	{
+		printf("Erro, pProj nulo");
+	}
+}
+
 const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2)
 {
 	sf::Vector2f pos1 = ent1->getCorpo().getPosition();
@@ -88,6 +100,7 @@ void Gerenciador::GerenciadorColisoes::executar() {
 	tratarColisoesInimgsObstacs();
 	tratarColisoesJogsObstacs();
 	tratarColisoesChao();
+	tratarColisoesJogsProjeteis();
 
 }
 
@@ -170,12 +183,35 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 	}
 }
 
+void Gerenciador::GerenciadorColisoes::tratarColisoesJogsProjeteis()
+{
+	if (!pJog1)
+	{
+		printf("Erro, pJog1 nulo");
+		return;
+	}
+
+	// So projeteis ATIVOS colidem; os inativos estao escondidos fora da tela.
+	for (set<Entidades::Projetil*>::iterator it = projeteis.begin(); it != projeteis.end(); ++it)
+	{
+		Entidades::Projetil* proj = *it;
+		if (!proj->estaAtivo()) continue;
+
+		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(pJog1),
+			static_cast<Entidades::Entidade*>(proj));
+		if (ds.x > 0.0f && ds.y > 0.0f) // acertou o jogador
+		{
+			proj->atingir(); // exibe o dano no terminal e se desativa
+		}
+	}
+}
+
 
 void Gerenciador::GerenciadorColisoes::limpar()
 {
 	LIs.clear();
 	LOs.clear();
+	projeteis.clear();
 	pJog1 = nullptr;
 	fase = nullptr;
 }
-

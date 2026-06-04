@@ -38,8 +38,7 @@ void Jogo::Fases::FasePrimeira::criarInimigosMedios()
 void Jogo::Fases::FasePrimeira::criarObstaculos()
 {
     criarPlataformas();      // COMUM -> definido na base (Fase)
-    criarEspinhos();
-   
+    criarEspinhos();   
 }
 
 void Jogo::Fases::FasePrimeira::criarEspinhos()

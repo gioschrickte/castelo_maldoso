@@ -5,7 +5,6 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	: Personagem(pos, tam, 200.0f, IDs::IDs::jogador)
 {
 	corpo.setFillColor(sf::Color::Blue);
-	forcaPulo = 800.0f;
 }
 
 Entidades::Personagens::Jogadores::Jogador::~Jogador()

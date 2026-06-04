@@ -1,6 +1,6 @@
 #include "Personagem.hpp"
 #define GRAVIDADE 1500.0f
-#define FORCA_PULO 1000.0f
+#define FORCA_PULO 800.0f
 
 
 Entidades::Personagens::Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam, const float vel, const IDs::IDs id)

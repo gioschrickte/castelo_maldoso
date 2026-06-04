@@ -8,6 +8,7 @@
 #include "GerenciadorEventos.hpp"
 
 namespace Gerenciador { class GerenciadorColisoes; }
+namespace Entidades { class Projetil; } // forward declare
 
 namespace Jogo {
     namespace Fases {
@@ -32,6 +33,7 @@ namespace Jogo {
 
             void adicionarInimigo(Entidades::Personagens::Inimigos::Inimigo* i);
             void adicionarObstaculo(Entidades::Obstaculos::Obstaculo* o);
+            void adicionarProjetil(Entidades::Projetil* p); // na lista de entidades + no gerenciador
         public:
             Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
@@ -39,7 +41,6 @@ namespace Jogo {
 
             void executar() override;                      // loop comum a todas as fases
             Entidades::Chao* getChao() { return chao; }
-			//virtual void setBackground();                          // pode ser sobrescrito para cada fase ter um fundo diferente
 
             virtual void criarInimigos() = 0;            // cada fase acrescenta os seus
             virtual void criarObstaculos() = 0;

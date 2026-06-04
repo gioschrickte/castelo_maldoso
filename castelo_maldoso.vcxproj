@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,6 +151,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chefao.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="Espinho.cpp" />
@@ -171,9 +172,11 @@
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="Principal.cpp" />
+    <ClCompile Include="Projetil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chao.hpp" />
+    <ClInclude Include="Chefao.hpp" />
     <ClInclude Include="Elemento.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
@@ -196,6 +199,7 @@
     <ClInclude Include="Personagem.hpp" />
     <ClInclude Include="Plataforma.hpp" />
     <ClInclude Include="Principal.hpp" />
+    <ClInclude Include="Projetil.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

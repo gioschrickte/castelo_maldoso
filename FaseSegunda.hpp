@@ -17,6 +17,7 @@ namespace Jogo {
             void criarInimigos()   override;
             void criarObstaculos() override;
             void criarLama();
+            void criarChefao();
 			//void criarChefao();
         };
     }

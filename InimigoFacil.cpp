@@ -22,6 +22,8 @@ Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
     temSprite = true;
 }
 
+Entidades::Personagens::Inimigos::InimigoFacil::~InimigoFacil() {}
+
 void Entidades::Personagens::Inimigos::InimigoFacil::danificar(
     Jogadores::Jogador* pJog)
 {

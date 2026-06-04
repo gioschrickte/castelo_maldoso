@@ -1,11 +1,12 @@
 // Fase.cpp
 #include "Fase.hpp"
 #include "GerenciadorColisoes.hpp"
-#include "InimigoFacil.hpp"   // a base agora cria os inimigos fáceis
-#include "Plataforma.hpp"     // ... e as plataformas
-#include <cstdlib>            // rand()
+#include "InimigoFacil.hpp" 
+#include "Plataforma.hpp" 
+#include "Projetil.hpp"
+#include <cstdlib>
 
-#define MAX_INIMIGOS_FACEIS 5
+#define MAX_INIMIGOS_FACEIS 4
 #define MAX_PLATAFORMAS 5
 
 Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
@@ -14,12 +15,12 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     gerEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
     chao(nullptr)
 {
-    criarChao();                          // chão é comum -> criado na base
+    criarChao();
 
     listaEntidade.addEntidade(jog1);
     if (jog2) listaEntidade.addEntidade(jog2);
 
-    gerColisoes->setFase(this);           // agregação bidirecional (só referência)
+    gerColisoes->setFase(this);
     gerColisoes->setJogador1(jog1);
     gerEventos->setJogador(jog1);
 }
@@ -33,7 +34,7 @@ Jogo::Fases::Fase::~Fase()
 
 void Jogo::Fases::Fase::criarChao()
 {
-    chao = new Entidades::Chao(sf::Vector2f(0.0f, 900.0f), sf::Vector2f(1920.0f, 20.0f));
+    chao = new Entidades::Chao(sf::Vector2f(0.0f, 750.0f), sf::Vector2f(pGG->getWindow()->getSize().x, 20.0f));
     listaEntidade.addEntidade(chao);
 }
 
@@ -47,6 +48,12 @@ void Jogo::Fases::Fase::adicionarObstaculo(Entidades::Obstaculos::Obstaculo* o)
 {
     listaEntidade.addEntidade(o);
     gerColisoes->incluirObstaculo(o);
+}
+
+void Jogo::Fases::Fase::adicionarProjetil(Entidades::Projetil* p)
+{
+    listaEntidade.addEntidade(p);     // entra no loop de executar()/desenhar()
+    gerColisoes->incluirProjetil(p);  // entra no set de projeteis (colisao com o jogador)
 }
 
 int Jogo::Fases::Fase::aleatorio(int minimo, int maximo)
@@ -103,12 +110,12 @@ void Jogo::Fases::Fase::criarPlataformas()
 
     const sf::Vector2f tam(200.0f, 20.0f);
     const float folga = 40.0f;               // espaço mínimo exigido entre plataformas
-    const int  MAX_TENTATIVAS = 30;          // evita travar quando a tela está cheia
+    const int  MAX_TENTATIVAS = 30;
 
     const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
     const float chaoTopo = chao->getPosicao().y;
     const float xMin = 0.0f;
-    const float xMax = largura - tam.x;      // garante a plataforma INTEIRA dentro da tela
+    const float xMax = largura - tam.x;
     const float yMin = 250.0f;
     const float yMax = chaoTopo - 150.0f;
 

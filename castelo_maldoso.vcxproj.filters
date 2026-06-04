@@ -99,11 +99,29 @@
     <ClCompile Include="Fase.cpp">
       <Filter>src\Fase</Filter>
     </ClCompile>
-    <ClCompile Include="Espinho.cpp" />
-    <ClCompile Include="FasePrimeira.cpp" />
-    <ClCompile Include="FaseSegunda.cpp" />
     <ClCompile Include="InimigoFacil.cpp">
       <Filter>src\Entidade\Personagem\Inimigo</Filter>
+    </ClCompile>
+    <ClCompile Include="FasePrimeira.cpp">
+      <Filter>src\Fase</Filter>
+    </ClCompile>
+    <ClCompile Include="FaseSegunda.cpp">
+      <Filter>src\Fase</Filter>
+    </ClCompile>
+    <ClCompile Include="Espinho.cpp">
+      <Filter>src\Entidade\Obstaculo</Filter>
+    </ClCompile>
+    <ClCompile Include="Lama.cpp">
+      <Filter>src\Entidade\Obstaculo</Filter>
+    </ClCompile>
+    <ClCompile Include="InimigoMedio.cpp">
+      <Filter>src\Entidade\Personagem\Inimigo</Filter>
+    </ClCompile>
+    <ClCompile Include="Chefao.cpp">
+      <Filter>src\Entidade\Personagem\Inimigo</Filter>
+    </ClCompile>
+    <ClCompile Include="Projetil.cpp">
+      <Filter>src\Entidade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +176,29 @@
     <ClInclude Include="chao.hpp">
       <Filter>include\Entidade\Obstaculo</Filter>
     </ClInclude>
-    <ClInclude Include="Espinho.hpp" />
-    <ClInclude Include="FasePrimeira.hpp" />
-    <ClInclude Include="FaseSegunda.hpp" />
-    <ClInclude Include="InimigoFacil.hpp" />
-    <ClInclude Include="InimigoMedio.hpp" />
+    <ClInclude Include="FasePrimeira.hpp">
+      <Filter>include\Fase</Filter>
+    </ClInclude>
+    <ClInclude Include="FaseSegunda.hpp">
+      <Filter>include\Fase</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoFacil.hpp">
+      <Filter>include\Entidade\Personagem\Inimigo</Filter>
+    </ClInclude>
+    <ClInclude Include="InimigoMedio.hpp">
+      <Filter>include\Entidade\Personagem\Inimigo</Filter>
+    </ClInclude>
+    <ClInclude Include="Espinho.hpp">
+      <Filter>include\Entidade\Obstaculo</Filter>
+    </ClInclude>
+    <ClInclude Include="Lama.hpp">
+      <Filter>include\Entidade\Obstaculo</Filter>
+    </ClInclude>
+    <ClInclude Include="Chefao.hpp">
+      <Filter>include\Entidade\Personagem\Inimigo</Filter>
+    </ClInclude>
+    <ClInclude Include="Projetil.hpp">
+      <Filter>include\Entidade</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
