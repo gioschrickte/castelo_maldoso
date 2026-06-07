@@ -5,6 +5,8 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	: Personagem(pos, tam, 200.0f, IDs::IDs::jogador)
 {
 	corpo.setFillColor(sf::Color::Blue);
+	vidaMax = 20.0f;
+	vida = vidaMax;
 }
 
 Entidades::Personagens::Jogadores::Jogador::~Jogador()
@@ -22,7 +24,5 @@ void Entidades::Personagens::Jogadores::Jogador::executar()
 
 void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Personagens::Inimigos::Inimigo* inimigo)
 {
-	// Aqui você pode implementar a lógica de dano ao jogador, como reduzir a vida ou reiniciar o jogo
-	std::cout << "O jogador colidiu com um inimigo!" << std::endl;
 	inimigo->danificar(this);
 }

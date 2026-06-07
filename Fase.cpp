@@ -152,10 +152,13 @@ void Jogo::Fases::Fase::executar()
         gerEventos->executar();                                   // 1. entrada
         for (int i = 0; i < listaEntidade.getTam(); i++)
             listaEntidade[i]->executar();                         // 2. física/IA
-        gerColisoes->executar();                                  // 3. colisões corrigem
+        gerColisoes->executar();                                  // 3. colisões corrigem / atualiza vida dos personagens
         pGG->limpaJanela();
         for (int i = 0; i < listaEntidade.getTam(); i++)
-            listaEntidade[i]->desenhar();                         // 4. desenha já corrigido
+        {
+			listaEntidade[i]->desenhar();                          // 4. desenha tudo
+
+        }
         pGG->mostraElementos();
     }
 }

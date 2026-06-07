@@ -1,5 +1,6 @@
 #include "GerenciadorColisoes.hpp"
 
+
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
 
 Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
@@ -202,6 +203,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsProjeteis()
 		if (ds.x > 0.0f && ds.y > 0.0f) // acertou o jogador
 		{
 			proj->atingir(); // exibe o dano no terminal e se desativa
+			pJog1->tomarDano(proj->getDano()); // o jogador toma dano
 		}
 	}
 }

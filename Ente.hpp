@@ -24,7 +24,7 @@ namespace Jogo
 		Ente(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);
 		virtual ~Ente();
 		virtual void executar() = 0;
-		void desenhar();
+		virtual void desenhar();
 		static void setGG(Gerenciador::GerenciadorGrafico* pgg);
 	};
 }

@@ -11,6 +11,7 @@ namespace Entidades {
 			protected:
 				Entidades::Personagens::Jogadores::Jogador* jogador;
 				sf::Clock relogioAleatorio;
+				float dano;
 			public:
 				Inimigo(Entidades::Personagens::Jogadores::Jogador* pjogador,
 					const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f),

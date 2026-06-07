@@ -11,3 +11,10 @@ Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador,
 }
 
 Entidades::Personagens::Inimigos::Inimigo::~Inimigo(){}
+
+void Entidades::Personagens::Inimigos::Inimigo::danificar(Jogadores::Jogador* pJog)
+{
+	// Aqui você pode implementar a lógica de dano ao jogador, como reduzir a vida ou reiniciar o jogo
+	std::cout << "O inimigo danificou o jogador!" << std::endl;
+	pJog->tomarDano(1.0f); // Exemplo: reduz a vida do jogador em 1 ponto
+}

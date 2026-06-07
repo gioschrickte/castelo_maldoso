@@ -4,13 +4,19 @@
 
 
 Entidades::Personagens::Personagem::Personagem(const sf::Vector2f pos, const sf::Vector2f tam, const float vel, const IDs::IDs id)
-	: Entidade::Entidade(pos, tam, id), velFinal(sf::Vector2f(vel, 0.0f)), relogio(), noChao(false)
+	: Entidade::Entidade(pos, tam, id), velFinal(sf::Vector2f(vel, 0.0f)), relogio(), noChao(false), barraVida()
 {
 	podeAndar = 0;
 	paraEsquerda = 0;
 	forcaPulo = FORCA_PULO;
 	multiplicadorVel = 1.0f;
 	multiplicadorPulo = 1.0f;
+
+	vidaMax = 10.0f;
+	vida = vidaMax;
+
+	barraVida.setSize(sf::Vector2f(tam.x, 5.0f));
+	barraVida.setFillColor(sf::Color::Green);
 }
 
 Entidades::Personagens::Personagem::~Personagem()
@@ -91,4 +97,48 @@ void Entidades::Personagens::Personagem::aplicarLentidao(float fatorVel, float f
 {
 	multiplicadorVel = fatorVel;
 	multiplicadorPulo = fatorPulo;
+}
+
+float Entidades::Personagens::Personagem::getVida() const
+{
+	return vida;
+}
+
+float Entidades::Personagens::Personagem::getVidaMax() const
+{
+	return vidaMax;
+}
+
+void Entidades::Personagens::Personagem::atualizaVida()
+{
+	if (vida < 0.0f)      vida = 0.0f;
+	if (vida > vidaMax)   vida = vidaMax;
+
+	// largura proporcional à vida atual
+	const sf::Vector2f tam = getTamanho();
+	const float proporcao = vida / vidaMax;
+	barraVida.setSize(sf::Vector2f(tam.x * proporcao, barraVida.getSize().y));
+
+	// posiciona acima da cabeça (top do personagem - altura da barra - folga)
+	const sf::Vector2f pos = getPosicao();
+	const float folga = 4.0f;
+	barraVida.setPosition(pos.x, pos.y - barraVida.getSize().y - folga);
+
+	// cor em função da proporção (não do valor absoluto)
+	if (proporcao > 0.6f)      barraVida.setFillColor(sf::Color::Green);
+	else if (proporcao > 0.3f) barraVida.setFillColor(sf::Color::Yellow);
+	else                       barraVida.setFillColor(sf::Color::Red);
+}
+
+void Entidades::Personagens::Personagem::desenhar()
+{
+	atualizaVida();              // sincroniza antes de desenhar
+	Jogo::Ente::desenhar();      // desenha o corpo (ou sprite)
+	pGG->desenhaElemento(barraVida);
+}
+
+void Entidades::Personagens::Personagem::tomarDano(float dano)
+{
+	vida -= dano;
+	if (vida < 0.0f) vida = 0.0f;
 }

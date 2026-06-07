@@ -20,16 +20,23 @@ Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
 
     sprite.setPosition(pos);
     temSprite = true;
+
+	vidaMax = 5.0f;
+	vida = vidaMax;
+	dano = 1.0f;
 }
 
 Entidades::Personagens::Inimigos::InimigoFacil::~InimigoFacil() {}
 
+
 void Entidades::Personagens::Inimigos::InimigoFacil::danificar(
     Jogadores::Jogador* pJog)
 {
+	pJog->tomarDano(dano); // Exemplo: reduz a vida do jogador em 0.5 ponto
     std::cout << "InimigoFacil causou dano leve!\n";
-    // quando houver vida: pJog->receberDano(1);
+	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
+
 
 void Entidades::Personagens::Inimigos::InimigoFacil::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
 {
