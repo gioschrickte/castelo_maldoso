@@ -41,5 +41,6 @@ namespace Entidades {
                     }                        
             }
         }
+            void executar() {}
 	};
 }
