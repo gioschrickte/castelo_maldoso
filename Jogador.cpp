@@ -24,15 +24,17 @@ void Entidades::Personagens::Jogadores::Jogador::executar()
 	if (podeAndar) atualizarX(dt);
 	atualizarY(dt);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
-		if (relogioAtaque.getElapsedTime().asSeconds() >= COOLDOWN_ATAQUE) {
-			relogioAtaque.restart();
-			ataqueAtivo = true;
-			std::cout << "Jogador atacou!\n";
-		}
-	}
 	if (ataqueAtivo && relogioAtaque.getElapsedTime().asSeconds() >= DURACAO_ATAQUE)
 		ataqueAtivo = false;
+}
+
+void Entidades::Personagens::Jogadores::Jogador::atacar()
+{
+	if (relogioAtaque.getElapsedTime().asSeconds() >= COOLDOWN_ATAQUE) {
+		relogioAtaque.restart();
+		ataqueAtivo = true;
+		std::cout << "Jogador atacou!\n";
+	}
 }
 
 bool Entidades::Personagens::Jogadores::Jogador::estaAtacando() const { return ataqueAtivo; }

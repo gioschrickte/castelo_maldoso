@@ -18,6 +18,7 @@ namespace Entidades {
 				void executar();
 				void colidir(Entidades::Personagens::Inimigos::Inimigo* inimigo);
 				void setChao(bool noChao) { this->noChao = noChao; }
+				void atacar();
 				bool estaAtacando() const;
 				float getDanoAtaque() const;
 			};
