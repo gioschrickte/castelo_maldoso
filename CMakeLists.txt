@@ -12,30 +12,34 @@ set(SFML_DIR "C:/Users/gssar/Documentos/Estudos/UTFPR/tecprog/SFML-2.6.2/lib/cma
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 
 # Adiciona o seu executável (liste todos os seus arquivos .cpp aqui)
-add_executable(app main.cpp
-Chefao.cpp
-Ente.cpp
-Entidade.cpp
-Espinho.cpp
-Fase.cpp
-FasePrimeira.cpp
-FaseSegunda.cpp
-GerenciadorColisoes.cpp
-GerenciadorEventos.cpp
-GerenciadorGrafico.cpp
-Inimigo.cpp
-InimigoFacil.cpp
-InimigoMedio.cpp
-Jogador.cpp
-Lama.cpp
-ListaEntidade.cpp
-Menu.cpp
-Obstaculo.cpp
-Personagem.cpp
-Plataforma.cpp
-Principal.cpp
-Projetil.cpp
+add_executable(app
+    src/main.cpp
+    src/Chefao.cpp
+    src/Ente.cpp
+    src/Entidade.cpp
+    src/Espinho.cpp
+    src/Fase.cpp
+    src/FasePrimeira.cpp
+    src/FaseSegunda.cpp
+    src/GerenciadorColisoes.cpp
+    src/GerenciadorEventos.cpp
+    src/GerenciadorGrafico.cpp
+    src/Inimigo.cpp
+    src/InimigoFacil.cpp
+    src/InimigoMedio.cpp
+    src/Jogador.cpp
+    src/Lama.cpp
+    src/ListaEntidade.cpp
+    src/Menu.cpp
+    src/Obstaculo.cpp
+    src/Personagem.cpp
+    src/Plataforma.cpp
+    src/Principal.cpp
+    src/Projetil.cpp
 )
+
+# Expõe a pasta include/ para todos os fontes
+target_include_directories(app PRIVATE include)
 
 # Linka o SFML ao seu executável
 target_link_libraries(app sfml-graphics sfml-window sfml-system)
