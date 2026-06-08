@@ -3,13 +3,12 @@
 #define RAIO_PERSEGUIR 400.0f
 
 Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador* j, const sf::Vector2f pos)
-    : Inimigo(j, pos, sf::Vector2f(60.0f, 60.0f), 150.0f)  // maior e mais rápido
+    : Inimigo(j, pos, sf::Vector2f(60.0f, 60.0f), 150.0f)
 {
     corpo.setFillColor(sf::Color::Magenta);
 	textura = pGG->carregarTextura("assets/ork.png");
 	sprite.setTexture(textura);
 
-	// Ajusta a escala do sprite para cobrir exatamente o corpo (50x50)
 	sf::Vector2u tSz = textura.getSize();
 	if (tSz.x > 0 && tSz.y > 0)
 	{
@@ -18,6 +17,18 @@ Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador*
 
 	sprite.setPosition(pos);
 	temSprite = true;
+
+	dano = 2.0f;
+	vidaMax = 10.0f;
+	vida = vidaMax;
+}
+
+void Entidades::Personagens::Inimigos::InimigoMedio::danificar(Jogadores::Jogador* pJog)
+{
+	if (!podeHitar()) return;
+	pJog->tomarDano(dano);
+	std::cout << "InimigoMedio causou dano medio! (dano=" << dano << ")\n";
+	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
 void Entidades::Personagens::Inimigos::InimigoMedio::executar()

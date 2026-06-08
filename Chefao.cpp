@@ -24,13 +24,20 @@ Entidades::Personagens::Inimigos::Chefao::Chefao(Jogadores::Jogador* j, const sf
 
 	sprite.setPosition(pos);
 	temSprite = true;
+
+	dano = 3.0f;
+	vidaMax = 20.0f;
+	vida = vidaMax;
 }
 
 Entidades::Personagens::Inimigos::Chefao::~Chefao() {}
 
 void Entidades::Personagens::Inimigos::Chefao::danificar(Jogadores::Jogador* pJog)
 {
-	std::cout << "O chefao encostou no jogador!\n";
+	if (!podeHitar()) return;
+	pJog->tomarDano(dano);
+	std::cout << "O chefao encostou no jogador! (dano=" << dano << ")\n";
+	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
 

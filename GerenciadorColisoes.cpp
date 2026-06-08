@@ -1,5 +1,8 @@
 #include "GerenciadorColisoes.hpp"
 
+#define ALCANCE_ATAQUE_H 80.0f  // alcance horizontal da espada
+#define ALCANCE_ATAQUE_V 60.0f  // tolerância vertical
+
 
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
 
@@ -95,14 +98,12 @@ const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidad
 }
 
 void Gerenciador::GerenciadorColisoes::executar() {
-	// Tratar de todas as colisões
-
 	tratarColisoesJogsInimgs();
 	tratarColisoesInimgsObstacs();
 	tratarColisoesJogsObstacs();
 	tratarColisoesChao();
 	tratarColisoesJogsProjeteis();
-
+	tratarAtaqueJogador();
 }
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
@@ -208,6 +209,29 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsProjeteis()
 	}
 }
 
+
+void Gerenciador::GerenciadorColisoes::tratarAtaqueJogador()
+{
+	if (!pJog1 || !pJog1->estaAtacando()) return;
+
+	sf::Vector2f posJog = pJog1->getCorpo().getPosition();
+	sf::Vector2f tamJog = pJog1->getCorpo().getSize();
+	bool paraEsquerda = pJog1->olhandoParaEsquerda();
+
+	for (int i = 0; i < (int)LIs.size(); i++)
+	{
+		sf::Vector2f posInim = LIs[i]->getCorpo().getPosition();
+		float dx = posInim.x - posJog.x;
+		bool naFrente = paraEsquerda ? (dx < 0.0f) : (dx >= 0.0f);
+		if (!naFrente) continue;
+		if (fabs(dx) <= ALCANCE_ATAQUE_H && fabs(posInim.y - posJog.y) <= ALCANCE_ATAQUE_V)
+		{
+			LIs[i]->tomarDano(pJog1->getDanoAtaque());
+			std::cout << "Jogador acertou inimigo! (dano=" << pJog1->getDanoAtaque() << ")\n";
+			std::cout << "Vida do inimigo: " << LIs[i]->getVida() << " / " << LIs[i]->getVidaMax() << std::endl;
+		}
+	}
+}
 
 void Gerenciador::GerenciadorColisoes::limpar()
 {

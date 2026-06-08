@@ -38,6 +38,7 @@ namespace Gerenciador {
 		void tratarColisoesJogsProjeteis();
 		void tratarColisoesInimgsObstacs();
 		void tratarColisoesChao();
+		void tratarAtaqueJogador();
 
 
 		void incluirInimigo(Entidades::Personagens::Inimigos::Inimigo* pInim);

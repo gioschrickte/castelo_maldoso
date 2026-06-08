@@ -32,8 +32,9 @@ Entidades::Personagens::Inimigos::InimigoFacil::~InimigoFacil() {}
 void Entidades::Personagens::Inimigos::InimigoFacil::danificar(
     Jogadores::Jogador* pJog)
 {
-	pJog->tomarDano(dano); // Exemplo: reduz a vida do jogador em 0.5 ponto
-    std::cout << "InimigoFacil causou dano leve!\n";
+	if (!podeHitar()) return;
+	pJog->tomarDano(dano);
+    std::cout << "InimigoFacil causou dano leve! (dano=" << dano << ")\n";
 	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 

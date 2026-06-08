@@ -49,6 +49,7 @@ namespace Entidades
 			void tomarDano(float dano);
 			float getVida() const;
 			float getVidaMax() const;
+			bool olhandoParaEsquerda() const { return paraEsquerda; }
 			void atualizaVida();
 			void desenhar();
 		};

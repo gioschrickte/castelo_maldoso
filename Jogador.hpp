@@ -8,12 +8,18 @@ namespace Entidades {
 
 		namespace Jogadores {
 			class Jogador : public Personagem {
+			private:
+				bool ataqueAtivo;
+				sf::Clock relogioAtaque;
+				float danoAtaque;
 			public:
 				Jogador(const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f));
 				~Jogador();
 				void executar();
 				void colidir(Entidades::Personagens::Inimigos::Inimigo* inimigo);
 				void setChao(bool noChao) { this->noChao = noChao; }
+				bool estaAtacando() const;
+				float getDanoAtaque() const;
 			};
 		}
 	}

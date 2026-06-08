@@ -8,11 +8,7 @@ namespace Entidades {
             class InimigoMedio : public Inimigo {
             public:
                 InimigoMedio(Jogadores::Jogador* j, const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f));
-                void danificar(Jogadores::Jogador* pJog) override
-                {
-                    std::cout << "InimigoMedio causou dano alto!\n";
-                    // quando houver vida: pJog->receberDano(2);
-                }
+                void danificar(Jogadores::Jogador* pJog) override;
 
                 void executar();
             };
