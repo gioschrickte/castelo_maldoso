@@ -1,7 +1,7 @@
 ﻿#include "Jogador.h"
 #include "Inimigo.h"
 
-#define DURACAO_ATAQUE  0.15f
+#define DURACAO_ATAQUE  0.05f
 #define COOLDOWN_ATAQUE 0.5f
 
 Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, const sf::Vector2f tam)
