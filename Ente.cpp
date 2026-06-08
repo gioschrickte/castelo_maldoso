@@ -1,6 +1,6 @@
-#include "Ente.hpp"
+﻿#include "Ente.h"
 
-// Definição do membro estático (uma única vez em todo o projeto)
+// DefiniÃ§Ã£o do membro estÃ¡tico (uma Ãºnica vez em todo o projeto)
 Gerenciador::GerenciadorGrafico* Jogo::Ente::pGG = nullptr;	
 
 Jogo::Ente::Ente()
@@ -29,7 +29,7 @@ void Jogo::Ente::desenhar()
 		pGG->desenhaElemento(corpo);
 }
 
-void Jogo::Ente::setGG(Gerenciador::GerenciadorGrafico* pgg) // será tratado na Principal, onde o GG é criado e passado para as entidades, para que elas possam desenhar a si mesmas
+void Jogo::Ente::setGG(Gerenciador::GerenciadorGrafico* pgg) // serÃ¡ tratado na Principal, onde o GG Ã© criado e passado para as entidades, para que elas possam desenhar a si mesmas
 {
 	pGG = pgg;
 }

@@ -1,6 +1,6 @@
-#include "Menu.hpp"
+﻿#include "Menu.h"
 
-// Cores dos botões
+// Cores dos botÃµes
 static const sf::Color COR_FASE1_NORMAL(70, 130, 180);
 static const sf::Color COR_FASE1_HOVER(100, 160, 210);
 static const sf::Color COR_FASE2_NORMAL(178, 34, 34);
@@ -13,7 +13,7 @@ Jogo::Menu::Menu()
     const float W = static_cast<float>(pGG->getWindow()->getSize().x);
     const float H = static_cast<float>(pGG->getWindow()->getSize().y);
 
-    // Botões centralizados horizontalmente, na metade inferior da tela
+    // BotÃµes centralizados horizontalmente, na metade inferior da tela
     const sf::Vector2f tamBotao(260.0f, 90.0f);
     const float espacamento = 60.0f;
     const float totalLarg = tamBotao.x * 2.0f + espacamento;
@@ -31,7 +31,7 @@ Jogo::Menu::Menu()
     fontCarregada = carregarFonte();
     if (!fontCarregada) return;
 
-    // Título
+    // TÃ­tulo
     textoTitulo.setFont(fonte);
     textoTitulo.setString("CASTELO MALDOSO");
     textoTitulo.setCharacterSize(64);
@@ -41,7 +41,7 @@ Jogo::Menu::Menu()
     textoTitulo.setOrigin(rT.left + rT.width / 2.0f, rT.top + rT.height / 2.0f);
     textoTitulo.setPosition(W / 2.0f, H * 0.30f);
 
-    // Helper para centralizar texto dentro de um botão
+    // Helper para centralizar texto dentro de um botÃ£o
     auto centralizarTexto = [](sf::Text& txt, const sf::RectangleShape& botao) {
         sf::FloatRect r = txt.getLocalBounds();
         txt.setOrigin(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
@@ -71,7 +71,7 @@ bool Jogo::Menu::carregarFonte()
     if (fonte.loadFromFile("assets/arial.ttf"))         return true;
     if (fonte.loadFromFile("C:/Windows/Fonts/arial.ttf")) return true;
     if (fonte.loadFromFile("C:/Windows/Fonts/calibri.ttf")) return true;
-    printf("Menu: nenhuma fonte encontrada — textos nao serao exibidos.\n");
+    printf("Menu: nenhuma fonte encontrada â€” textos nao serao exibidos.\n");
     return false;
 }
 

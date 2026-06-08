@@ -1,9 +1,9 @@
-#include "Principal.hpp"
-#include "GerenciadorColisoes.hpp"
-#include "FasePrimeira.hpp"
-#include "FaseSegunda.hpp"
+﻿#include "Principal.h"
+#include "GerenciadorColisoes.h"
+#include "FasePrimeira.h"
+#include "FaseSegunda.h"
 #include <iostream>
-#include "Menu.hpp"
+#include "Menu.h"
 using namespace std;
 
 Principal::Principal()

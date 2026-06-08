@@ -1,4 +1,4 @@
-#include "GerenciadorGrafico.hpp"
+﻿#include "GerenciadorGrafico.h"
 
 
 Gerenciador::GerenciadorGrafico* Gerenciador::GerenciadorGrafico::pGrafico(nullptr);
@@ -9,7 +9,7 @@ Gerenciador::GerenciadorGrafico::GerenciadorGrafico()
 {
 	if (window == NULL)
 	{
-		cout << "Falha na criação de janela! Encerrando programa..." << endl;
+		cout << "Falha na criaÃ§Ã£o de janela! Encerrando programa..." << endl;
 		exit(1);
 	}
 
@@ -28,7 +28,7 @@ Gerenciador::GerenciadorGrafico* Gerenciador::GerenciadorGrafico::getGerenciador
 {
 	if (pGrafico == nullptr)
 	{
-		pGrafico = new Gerenciador::GerenciadorGrafico(); // criação da instância única de GG
+		pGrafico = new Gerenciador::GerenciadorGrafico(); // criaÃ§Ã£o da instÃ¢ncia Ãºnica de GG
 	}
 	return pGrafico;
 }

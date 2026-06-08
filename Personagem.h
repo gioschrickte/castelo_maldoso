@@ -1,9 +1,9 @@
-#pragma once
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Entidade.hpp"
+#include "Entidade.h"
 
 namespace Entidades
 {

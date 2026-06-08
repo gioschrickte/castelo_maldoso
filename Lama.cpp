@@ -1,4 +1,4 @@
-#include "Lama.hpp"
+﻿#include "Lama.h"
 
 Entidades::Obstaculos::Lama::Lama(const sf::Vector2f pos, const sf::Vector2f tam)
 	: Entidades::Obstaculos::Obstaculo(pos, tam, IDs::IDs::lama)

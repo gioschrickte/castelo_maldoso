@@ -1,5 +1,5 @@
-#include "Jogador.hpp"
-#include "Inimigo.hpp"
+﻿#include "Jogador.h"
+#include "Inimigo.h"
 
 #define DURACAO_ATAQUE  0.15f
 #define COOLDOWN_ATAQUE 0.5f

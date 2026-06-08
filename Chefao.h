@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "Inimigo.hpp"
+#include "Inimigo.h"
 
 namespace Entidades { class Projetil; } // pra nao dar erro
 

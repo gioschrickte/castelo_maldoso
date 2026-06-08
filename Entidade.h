@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 
-#include "IDs.hpp"
-#include "Ente.hpp"
+#include "IDs.h"
+#include "Ente.h"
 #include <SFML\Graphics.hpp>
 #include <iostream>
 using namespace std;

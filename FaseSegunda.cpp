@@ -1,7 +1,7 @@
-// FaseSegunda.cpp
-#include "FaseSegunda.hpp"
-#include "Chefao.hpp"
-#include "Projetil.hpp"
+﻿// FaseSegunda.cpp
+#include "FaseSegunda.h"
+#include "Chefao.h"
+#include "Projetil.h"
 #define MAX_LAMA 5
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
@@ -28,7 +28,7 @@ void Jogo::Fases::FaseSegunda::criarObstaculos()
 void Jogo::Fases::FaseSegunda::criarLama()
 {
 	using namespace Entidades::Obstaculos;
-	// Específico da fase 2: lama rente ao chão.
+	// EspecÃ­fico da fase 2: lama rente ao chÃ£o.
 	const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
 	const float chaoTopo = chao->getPosicao().y;
 	const float margem = 100.0f;

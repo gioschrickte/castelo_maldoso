@@ -1,9 +1,9 @@
-// FasePrimeira.cpp
-#include "FasePrimeira.hpp"
+﻿// FasePrimeira.cpp
+#include "FasePrimeira.h"
 #include <cstdlib>   // rand()
 
 namespace {
-    // Limites ESPECÍFICOS da fase 1 (os comuns ficam na base, em Fase.cpp).
+    // Limites ESPECÃFICOS da fase 1 (os comuns ficam na base, em Fase.cpp).
     const int MAX_INIMIGOS_MEDIOS = 3;
     const int MAX_ESPINHOS = 5;
 }
@@ -44,7 +44,7 @@ void Jogo::Fases::FasePrimeira::criarObstaculos()
 void Jogo::Fases::FasePrimeira::criarEspinhos()
 {
     using namespace Entidades::Obstaculos;
-    // Específico da fase 1: espinhos rente ao chão.
+    // EspecÃ­fico da fase 1: espinhos rente ao chÃ£o.
     const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
     const float chaoTopo = chao->getPosicao().y;
     const float margem = 100.0f;

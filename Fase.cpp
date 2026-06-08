@@ -1,9 +1,9 @@
-// Fase.cpp
-#include "Fase.hpp"
-#include "GerenciadorColisoes.hpp"
-#include "InimigoFacil.hpp" 
-#include "Plataforma.hpp" 
-#include "Projetil.hpp"
+﻿// Fase.cpp
+#include "Fase.h"
+#include "GerenciadorColisoes.h"
+#include "InimigoFacil.h" 
+#include "Plataforma.h" 
+#include "Projetil.h"
 #include <cstdlib>
 
 #define MAX_INIMIGOS_FACEIS 4
@@ -72,13 +72,13 @@ sf::Vector2f Jogo::Fases::Fase::posicaoAleatoria(float xMin, float xMax, float y
 sf::Vector2f Jogo::Fases::Fase::posicaoInimigoAleatoria() const
 {
     const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
-    const float chaoTopo = chao->getPosicao().y;   // y real do chão
+    const float chaoTopo = chao->getPosicao().y;   // y real do chÃ£o
 
     const float margem = 50.0f;
     const float xMin = margem;
     const float xMax = largura - margem;
     const float yMin = margem;
-    const float yMax = chaoTopo - 100.0f;          // folga acima do chão
+    const float yMax = chaoTopo - 100.0f;          // folga acima do chÃ£o
     return posicaoAleatoria(xMin, xMax, yMin, yMax);
 }
 
@@ -109,7 +109,7 @@ void Jogo::Fases::Fase::criarPlataformas()
     using namespace Entidades::Obstaculos;
 
     const sf::Vector2f tam(200.0f, 20.0f);
-    const float folga = 40.0f;               // espaço mínimo exigido entre plataformas
+    const float folga = 40.0f;               // espaÃ§o mÃ­nimo exigido entre plataformas
     const int  MAX_TENTATIVAS = 30;
 
     const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
@@ -119,7 +119,7 @@ void Jogo::Fases::Fase::criarPlataformas()
     const float yMin = 250.0f;
     const float yMax = chaoTopo - 150.0f;
 
-    std::vector<sf::FloatRect> colocadas;    // o que já foi posicionado nesta fase
+    std::vector<sf::FloatRect> colocadas;    // o que jÃ¡ foi posicionado nesta fase
 
     int n = aleatorio(3, MAX_PLATAFORMAS);
     for (int i = 0; i < n; i++)
@@ -151,8 +151,8 @@ void Jogo::Fases::Fase::executar()
     while (pGG->verificaJanelaAberta()) {
         gerEventos->executar();                                   // 1. entrada
         for (int i = 0; i < listaEntidade.getTam(); i++)
-            listaEntidade[i]->executar();                         // 2. física/IA
-        gerColisoes->executar();                                  // 3. colisões corrigem / atualiza vida dos personagens
+            listaEntidade[i]->executar();                         // 2. fÃ­sica/IA
+        gerColisoes->executar();                                  // 3. colisÃµes corrigem / atualiza vida dos personagens
         pGG->limpaJanela();
         for (int i = 0; i < listaEntidade.getTam(); i++)
         {

@@ -1,7 +1,7 @@
-#include "GerenciadorColisoes.hpp"
+﻿#include "GerenciadorColisoes.h"
 
 #define ALCANCE_ATAQUE_H 80.0f  // alcance horizontal da espada
-#define ALCANCE_ATAQUE_V 60.0f  // tolerância vertical
+#define ALCANCE_ATAQUE_V 60.0f  // tolerÃ¢ncia vertical
 
 
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
@@ -9,7 +9,7 @@ Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr)
 Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
 	LIs(), LOs(), projeteis(), pJog1(nullptr), fase(nullptr)
 {
-	// Aqui, o gerenciador de colisoes está com as listas vazias, e o ponteiro para o jogador é nulo
+	// Aqui, o gerenciador de colisoes estÃ¡ com as listas vazias, e o ponteiro para o jogador Ã© nulo
 }
 
 Gerenciador::GerenciadorColisoes::~GerenciadorColisoes()
@@ -28,7 +28,7 @@ Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::getGerenciad
 
 void Gerenciador::GerenciadorColisoes::setJogador1(Entidades::Personagens::Jogadores::Jogador* p)
 {
-	// Será necessária edição depois para incluir um segundo jogador
+	// SerÃ¡ necessÃ¡ria ediÃ§Ã£o depois para incluir um segundo jogador
 	pJog1 = p;
 }
 
@@ -84,11 +84,11 @@ const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::E
 	float overlapX = (tam1.x / 2.0f + tam2.x / 2.0f) - fabs(centro1.x - centro2.x);
 	float overlapY = (tam1.y / 2.0f + tam2.y / 2.0f) - fabs(centro1.y - centro2.y);
 
-	// ambos > 0  =>  há colisão. Valores são as profundidades de penetração.
+	// ambos > 0  =>  hÃ¡ colisÃ£o. Valores sÃ£o as profundidades de penetraÃ§Ã£o.
 	return sf::Vector2f(overlapX, overlapY);
 }
 
-// Agora considera colisão quando penetração em X e Y for positiva
+// Agora considera colisÃ£o quando penetraÃ§Ã£o em X e Y for positiva
 const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2)
 {
 	sf::Vector2f ds = calculaColisao(ent1, ent2);
@@ -113,13 +113,13 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 		printf("Erro, pJog1 nulo");
 		return;
 	}
-	// Checar se o jogador está colidindo com algum inimigo
+	// Checar se o jogador estÃ¡ colidindo com algum inimigo
 	for (int i = 0; i < LIs.size(); i++)
 	{
 		bool col = verificarColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(LIs[i]));
 		if (col) // se colidiu
 		{
-			pJog1->colidir(LIs[i]); // chama a função de colidir do jogador, passando o inimigo
+			pJog1->colidir(LIs[i]); // chama a funÃ§Ã£o de colidir do jogador, passando o inimigo
 		}
 	}
 }
@@ -132,14 +132,14 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 		return;
 	}
 
-	// Checar se o jogador está colidindo com algum obstáculo
+	// Checar se o jogador estÃ¡ colidindo com algum obstÃ¡culo
 	for (list<Entidades::Obstaculos::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
 	{
 		// calcula uma vez e reutiliza
 		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(*it));
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
-			// passa a penetração assinada para a rotina de resolução do jogador
+			// passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do jogador
 			(*it)->resolverColisao(pJog1, ds);
 		}
 	}
@@ -148,11 +148,11 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 	for (list<Entidades::Obstaculos::Obstaculo*>::iterator itO = LOs.begin(); itO != LOs.end(); ++itO) {
-		if ((*itO)->afetaInimigos()) { // se o obstáculo afeta inimigos, ou seja, eles colidem com ele e são empurrados para fora
+		if ((*itO)->afetaInimigos()) { // se o obstÃ¡culo afeta inimigos, ou seja, eles colidem com ele e sÃ£o empurrados para fora
 			for (int i = 0; i < LIs.size(); i++) {
 				sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(*itO));
 				if (ds.x > 0.0f && ds.y > 0.0f) { // se colidiu
-					(*itO)->resolverColisao(LIs[i], ds); // passa a penetração assinada para a rotina de resolução do inimigo
+					(*itO)->resolverColisao(LIs[i], ds); // passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do inimigo
 				}
 			}
 		}
@@ -162,7 +162,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 {
 	Entidades::Chao* chao = fase->getChao();
-	// Checar se o jogador está colidindo com o chão
+	// Checar se o jogador estÃ¡ colidindo com o chÃ£o
 	if (!pJog1)
 	{
 		printf("Erro, pJog1 nulo");
@@ -174,7 +174,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 		chao->resolverColisao(pJog1, ds);
 	}
 
-	//Checar se os inimigos estão colidindo com o chao
+	//Checar se os inimigos estÃ£o colidindo com o chao
 	for (int i = 0; i < LIs.size(); i++)
 	{
 		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(chao));

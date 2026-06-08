@@ -1,5 +1,5 @@
-#pragma once
-#include "Personagem.hpp"
+﻿#pragma once
+#include "Personagem.h"
 #define RAIO_PERSEGUIR 200.0f
 
 namespace Entidades {

@@ -1,5 +1,5 @@
-#pragma once
-#include "Obstaculo.hpp"
+﻿#pragma once
+#include "Obstaculo.h"
 
 namespace Entidades {
 	namespace Obstaculos {

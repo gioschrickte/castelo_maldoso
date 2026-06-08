@@ -1,7 +1,7 @@
-// Menu.hpp
+﻿// Menu.hpp
 #pragma once
-#include "Ente.hpp"
-#include "GerenciadorGrafico.hpp"
+#include "Ente.h"
+#include "GerenciadorGrafico.h"
 #include <SFML/Graphics.hpp>
 
 namespace Jogo {
@@ -27,7 +27,7 @@ namespace Jogo {
         Menu();
         ~Menu();
 
-        // Satisfaz Ente::executar() — não usado diretamente
+        // Satisfaz Ente::executar() â€” nÃ£o usado diretamente
         void executar() override {}
 
         // Chamado pela Principal. Retorna 1, 2 ou -1 (janela fechada)

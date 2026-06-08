@@ -1,4 +1,4 @@
-#include "Personagem.hpp"
+﻿#include "Personagem.h"
 #define GRAVIDADE 1500.0f
 #define FORCA_PULO 800.0f
 
@@ -34,7 +34,7 @@ void Entidades::Personagens::Personagem::parar()
 	podeAndar = false;
 }
 
-float Entidades::Personagens::Personagem::calcularDt() // responsavel pela física dos movimentos
+float Entidades::Personagens::Personagem::calcularDt() // responsavel pela fÃ­sica dos movimentos
 {
 	float dt = relogio.getElapsedTime().asSeconds();
 	relogio.restart();
@@ -53,7 +53,7 @@ void Entidades::Personagens::Personagem::atualizarX(float dt)
 
 	float limiteDireito = static_cast<float>(pGG->getWindow()->getSize().x) - getTamanho().x;
 
-	// Prende a posição dentro dos limites da tela
+	// Prende a posiÃ§Ã£o dentro dos limites da tela
 	if (novoX < 0.0f)            novoX = 0.0f;
 	if (novoX > limiteDireito)   novoX = limiteDireito;
 
@@ -84,7 +84,7 @@ void Entidades::Personagens::Personagem::pular()
 
 void Entidades::Personagens::Personagem::aterrissar()
 {
-	velFinal.y = 0.0f;   // sem isto a velocidade continua acumulando no chão
+	velFinal.y = 0.0f;   // sem isto a velocidade continua acumulando no chÃ£o
 	noChao = true;
 }
 
@@ -114,17 +114,17 @@ void Entidades::Personagens::Personagem::atualizaVida()
 	if (vida < 0.0f)      vida = 0.0f;
 	if (vida > vidaMax)   vida = vidaMax;
 
-	// largura proporcional à vida atual
+	// largura proporcional Ã  vida atual
 	const sf::Vector2f tam = getTamanho();
 	const float proporcao = vida / vidaMax;
 	barraVida.setSize(sf::Vector2f(tam.x * proporcao, barraVida.getSize().y));
 
-	// posiciona acima da cabeça (top do personagem - altura da barra - folga)
+	// posiciona acima da cabeÃ§a (top do personagem - altura da barra - folga)
 	const sf::Vector2f pos = getPosicao();
 	const float folga = 4.0f;
 	barraVida.setPosition(pos.x, pos.y - barraVida.getSize().y - folga);
 
-	// cor em função da proporção (não do valor absoluto)
+	// cor em funÃ§Ã£o da proporÃ§Ã£o (nÃ£o do valor absoluto)
 	if (proporcao > 0.6f)      barraVida.setFillColor(sf::Color::Green);
 	else if (proporcao > 0.3f) barraVida.setFillColor(sf::Color::Yellow);
 	else                       barraVida.setFillColor(sf::Color::Red);

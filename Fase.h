@@ -1,11 +1,11 @@
-// Fase.hpp
+﻿// Fase.hpp
 #pragma once
-#include "ListaEntidade.hpp"
-#include "Inimigo.hpp"
-#include "Jogador.hpp"
-#include "Obstaculo.hpp"
-#include "chao.hpp"
-#include "GerenciadorEventos.hpp"
+#include "ListaEntidade.h"
+#include "Inimigo.h"
+#include "Jogador.h"
+#include "Obstaculo.h"
+#include "chao.h"
+#include "GerenciadorEventos.h"
 
 namespace Gerenciador { class GerenciadorColisoes; }
 namespace Entidades { class Projetil; } // forward declare

@@ -1,4 +1,4 @@
-#include "Obstaculo.hpp"
+﻿#include "Obstaculo.h"
 
 Entidades::Obstaculos::Obstaculo::Obstaculo(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id)
     : Entidade(pos, tam, id)
@@ -9,7 +9,7 @@ Entidades::Obstaculos::Obstaculo::Obstaculo(const sf::Vector2f pos, const sf::Ve
 Entidades::Obstaculos::Obstaculo::~Obstaculo() {}
 
 void Entidades::Obstaculos::Obstaculo::executar() {
-	// Obstáculos podem ter comportamentos específicos, como se moverem ou mudarem de estado.
-	// Por exemplo, um obstáculo danoso poderia piscar ou se mover para dificultar a passagem do jogador.
+	// ObstÃ¡culos podem ter comportamentos especÃ­ficos, como se moverem ou mudarem de estado.
+	// Por exemplo, um obstÃ¡culo danoso poderia piscar ou se mover para dificultar a passagem do jogador.
 }
 

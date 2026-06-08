@@ -1,6 +1,6 @@
-// InimigoMedio.hpp
+﻿// InimigoMedio.hpp
 #pragma once
-#include "Inimigo.hpp"
+#include "Inimigo.h"
 
 namespace Entidades {
     namespace Personagens {

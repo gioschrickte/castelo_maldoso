@@ -1,6 +1,6 @@
-// InimigoFacil.cpp
-#include "InimigoFacil.hpp"
-#include "Jogador.hpp"
+﻿// InimigoFacil.cpp
+#include "InimigoFacil.h"
+#include "Jogador.h"
 
 Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
     Jogadores::Jogador* j, const sf::Vector2f pos)

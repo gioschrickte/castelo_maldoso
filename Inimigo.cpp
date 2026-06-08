@@ -1,5 +1,5 @@
-#include "Inimigo.hpp"
-#include "Jogador.hpp"
+﻿#include "Inimigo.h"
+#include "Jogador.h"
 
 #define COOLDOWN_HIT 1.0f
 
@@ -24,7 +24,7 @@ bool Entidades::Personagens::Inimigos::Inimigo::podeHitar()
 
 void Entidades::Personagens::Inimigos::Inimigo::danificar(Jogadores::Jogador* pJog)
 {
-	// Aqui você pode implementar a lógica de dano ao jogador, como reduzir a vida ou reiniciar o jogo
+	// Aqui vocÃª pode implementar a lÃ³gica de dano ao jogador, como reduzir a vida ou reiniciar o jogo
 	std::cout << "O inimigo danificou o jogador!" << std::endl;
 	pJog->tomarDano(1.0f); // Exemplo: reduz a vida do jogador em 1 ponto
 }

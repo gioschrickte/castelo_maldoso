@@ -1,6 +1,6 @@
-#pragma once
-#include "Jogador.hpp"
-#include "GerenciadorGrafico.hpp"
+﻿#pragma once
+#include "Jogador.h"
+#include "GerenciadorGrafico.h"
 
 namespace Gerenciador {
 	

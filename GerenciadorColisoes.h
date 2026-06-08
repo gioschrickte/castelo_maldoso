@@ -1,10 +1,10 @@
-#pragma once
-#include "ListaEntidade.hpp"
-#include "Inimigo.hpp"
-#include "Jogador.hpp"
-#include "Obstaculo.hpp"
-#include "Projetil.hpp"
-#include "Fase.hpp"
+﻿#pragma once
+#include "ListaEntidade.h"
+#include "Inimigo.h"
+#include "Jogador.h"
+#include "Obstaculo.h"
+#include "Projetil.h"
+#include "Fase.h"
 #include <vector>
 #include <list>
 #include <set>
@@ -22,7 +22,7 @@ namespace Gerenciador {
 
 
 		//Entidades::Personagens::Jogadores::Jogador* pJog2;		
-		GerenciadorColisoes();	 // Padrão singleton
+		GerenciadorColisoes();	 // PadrÃ£o singleton
 		static GerenciadorColisoes* pGC;
 
 	public:
@@ -45,7 +45,7 @@ namespace Gerenciador {
 		void incluirObstaculo(Entidades::Obstaculos::Obstaculo* pObst);
 		void incluirProjetil(Entidades::Projetil* pProj);
 		void setFase(Jogo::Fases::Fase* f);
-		void limpar(); // Limpa as listas de inimigos e obstáculos
+		void limpar(); // Limpa as listas de inimigos e obstÃ¡culos
 
 	};
 }

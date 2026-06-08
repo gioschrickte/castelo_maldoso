@@ -1,4 +1,4 @@
-#include "Projetil.hpp"
+﻿#include "Projetil.h"
 #include <cmath>
 	
 #define VEL_PROJETIL 400.0f

@@ -1,5 +1,5 @@
-#include "InimigoMedio.hpp"
-#include "Jogador.hpp"
+﻿#include "InimigoMedio.h"
+#include "Jogador.h"
 #define RAIO_PERSEGUIR 400.0f
 
 Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador* j, const sf::Vector2f pos)
@@ -33,7 +33,7 @@ void Entidades::Personagens::Inimigos::InimigoMedio::danificar(Jogadores::Jogado
 
 void Entidades::Personagens::Inimigos::InimigoMedio::executar()
 {
-	// O inimigo médio vai ficar pulando e perseguindo o jogador, ou seja, a direção do pulo é determinada pelo jogador
+	// O inimigo mÃ©dio vai ficar pulando e perseguindo o jogador, ou seja, a direÃ§Ã£o do pulo Ã© determinada pelo jogador
 	
 	sf::Vector2f posJogador = jogador->getPosicao();
 	sf::Vector2f posInimigo = getPosicao();

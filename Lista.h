@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
-#include "Elemento.hpp"
+#include "Elemento.h"
 using namespace std;
 
 
@@ -84,7 +84,7 @@ namespace Lista {
 				tam--;
 			}
 			else {
-				cout << "Elemento não encontrado na lista!" << endl;
+				cout << "Elemento nÃ£o encontrado na lista!" << endl;
 			}
 		}
 		else {

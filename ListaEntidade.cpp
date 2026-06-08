@@ -1,4 +1,4 @@
-#include "ListaEntidade.hpp"
+﻿#include "ListaEntidade.h"
 
 Lista::ListaEntidade::ListaEntidade() :
 	objListaEntidade()

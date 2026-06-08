@@ -1,6 +1,6 @@
-#include "Chefao.hpp"
-#include "Projetil.hpp"
-#include "Jogador.hpp"
+﻿#include "Chefao.h"
+#include "Projetil.h"
+#include "Jogador.h"
 #include <cmath>
 #include <cstdlib>
 

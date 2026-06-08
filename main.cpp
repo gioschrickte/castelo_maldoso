@@ -1,5 +1,5 @@
-#include <iostream>
-#include "Principal.hpp"
+﻿#include <iostream>
+#include "Principal.h"
 
 int main()
 {

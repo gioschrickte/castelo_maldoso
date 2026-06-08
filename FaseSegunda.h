@@ -1,11 +1,11 @@
-// FaseSegunda.hpp
+﻿// FaseSegunda.hpp
 #pragma once
-#include "Fase.hpp"
-#include "InimigoFacil.hpp"
-#include "InimigoMedio.hpp"
-// #include "Chefao.hpp" (a implementar)
-#include "Plataforma.hpp"
-#include "Lama.hpp"
+#include "Fase.h"
+#include "InimigoFacil.h"
+#include "InimigoMedio.h"
+// #include "Chefao.h" (a implementar)
+#include "Plataforma.h"
+#include "Lama.h"
 
 namespace Jogo {
     namespace Fases {

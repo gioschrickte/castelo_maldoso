@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "Entidade.hpp"
+#include "Entidade.h"
 
 namespace Entidades {
 		class Chao : public Entidade {
@@ -21,17 +21,17 @@ namespace Entidades {
                 sf::Vector2f centroOutra(posOutra.x + tamOutra.x / 2.0f, posOutra.y + tamOutra.y / 2.0f);
                 sf::Vector2f centroEsta(posEsta.x + tamEsta.x / 2.0f, posEsta.y + tamEsta.y / 2.0f);
 
-                // empurra pelo eixo de MENOR penetração
+                // empurra pelo eixo de MENOR penetraÃ§Ã£o
                 if (ds.x < ds.y) {
                     if (centroOutra.x < centroEsta.x)
-                        p->mover(sf::Vector2f(-ds.x, 0.0f)); // está à esquerda -> empurra p/ esquerda
+                        p->mover(sf::Vector2f(-ds.x, 0.0f)); // estÃ¡ Ã  esquerda -> empurra p/ esquerda
                     else
-                        p->mover(sf::Vector2f(ds.x, 0.0f)); // à direita -> empurra p/ direita
+                        p->mover(sf::Vector2f(ds.x, 0.0f)); // Ã  direita -> empurra p/ direita
                 }
                 else {
                     if (centroOutra.y < centroEsta.y)
                     {
-                        p->mover(sf::Vector2f(0.0f, -ds.y)); // está acima -> empurra p/ cima
+                        p->mover(sf::Vector2f(0.0f, -ds.y)); // estÃ¡ acima -> empurra p/ cima
                         p->aterrissar();
                     }
                     else

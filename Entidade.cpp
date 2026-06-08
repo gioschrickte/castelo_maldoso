@@ -1,4 +1,4 @@
-#include "Entidade.hpp"
+﻿#include "Entidade.h"
 
 Entidades::Entidade::Entidade()
 	: Jogo::Ente()

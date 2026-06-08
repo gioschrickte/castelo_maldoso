@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <stdio.h>
-#include "Fase.hpp"
+#include "Fase.h"
 
 class Principal
 {

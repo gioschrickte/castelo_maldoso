@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 
-#include "Personagem.hpp"
-// não incluir Inimigo.hpp aqui; forward declare:
+#include "Personagem.h"
+// nÃ£o incluir Inimigo.hpp aqui; forward declare:
 namespace Entidades {
 	namespace Personagens {
 		namespace Inimigos { class Inimigo; }
