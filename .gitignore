@@ -1,4 +1,5 @@
 SFML/
+CMakeLists.txt
 
 # Prerequisites
 *.d
@@ -500,3 +501,4 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
