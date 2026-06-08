@@ -41,9 +41,5 @@ namespace Entidades {
                     }                        
             }
         }
-
-			void executar() {
-				// O chão não tem comportamento, então o método executar é vazio
-			}
 	};
 }
