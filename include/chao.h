@@ -4,6 +4,8 @@
 
 namespace Entidades {
 		class Chao : public Entidade {
+		private:
+			sf::Color cor = sf::Color::Cyan; // cor do chao
 		public:
 			Chao(const sf::Vector2f pos, const sf::Vector2f tam) :
 				Entidade(pos, tam, IDs::IDs::chao)

@@ -12,6 +12,7 @@ namespace Entidades {
 	
 	class Entidade : public Jogo::Ente {
 	protected:
+		bool ativa = true; // indica se a entidade esta ativa no jogo
 	public:
 		Entidade();
 		Entidade(const sf::Vector2f pos, const sf::Vector2f tam, const IDs::IDs id);

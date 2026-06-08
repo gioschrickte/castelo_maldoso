@@ -10,6 +10,8 @@
 namespace Jogo {
     namespace Fases {
         class FaseSegunda : public Fase {
+        private:
+            int numeroFase = 2; // numero identificador da fase
         public:
             FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);

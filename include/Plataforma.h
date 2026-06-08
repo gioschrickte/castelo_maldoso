@@ -4,6 +4,8 @@
 namespace Entidades {
     namespace Obstaculos {
         class Plataforma : public Obstaculos::Obstaculo {
+        private:
+            float altura = 20.0f; // altura da plataforma
         public:
 			bool afetaInimigos() const override { return true; } // Plataformas afetam inimigos, ou seja, eles tambÃ©m colidem com elas e sÃ£o empurrados para fora
             Plataforma(const sf::Vector2f pos, const sf::Vector2f tam = sf::Vector2f(200.0f, 20.0f));

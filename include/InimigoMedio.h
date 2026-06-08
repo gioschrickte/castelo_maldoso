@@ -6,6 +6,8 @@ namespace Entidades {
     namespace Personagens {
         namespace Inimigos {
             class InimigoMedio : public Inimigo {
+            private:
+                short nivelDificuldade = 2; // nivel de dificuldade do inimigo
             public:
                 InimigoMedio(Jogadores::Jogador* j, const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f));
                 void danificar(Jogadores::Jogador* pJog) override;
