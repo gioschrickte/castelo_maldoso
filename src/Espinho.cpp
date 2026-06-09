@@ -42,5 +42,6 @@ void Entidades::Obstaculos::Espinho::resolverColisao(Personagens::Personagem* p,
         if (centroOutra.y < centroEsta.y) { p->mover(sf::Vector2f(0.0f, -ds.y)); p->aterrissar(); }
         else                                p->mover(sf::Vector2f(0.0f, ds.y));
     }
-    // AQUI vai o dano quando houver sistema de vida (sÃ³ o jogador chega aqui, pois afetaInimigos()==false)
+    
+    p->tomarDano(1); // dano fixo de 1 ponto
 }
