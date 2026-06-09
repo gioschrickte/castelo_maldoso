@@ -15,7 +15,7 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	sf::Vector2u tSz = textura.getSize();
 	if (tSz.x > 0 && tSz.y > 0)
 	{
-		sprite.setScale(70.0f / tSz.x, 70.0f / tSz.y);
+		sprite.setScale(tam.x / tSz.x, tam.y / tSz.y);
 	}
 
 	sprite.setPosition(pos);
@@ -23,6 +23,7 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	
 	vidaMax = 20.0f;
 	vida = vidaMax;
+	barraVida.setFillColor(sf::Color::Red);
 }
 
 Entidades::Personagens::Jogadores::Jogador::~Jogador()
