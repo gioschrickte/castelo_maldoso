@@ -1,5 +1,6 @@
 SFML/
 CMakeLists.txt
+build/
 
 # Prerequisites
 *.d
