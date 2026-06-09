@@ -13,6 +13,15 @@ Jogo::Fases::FasePrimeira::FasePrimeira(Entidades::Personagens::Jogadores::Jogad
 {
     criarInimigos();
     criarObstaculos();
+    
+    texturaFundo = pGG->carregarTextura("assets/fundo.png");
+    spriteFundo.setTexture(texturaFundo);
+    sf::Vector2u tamJanela = pGG->getWindow()->getSize();
+    sf::Vector2u tamTextura = texturaFundo.getSize();
+    spriteFundo.setScale(
+    (float)tamJanela.x / tamTextura.x,
+    (float)tamJanela.y / tamTextura.y
+    );
 }
 
 Jogo::Fases::FasePrimeira::~FasePrimeira() {}

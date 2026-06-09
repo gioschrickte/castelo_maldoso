@@ -1,6 +1,7 @@
 ﻿// Fase.cpp
 #include "Fase.h"
 #include "GerenciadorColisoes.h"
+#include "GerenciadorGrafico.h"
 #include "InimigoFacil.h" 
 #include "Plataforma.h" 
 #include "Projetil.h"
@@ -16,6 +17,7 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     chao(nullptr)
 {
     criarChao();
+   
 
     listaEntidade.addEntidade(jog1);
     if (jog2) listaEntidade.addEntidade(jog2);
@@ -154,6 +156,7 @@ void Jogo::Fases::Fase::executar()
             listaEntidade[i]->executar();                         // 2. fÃ­sica/IA
         gerColisoes->executar();                                  // 3. colisÃµes corrigem / atualiza vida dos personagens
         pGG->limpaJanela();
+        pGG->desenhaSprite(spriteFundo); 
         for (int i = 0; i < listaEntidade.getTam(); i++)
         {
 			listaEntidade[i]->desenhar();                          // 4. desenha tudo

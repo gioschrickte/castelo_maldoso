@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Informa onde o SFML está instalado no seu computador
 # Altere este caminho para a pasta onde você extraiu o SFML
-set(SFML_DIR "C:/Users/gssar/Documentos/Estudos/UTFPR/tecprog/SFML-2.6.2/lib/cmake/SFML") 
+set(SFML_DIR "C:/Users/leokr/source/repos/castelo_maldoso/SFML-2.6.2/lib/cmake/SFML") 
 
 # Encontra a biblioteca do SFML
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
