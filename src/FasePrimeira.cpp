@@ -57,7 +57,7 @@ void Jogo::Fases::FasePrimeira::criarEspinhos()
     const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
     const float chaoTopo = chao->getPosicao().y;
     const float margem = 100.0f;
-    const float espinhoY = chaoTopo - 42.0f;   // mesmo encaixe do original (858 p/ chao em 900)
+    const float espinhoY = chaoTopo - 35.0f; 
 
     int nEspinhos = aleatorio(3, MAX_ESPINHOS);
     for (int i = 0; i < nEspinhos; i++)
