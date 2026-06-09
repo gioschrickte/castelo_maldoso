@@ -34,6 +34,9 @@ namespace Jogo {
             void adicionarInimigo(Entidades::Personagens::Inimigos::Inimigo* i);
             void adicionarObstaculo(Entidades::Obstaculos::Obstaculo* o);
             void adicionarProjetil(Entidades::Projetil* p); // na lista de entidades + no gerenciador
+
+            sf::Texture texturaFundo;
+            sf::Sprite  spriteFundo;
         public:
             Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);

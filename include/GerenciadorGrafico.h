@@ -23,5 +23,6 @@ namespace Gerenciador
 		void fecharJanela();
 		const bool verificaJanelaAberta();
 		sf::Texture carregarTextura(const char* caminhoTextura);
+		
 	};
 }

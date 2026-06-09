@@ -8,6 +8,19 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	: Personagem(pos, tam, 200.0f, IDs::IDs::jogador), ataqueAtivo(false), danoAtaque(3.0f)
 {
 	corpo.setFillColor(sf::Color::Blue);
+	
+	textura = pGG->carregarTextura("assets/cavaleiro.png");
+	sprite.setTexture(textura);
+
+	sf::Vector2u tSz = textura.getSize();
+	if (tSz.x > 0 && tSz.y > 0)
+	{
+		sprite.setScale(70.0f / tSz.x, 70.0f / tSz.y);
+	}
+
+	sprite.setPosition(pos);
+	temSprite = true;
+	
 	vidaMax = 20.0f;
 	vida = vidaMax;
 }

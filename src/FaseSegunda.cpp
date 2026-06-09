@@ -9,6 +9,14 @@ Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador
 {
     criarInimigos();
     criarObstaculos();
+	texturaFundo = pGG->carregarTextura("assets/fundo.png");
+    spriteFundo.setTexture(texturaFundo);
+    sf::Vector2u tamJanela = pGG->getWindow()->getSize();
+    sf::Vector2u tamTextura = texturaFundo.getSize();
+    spriteFundo.setScale(
+    (float)tamJanela.x / tamTextura.x,
+    (float)tamJanela.y / tamTextura.y
+    );
 }
 
 Jogo::Fases::FaseSegunda::~FaseSegunda() {}

@@ -72,3 +72,5 @@ void Gerenciador::GerenciadorGrafico::desenhaSprite(sf::Sprite& sprite)
 {
 	window->draw(sprite);
 }
+
+
