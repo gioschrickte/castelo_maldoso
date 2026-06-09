@@ -52,7 +52,7 @@ void Jogo::Fases::FaseSegunda::criarLama()
 void Jogo::Fases::FaseSegunda::criarChefao()
 {
 	Entidades::Personagens::Inimigos::Chefao* chefao = new Entidades::Personagens::Inimigos::Chefao(jog1, posicaoInimigoAleatoria());
-	Entidades::Projetil* projetil = new Entidades::Projetil(1);
+	Entidades::Projetil* projetil = new Entidades::Projetil();
 	chefao->setProjetil(projetil);
 	adicionarInimigo(chefao);
 	adicionarProjetil(projetil);

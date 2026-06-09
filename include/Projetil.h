@@ -9,7 +9,7 @@ namespace Entidades {
 		sf::Vector2f velocidade;
 		sf::Clock relogio;
 	public:
-		Projetil(int dano = 1, const sf::Vector2f tam = sf::Vector2f(15.0f, 15.0f));
+		Projetil(int dano = 5, const sf::Vector2f tam = sf::Vector2f(15.0f, 15.0f));
 		~Projetil();
 
 		void executar() override;
