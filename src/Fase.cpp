@@ -165,3 +165,8 @@ void Jogo::Fases::Fase::executar()
         pGG->mostraElementos();
     }
 }
+
+void Jogo::Fases::Fase::SalvarTudo()
+{
+    listaEntidade.salvarEntidades();
+}

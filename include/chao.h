@@ -44,5 +44,9 @@ namespace Entidades {
             }
         }
             void executar() {}
+            void salvar() 
+            {
+                
+            }
 	};
 }

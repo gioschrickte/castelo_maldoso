@@ -11,8 +11,11 @@ namespace Entidades {
             public:
                 InimigoMedio(Jogadores::Jogador* j, const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f));
                 void danificar(Jogadores::Jogador* pJog) override;
+                
+
 
                 void executar();
+                void salvar();
             };
         }
     }

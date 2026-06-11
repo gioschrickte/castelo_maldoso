@@ -13,3 +13,9 @@ void Entidades::Obstaculos::Obstaculo::executar() {
 	// Por exemplo, um obstÃ¡culo danoso poderia piscar ou se mover para dificultar a passagem do jogador.
 }
 
+void Entidades::Obstaculos::Obstaculo::salvarDataBuffer()
+{
+	Entidades::Entidade::salvarDataBuffer();
+	//so precisamos salvar a posiçao e o Id, ja que o dano nao muda
+}
+

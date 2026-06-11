@@ -45,3 +45,17 @@ void Entidades::Obstaculos::Espinho::resolverColisao(Personagens::Personagem* p,
     
     p->tomarDano(1); // dano fixo de 1 ponto
 }
+
+void Entidades::Obstaculos::Espinho::salvar()
+{
+    
+}
+
+void Entidades::Obstaculos::Espinho::salvarDataBuffer()
+{
+	Entidades::Obstaculos::Obstaculo::salvarDataBuffer();
+	//mais nada pra salvar, so posiçao e Id
+}
+
+
+

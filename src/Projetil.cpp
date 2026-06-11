@@ -73,3 +73,8 @@ void Entidades::Projetil::atingir()
 
 bool Entidades::Projetil::estaAtivo() const { return ativo; }
 int  Entidades::Projetil::getDano()   const { return dano; }
+
+void Entidades::Projetil::salvar()
+{
+	
+}

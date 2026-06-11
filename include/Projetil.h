@@ -20,5 +20,7 @@ namespace Entidades {
 
 		bool estaAtivo() const;
 		int  getDano()   const;
+
+		void salvar();
 	};
 }

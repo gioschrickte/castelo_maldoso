@@ -85,3 +85,9 @@ void Entidades::Personagens::Inimigos::InimigoFacil::executar()
 	if (podeAndar) atualizarX(dt);
 	atualizarY(dt);
 }
+
+void Entidades::Personagens::Inimigos::InimigoFacil::salvar()
+{
+	
+}
+

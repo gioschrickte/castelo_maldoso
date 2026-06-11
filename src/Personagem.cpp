@@ -142,3 +142,9 @@ void Entidades::Personagens::Personagem::tomarDano(float dano)
 	vida -= dano;
 	if (vida < 0.0f) vida = 0.0f;
 }
+
+void Entidades::Personagens::Personagem::salvarDataBuffer()
+{
+
+}
+
