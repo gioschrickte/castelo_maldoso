@@ -13,6 +13,9 @@ namespace Entidades {
 			Lama(const sf::Vector2f pos, const sf::Vector2f tam = sf::Vector2f(100.0f, 30.0f));
 			~Lama();
 			void resolverColisao(Personagens::Personagem* p, sf::Vector2f ds) override;
+			void salvar();
+			void salvarDataBuffer();
+
 		};
 	}
 }

@@ -21,6 +21,7 @@ namespace Entidades {
 				void atacar();
 				bool estaAtacando() const;
 				float getDanoAtaque() const;
+				void salvar();
 			};
 		}
 	}

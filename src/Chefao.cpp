@@ -102,3 +102,9 @@ void Entidades::Personagens::Inimigos::Chefao::atualizarTiro()
 
 	projetilEstavaAtivo = ativoAgora;
 }
+
+void Entidades::Personagens::Inimigos::Chefao::salvar()
+{
+	
+}
+

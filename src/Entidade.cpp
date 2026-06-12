@@ -1,7 +1,7 @@
 ﻿#include "Entidade.h"
 
 Entidades::Entidade::Entidade()
-	: Jogo::Ente()
+	: Jogo::Ente(), buffer()
 {
 
 }
@@ -40,4 +40,14 @@ void Entidades::Entidade::mover(sf::Vector2f ds)
 {
 	corpo.move(ds);
 }
+
+void Entidades::Entidade::salvarDataBuffer()
+{
+	buffer << static_cast<int>(getId()) << " "
+		   << getPosicao().x            << " "
+		   << getPosicao().y			<< " "
+		   << ativa;
+}
+
+
 

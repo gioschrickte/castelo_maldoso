@@ -3,9 +3,8 @@
 #include "Elemento.h"
 using namespace std;
 
-
 namespace Lista {
-	
+
 	template <class TL>
 	class Lista {
 	private:
@@ -13,6 +12,43 @@ namespace Lista {
 		Elemento<TL>* pUltimo;
 		unsigned int tam;
 	public:
+		class Iterator
+		{
+		private:
+			Elemento<TL>* atual;
+		public:
+			Iterator(Elemento<TL>* cabeca = nullptr)
+				: atual(cabeca)
+			{
+			}
+			~Iterator()
+			{
+				atual = nullptr;
+			}
+			TL* operator*()
+			{
+				return atual->getElemento();
+			}
+			Iterator& operator++()
+			{
+				if (atual)
+					atual = atual->getProx();
+				return *this;
+			}
+			const bool operator==(const Iterator& valor) const
+			{
+				return atual == valor.atual;
+			}
+			const bool operator!=(const Iterator& valor) const
+			{
+				return atual != valor.atual;
+			}
+			Elemento<TL>* getAtual() const
+			{
+				return atual;
+			}
+		};
+
 		Lista();
 		~Lista();
 		void addElemento(TL* info);
@@ -21,13 +57,23 @@ namespace Lista {
 		int getTam();
 		void limpaLista();
 		TL* operator[](int pos);
+
+		Iterator inicio()
+		{
+			return Iterator(pInicio);
+		}
+		Iterator fim()
+		{
+			// past-the-end: pUltimo->getProx() == nullptr
+			return Iterator(nullptr);
+		}
+
 	};
 
 	template <class TL>
 	Lista<TL>::Lista():
 		pInicio(nullptr), pUltimo(nullptr), tam(0)
 	{
-
 	}
 
 	template <class TL>
@@ -71,11 +117,11 @@ namespace Lista {
 		if (tam > 0)
 		{
 			Elemento<TL>* pAux = pInicio;
-			while (pAux->getElemento() != info && pAux != nullptr)
+			while (pAux != nullptr && pAux->getElemento() != info)
 			{
 				pAux = pAux->getProx();
 			}
-			if (pAux->getElemento() == info)
+			if (pAux != nullptr && pAux->getElemento() == info)
 			{
 				Elemento<TL>* pAux2 = pAux;
 				pAux = pAux->getProx();
@@ -84,7 +130,7 @@ namespace Lista {
 				tam--;
 			}
 			else {
-				cout << "Elemento nÃ£o encontrado na lista!" << endl;
+				cout << "Elemento nao encontrado na lista!" << endl;
 			}
 		}
 		else {
@@ -95,7 +141,7 @@ namespace Lista {
 	template <class TL>
 	void Lista<TL>::removerElemento(int pos)
 	{
-		if (pos < tam && tam > 0)
+		if (pos < (int)tam && tam > 0)
 		{
 			removerElemento(this->operator[](pos));
 		}
@@ -106,7 +152,7 @@ namespace Lista {
 	{
 		return tam;
 	}
-	
+
 	template <class TL>
 	void Lista<TL>::limpaLista()
 	{
@@ -119,11 +165,10 @@ namespace Lista {
 	template <class TL>
 	TL* Lista<TL>::operator[](int pos)
 	{
-		if (pos < tam && tam > 0)
-		{	
+		if (pos < (int)tam && tam > 0)
+		{
 			Elemento<TL>* pAux = pInicio;
-			int c = 0;
-			for (c; c < pos; c++)
+			for (int c = 0; c < pos; c++)
 			{
 				pAux = pAux->getProx();
 			}

@@ -15,6 +15,7 @@ namespace Lista {
 		int getTam();
 		void limpaLista();
 		Entidades::Entidade* operator[](int pos);
-		void executar(sf::RenderWindow* window); // pintar todas as entidades na tela
+		void executar(sf::RenderWindow* window);
+		void salvarEntidades();
 	};
 }

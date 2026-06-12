@@ -16,6 +16,7 @@ namespace Entidades {
                 void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo);
                 void movAleatorio();
                 void executar();
+                void salvar();
             };
         }
     }

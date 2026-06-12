@@ -58,3 +58,9 @@ void Entidades::Personagens::Inimigos::InimigoMedio::executar()
 	}
 	atualizarY(dt);
 }
+
+void Entidades::Personagens::Inimigos::InimigoMedio::salvar()
+{
+	
+}
+

@@ -52,6 +52,8 @@ namespace Entidades
 			bool olhandoParaEsquerda() const { return paraEsquerda; }
 			void atualizaVida();
 			void desenhar();
+			virtual void salvar() = 0;
+			void salvarDataBuffer();
 		};
 	}
 }

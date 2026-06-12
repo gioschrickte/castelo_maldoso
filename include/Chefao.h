@@ -31,6 +31,8 @@ namespace Entidades
 
 				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posChefao);
 				void movAleatorio();
+                void salvar();
+
 			};
 		}
 	}

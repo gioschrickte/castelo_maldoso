@@ -23,6 +23,9 @@ namespace Entidades {
 				bool podeHitar();
 				virtual void executar() = 0;
 				virtual void danificar(Entidades::Personagens::Jogadores::Jogador* pJog) = 0;
+				void salvarDataBuffer();
+				virtual void salvar() = 0;
+				
 			};
 		}
 	}

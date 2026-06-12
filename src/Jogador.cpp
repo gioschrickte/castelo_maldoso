@@ -58,3 +58,8 @@ void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Personagens:
 {
 	inimigo->danificar(this);
 }
+
+void Entidades::Personagens::Jogadores::Jogador::salvar()
+{
+
+}

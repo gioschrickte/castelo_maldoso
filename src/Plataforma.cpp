@@ -53,3 +53,16 @@ void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem*
             
     }
 }
+
+void Entidades::Obstaculos::Plataforma::salvar()
+{
+    
+}
+
+void Entidades::Obstaculos::Plataforma::salvarDataBuffer()
+{
+	Entidades::Obstaculos::Obstaculo::salvarDataBuffer();
+	//mais nada pra salvar, so posiçao e Id
+}
+
+

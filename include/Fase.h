@@ -47,6 +47,7 @@ namespace Jogo {
 
             virtual void criarInimigos() = 0;            // cada fase acrescenta os seus
             virtual void criarObstaculos() = 0;
+            void SalvarTudo();
         };
     }
 }

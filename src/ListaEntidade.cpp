@@ -1,5 +1,4 @@
 ﻿#include "ListaEntidade.h"
-
 Lista::ListaEntidade::ListaEntidade() :
 	objListaEntidade()
 {
@@ -51,4 +50,15 @@ void Lista::ListaEntidade::executar(sf::RenderWindow* window)
 		aux->executar();
 		window->draw(aux->getCorpo());
 	}
+}
+
+void Lista::ListaEntidade::salvarEntidades()
+{
+	for (auto it = objListaEntidade.inicio(); it != objListaEntidade.fim(); ++it)
+    {
+        if (*it != nullptr)
+        {
+            (*it)->salvarDataBuffer();
+        }
+    }
 }

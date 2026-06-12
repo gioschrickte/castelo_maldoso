@@ -28,3 +28,9 @@ void Entidades::Personagens::Inimigos::Inimigo::danificar(Jogadores::Jogador* pJ
 	std::cout << "O inimigo danificou o jogador!" << std::endl;
 	pJog->tomarDano(1.0f); // Exemplo: reduz a vida do jogador em 1 ponto
 }
+
+void Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer()
+{
+	
+}
+
