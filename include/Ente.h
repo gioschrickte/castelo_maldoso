@@ -6,7 +6,7 @@
 
 #include "IDs.h"
 #include "GerenciadorGrafico.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 namespace Jogo
 {

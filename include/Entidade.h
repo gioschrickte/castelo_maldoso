@@ -2,7 +2,7 @@
 
 #include "IDs.h"
 #include "Ente.h"
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
 using namespace std;

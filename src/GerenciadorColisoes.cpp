@@ -1,4 +1,5 @@
 ﻿#include "GerenciadorColisoes.h"
+#include <cmath>
 
 #define ALCANCE_ATAQUE_H 80.0f  // alcance horizontal da espada
 #define ALCANCE_ATAQUE_V 60.0f  // tolerÃ¢ncia vertical

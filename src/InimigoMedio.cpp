@@ -1,4 +1,5 @@
 ﻿#include "InimigoMedio.h"
+#include <cmath>
 #include "Jogador.h"
 #include <fstream>
 #define RAIO_PERSEGUIR 400.0f

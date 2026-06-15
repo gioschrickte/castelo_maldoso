@@ -1,4 +1,5 @@
 ﻿// InimigoFacil.cpp
+#include <cmath>
 #include "InimigoFacil.h"
 #include "Jogador.h"
 #include <fstream>
