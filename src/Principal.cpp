@@ -62,6 +62,8 @@ void Principal::executar()
 	if (escolha == -1) return;    // jogador fechou a janela no menu
 
 	criarFase(escolha);
+
+	cout << "CHEGOU AQUI" << endl;
 	faseAtual->executar();
 	// antes de criar a segunda fase, tem q dar delete(faseAtual)
 }

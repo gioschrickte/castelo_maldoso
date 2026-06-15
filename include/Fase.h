@@ -39,7 +39,7 @@ namespace Jogo {
             sf::Texture texturaFundo;
             sf::Sprite  spriteFundo;
 
-            bool pausado = false;
+            bool pausado;
         public:
             Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
@@ -54,6 +54,10 @@ namespace Jogo {
             void setPausado(bool p)
             {
                 pausado = p;
+            }
+            bool getPausado()
+            {
+                return pausado;
             }
         };
     }

@@ -1,4 +1,5 @@
 ﻿#include "GerenciadorEventos.h"
+#include "Fase.h"
 
 
 
@@ -53,7 +54,14 @@ void Gerenciador::GerenciadorEvento::verificaTeclaPressionada(sf::Keyboard::Key 
 		pJogador->atacar();
 	}
 	else if (tecla == sf::Keyboard::Enter){
-		
+		if(pFase->getPausado())
+		{
+			pFase->setPausado(false);
+		}
+		else
+		{
+			pFase->setPausado(true);
+		}
 	}
 }
 

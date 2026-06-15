@@ -28,5 +28,6 @@ namespace Gerenciador {
 		void verificaTeclaPressionada(sf::Keyboard::Key tecla);
 		void verificaTeclaSolta(sf::Keyboard::Key tecla);
 		void executar();
+		void setFase(Jogo::Fases::Fase* f) {pFase = f;}
 	};
 }

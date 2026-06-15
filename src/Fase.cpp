@@ -14,7 +14,8 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     : Ente(), jog1(jogador), jog2(j2), listaEntidade(),
     gerColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()),
     gerEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
-    chao(nullptr)
+    chao(nullptr),
+    pausado(false)
 {
     criarChao();
    
@@ -25,6 +26,7 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     gerColisoes->setFase(this);
     gerColisoes->setJogador1(jog1);
     gerEventos->setJogador(jog1);
+    gerEventos->setFase(this);
 }
 
 Jogo::Fases::Fase::~Fase()
@@ -150,17 +152,26 @@ void Jogo::Fases::Fase::criarPlataformas()
 
 void Jogo::Fases::Fase::executar()
 {
+
+    cout << "LOOP DE EXECUTAR" << endl;
     while (pGG->verificaJanelaAberta()) {
         gerEventos->executar();                                   // 1. entrada
         
         
-        
+        if(!pausado)
+        {
             for (int i = 0; i < listaEntidade.getTam(); i++)
-                listaEntidade[i]->executar();       
-                                                        
+            {
+                cout << "Executando entidade: " << i << endl;
+                listaEntidade[i]->executar(); 
+            }
+                      
+        }                                  
         
         gerColisoes->executar();                                  // 3. colisÃµes corrigem / atualiza vida dos personagens
         pGG->limpaJanela();
+
+
         pGG->desenhaSprite(spriteFundo); 
         for (int i = 0; i < listaEntidade.getTam(); i++)
         {
