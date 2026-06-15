@@ -31,6 +31,7 @@ void Entidades::Personagens::Inimigos::Inimigo::danificar(Jogadores::Jogador* pJ
 
 void Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer()
 {
+	Entidades::Personagens::Personagem::salvarDataBuffer();
 	
 }
 

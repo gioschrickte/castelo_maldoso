@@ -22,6 +22,7 @@ namespace Entidades {
 				bool estaAtacando() const;
 				float getDanoAtaque() const;
 				void salvar();
+				void salvarDataBuffer();
 			};
 		}
 	}

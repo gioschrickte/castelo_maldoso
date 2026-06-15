@@ -16,6 +16,7 @@ namespace Entidades {
 
                 void executar();
                 void salvar();
+                void salvarDataBuffer();
             };
         }
     }

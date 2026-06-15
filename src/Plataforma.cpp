@@ -1,4 +1,6 @@
 ﻿#include "Plataforma.h"
+#include <fstream>
+
 
 Entidades::Obstaculos::Plataforma::Plataforma(const sf::Vector2f pos, const sf::Vector2f tam)
     : Entidades::Obstaculos::Obstaculo(pos, tam, IDs::IDs::plataforma)
@@ -56,7 +58,22 @@ void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem*
 
 void Entidades::Obstaculos::Plataforma::salvar()
 {
-    
+    buffer.str("");
+	buffer.clear();
+	salvarDataBuffer();
+	cout << "[SALVAR] " << buffer.str() << endl;//debug
+	ofstream arquivo("save.txt", ios::app);
+	
+	if (!arquivo.is_open())//debug
+    {
+        cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
+        return;
+    }
+
+	arquivo << buffer.str() << "\n";
+	arquivo.close();
+	 
+	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
 }
 
 void Entidades::Obstaculos::Plataforma::salvarDataBuffer()

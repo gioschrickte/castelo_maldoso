@@ -2,6 +2,13 @@
 #include "Jogador.h"
 #include "GerenciadorGrafico.h"
 
+
+namespace Jogo {
+    namespace Fases {
+        class Fase;
+    }
+}
+
 namespace Gerenciador {
 	
 	class GerenciadorEvento
@@ -9,6 +16,8 @@ namespace Gerenciador {
 	private:
 		GerenciadorGrafico* pGrafico;
 		Entidades::Personagens::Jogadores::Jogador* pJogador;
+		Jogo::Fases::Fase* pFase;
+		
 
 		static GerenciadorEvento* pEvento;
 		GerenciadorEvento();

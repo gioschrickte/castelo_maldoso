@@ -44,6 +44,6 @@ void Entidades::Obstaculos::Lama::salvar()
 void Entidades::Obstaculos::Lama::salvarDataBuffer()
 {
 	Entidades::Obstaculos::Obstaculo::salvarDataBuffer();
-	//mais nada pra salvar, so posiçao e Id
+	//mais nada pra salvar, so posiçao e Idd
 }
 

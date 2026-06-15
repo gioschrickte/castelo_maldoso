@@ -3,6 +3,7 @@
 #include "Jogador.h"
 #include <cmath>
 #include <cstdlib>
+#include <fstream>
 
 #define RAIO_CHEFAO   400.0f
 #define COOLDOWN_TIRO 1.5f
@@ -105,6 +106,27 @@ void Entidades::Personagens::Inimigos::Chefao::atualizarTiro()
 
 void Entidades::Personagens::Inimigos::Chefao::salvar()
 {
+	buffer.str("");
+	buffer.clear();
+	salvarDataBuffer();
+	cout << "[SALVAR] " << buffer.str() << endl;//debug
+	ofstream arquivo("save.txt", ios::app);
 	
+	if (!arquivo.is_open())//debug
+    {
+        cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
+        return;
+    }
+
+	arquivo << buffer.str() << "\n";
+	arquivo.close();
+	 
+	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
+}
+
+void Entidades::Personagens::Inimigos::Chefao::salvarDataBuffer()
+{
+	Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer();
+	// mais nada pra salvar
 }
 

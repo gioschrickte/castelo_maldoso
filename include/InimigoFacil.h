@@ -17,6 +17,7 @@ namespace Entidades {
                 void movAleatorio();
                 void executar();
                 void salvar();
+                void salvarDataBuffer();
             };
         }
     }

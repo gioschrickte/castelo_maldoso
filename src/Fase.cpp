@@ -152,8 +152,13 @@ void Jogo::Fases::Fase::executar()
 {
     while (pGG->verificaJanelaAberta()) {
         gerEventos->executar();                                   // 1. entrada
-        for (int i = 0; i < listaEntidade.getTam(); i++)
-            listaEntidade[i]->executar();                         // 2. fÃ­sica/IA
+        
+        
+        
+            for (int i = 0; i < listaEntidade.getTam(); i++)
+                listaEntidade[i]->executar();       
+                                                        
+        
         gerColisoes->executar();                                  // 3. colisÃµes corrigem / atualiza vida dos personagens
         pGG->limpaJanela();
         pGG->desenhaSprite(spriteFundo); 

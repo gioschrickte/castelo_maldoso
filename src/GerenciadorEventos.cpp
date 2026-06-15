@@ -1,5 +1,9 @@
 ﻿#include "GerenciadorEventos.h"
 
+
+
+
+
 Gerenciador::GerenciadorEvento* Gerenciador::GerenciadorEvento::pEvento(nullptr);
 
 Gerenciador::GerenciadorEvento::GerenciadorEvento()
@@ -47,6 +51,9 @@ void Gerenciador::GerenciadorEvento::verificaTeclaPressionada(sf::Keyboard::Key 
 	}
 	else if (tecla == sf::Keyboard::Z) {
 		pJogador->atacar();
+	}
+	else if (tecla == sf::Keyboard::Enter){
+		
 	}
 }
 

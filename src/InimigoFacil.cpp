@@ -1,6 +1,7 @@
 ﻿// InimigoFacil.cpp
 #include "InimigoFacil.h"
 #include "Jogador.h"
+#include <fstream>
 
 Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
     Jogadores::Jogador* j, const sf::Vector2f pos)
@@ -88,6 +89,26 @@ void Entidades::Personagens::Inimigos::InimigoFacil::executar()
 
 void Entidades::Personagens::Inimigos::InimigoFacil::salvar()
 {
+	buffer.str("");
+	buffer.clear();
+	salvarDataBuffer();
+	cout << "[SALVAR] " << buffer.str() << endl;//debug
+	ofstream arquivo("save.txt", ios::app);
 	
+	if (!arquivo.is_open())//debug
+    {
+        cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
+        return;
+    }
+
+	arquivo << buffer.str() << "\n";
+	arquivo.close();
+	 
+	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
+}
+
+void Entidades::Personagens::Inimigos::InimigoFacil::salvarDataBuffer()
+{
+	Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer();
 }
 

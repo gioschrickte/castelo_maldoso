@@ -7,7 +7,8 @@
 #include "chao.h"
 #include "GerenciadorEventos.h"
 
-namespace Gerenciador { class GerenciadorColisoes; }
+
+namespace Gerenciador {class GerenciadorColisoes;}
 namespace Entidades { class Projetil; } // forward declare
 
 namespace Jogo {
@@ -37,6 +38,8 @@ namespace Jogo {
 
             sf::Texture texturaFundo;
             sf::Sprite  spriteFundo;
+
+            bool pausado = false;
         public:
             Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
@@ -48,6 +51,10 @@ namespace Jogo {
             virtual void criarInimigos() = 0;            // cada fase acrescenta os seus
             virtual void criarObstaculos() = 0;
             void SalvarTudo();
+            void setPausado(bool p)
+            {
+                pausado = p;
+            }
         };
     }
 }

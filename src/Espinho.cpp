@@ -1,5 +1,7 @@
 ﻿// Espinho.cpp
 #include "Espinho.h"
+#include <fstream>
+
 
 Entidades::Obstaculos::Espinho::Espinho(const sf::Vector2f pos, const sf::Vector2f tam)
     : Entidades::Obstaculos::Obstaculo(pos, tam, IDs::IDs::plataforma) // reaproveita o id; crie IDs::espinho se quiser distinguir
@@ -48,7 +50,22 @@ void Entidades::Obstaculos::Espinho::resolverColisao(Personagens::Personagem* p,
 
 void Entidades::Obstaculos::Espinho::salvar()
 {
-    
+    buffer.str("");
+	buffer.clear();
+	salvarDataBuffer();
+	cout << "[SALVAR] " << buffer.str() << endl;//debug
+	ofstream arquivo("save.txt", ios::app);
+	
+	if (!arquivo.is_open())//debug
+    {
+        cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
+        return;
+    }
+
+	arquivo << buffer.str() << "\n";
+	arquivo.close();
+	 
+	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
 }
 
 void Entidades::Obstaculos::Espinho::salvarDataBuffer()

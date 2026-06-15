@@ -1,5 +1,8 @@
 ﻿#include "Jogador.h"
 #include "Inimigo.h"
+#include "fstream"
+
+
 
 #define DURACAO_ATAQUE  0.05f
 #define COOLDOWN_ATAQUE 0.5f
@@ -61,5 +64,26 @@ void Entidades::Personagens::Jogadores::Jogador::colidir(Entidades::Personagens:
 
 void Entidades::Personagens::Jogadores::Jogador::salvar()
 {
+	buffer.str("");
+	buffer.clear();
+	salvarDataBuffer();
+	cout << "[SALVAR] " << buffer.str() << endl;//debug
+	ofstream arquivo("save.txt", ios::app);
+	
+	if (!arquivo.is_open())//debug
+    {
+        cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
+        return;
+    }
+
+	arquivo << buffer.str() << "\n";
+	arquivo.close();
+	 
+	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
+}
+
+void Entidades::Personagens::Jogadores::Jogador::salvarDataBuffer()
+{
+	Entidades::Personagens::Personagem::salvarDataBuffer();
 
 }

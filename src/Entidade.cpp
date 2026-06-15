@@ -47,7 +47,7 @@ void Entidades::Entidade::salvarDataBuffer()
 		   << getPosicao().x            << " "
 		   << getPosicao().y			<< " "
 		   << ativa;
-}
+}//d
 
 
 
