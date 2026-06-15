@@ -6,6 +6,8 @@ static const sf::Color COR_FASE1_HOVER(100, 160, 210);
 static const sf::Color COR_FASE2_NORMAL(178, 34, 34);
 static const sf::Color COR_FASE2_HOVER(210, 60, 60);
 static const sf::Color COR_FUNDO(30, 30, 30);
+static const sf::Color COR_SAVE_NORMAL(46, 139, 87);  // Verde
+static const sf::Color COR_SAVE_HOVER(60, 179, 113);  // Verde Claro
 
 Jogo::Menu::Menu()
     : Ente(), fontCarregada(false)
@@ -27,6 +29,12 @@ Jogo::Menu::Menu()
     botaoFase2.setSize(tamBotao);
     botaoFase2.setPosition(xInicio + tamBotao.x + espacamento, yBotao);
     botaoFase2.setFillColor(COR_FASE2_NORMAL);
+
+    // Configuração do botão de Save (Abaixo do Fase 1)
+    const float espacamentoY = 30.0f; // Espaço vertical entre os botões
+    botaoSave.setSize(tamBotao);
+    botaoSave.setPosition(xInicio, yBotao + tamBotao.y + espacamentoY);
+    botaoSave.setFillColor(COR_SAVE_NORMAL);
 
     fontCarregada = carregarFonte();
     if (!fontCarregada) return;
@@ -62,6 +70,13 @@ Jogo::Menu::Menu()
     textoBotao2.setCharacterSize(32);
     textoBotao2.setFillColor(sf::Color::White);
     centralizarTexto(textoBotao2, botaoFase2);
+
+    // Texto do botão de Save
+    textoBotaoSave.setFont(fonte);
+    textoBotaoSave.setString("Continuar"); // Quebra de linha para caber bem
+    textoBotaoSave.setCharacterSize(22); // Fonte um pouco menor devido ao tamanho do texto
+    textoBotaoSave.setFillColor(sf::Color::White);
+    centralizarTexto(textoBotaoSave, botaoSave);
 }
 
 Jogo::Menu::~Menu() {}
@@ -115,6 +130,7 @@ int Jogo::Menu::rodar()
                 sf::Vector2i pos(evento.mouseButton.x, evento.mouseButton.y);
                 if (clicouEm(botaoFase1, pos)) escolha = 1;
                 else if (clicouEm(botaoFase2, pos)) escolha = 2;
+                else if (clicouEm(botaoSave, pos)) escolha = 3;
             }
 
             if (evento.type == sf::Event::KeyPressed &&
@@ -129,11 +145,15 @@ int Jogo::Menu::rodar()
         pGG->limpaJanela();
         pGG->desenhaElemento(botaoFase1);
         pGG->desenhaElemento(botaoFase2);
+        pGG->desenhaElemento(botaoSave);
+
         if (fontCarregada)
         {
             pGG->getWindow()->draw(textoTitulo);
             pGG->getWindow()->draw(textoBotao1);
             pGG->getWindow()->draw(textoBotao2);
+            pGG->getWindow()->draw(textoBotaoSave);
+
         }
         pGG->mostraElementos();
     }

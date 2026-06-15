@@ -14,6 +14,8 @@ namespace Jogo {
         sf::Text textoBotao1;
         sf::Text textoBotao2;
         sf::Text textoTitulo;
+        sf::RectangleShape botaoSave;
+        sf::Text textoBotaoSave;
 
         //Jogo* pjog;
 
