@@ -20,9 +20,32 @@ Entidades::Obstaculos::Plataforma::Plataforma(const sf::Vector2f pos, const sf::
 
     sprite.setPosition(pos);
     temSprite = true;
+
+    // Parametros do "ceder com o peso".
+    yInicial       = pos.y;
+    afundamentoMax = 200.0f;
+    velocidade     = 1.5f;
+    alguemEmCima   = false;
 }
 
 Entidades::Obstaculos::Plataforma::~Plataforma() {}
+
+void Entidades::Obstaculos::Plataforma::executar()
+{
+    // O afundamento acontece em resolverColisao (la temos o personagem em
+    // contato para descer junto). Aqui so tratamos o RETORNO: se ninguem
+    // estava apoiado no frame anterior, a plataforma sobe de volta a origem.
+    if (!alguemEmCima)
+    {
+        float deslocamento = getPosicao().y - yInicial; // >0 = abaixo da origem
+        if (deslocamento > 0.0f)
+            mover(sf::Vector2f(0.0f, -velocidade));
+    }
+
+    // As colisoes deste frame remarcam a flag se ainda houver alguem em cima;
+    // zera aqui para detectar quando todos sairem.
+    alguemEmCima = false;
+}
 
 void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
 {
@@ -44,15 +67,25 @@ void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem*
     else {
         if (centroOutra.y < centroEsta.y)
         {
-            p->mover(sf::Vector2f(0.0f, -ds.y)); // estÃ¡ acima -> empurra p/ cima
+            p->mover(sf::Vector2f(0.0f, -ds.y)); // estÃ¡ acima -> empurra p/ cima (encosta no topo)
             p->aterrissar();
-        }            
+            alguemEmCima = true; // ha um personagem apoiado em cima -> plataforma cede
+
+            // A plataforma cede com o peso: afunda um passo levando o personagem
+            // junto, ate o limite. Descer os dois juntos mantem o contato e evita
+            // a folga que causava a trepidacao.
+            float deslocamento = getPosicao().y - yInicial;
+            if (deslocamento < afundamentoMax)
+            {
+                mover(sf::Vector2f(0.0f, velocidade));    // plataforma desce
+                p->mover(sf::Vector2f(0.0f, velocidade)); // personagem desce junto
+            }
+        }
         else
         {
             p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
             p->baterCabeca();
         }
-            
     }
 }
 

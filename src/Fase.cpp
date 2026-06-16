@@ -263,6 +263,7 @@ void Jogo::Fases::Fase::carregarEntidades(const std::string& arquivo)
         const sf::Vector2f pos(x, y);
         const sf::Vector2f vel(vx, vy);
 
+        // Ler cada tipo de data buffer gerado pelas entidades
         switch (static_cast<IDs::IDs>(id))
         {
         case IDs::IDs::jogador:
@@ -331,7 +332,6 @@ void Jogo::Fases::Fase::carregarEntidades(const std::string& arquivo)
             break;
         }
         default:
-            // chao, vazio (projetil), etc.: recriados de outra forma; ignorados.
             break;
         }
     }

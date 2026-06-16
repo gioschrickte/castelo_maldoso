@@ -74,7 +74,7 @@ void Principal::carregarFase(int numFase)
 		pColisoes->limpar();
 	}
 
-	// Jogador(es) com posicao provisoria; a carga sobrescreve posicao/vida/estado.
+	// Jogador(es) com posicao provisoria;
 	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));
 	jogador1->setNome(nomeJogador);
 	jogador1->setPontuacao(pontuacaoJogador);   // nome/pontuacao vieram do cabecalho do save

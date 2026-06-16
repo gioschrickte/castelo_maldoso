@@ -57,6 +57,8 @@ namespace Entidades
 			void desenhar();
 			virtual void salvar() = 0;
 			void salvarDataBuffer();
+
+			bool getNoChao() {return noChao;}
 		};
 	}
 }
