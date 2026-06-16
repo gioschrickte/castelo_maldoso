@@ -93,7 +93,7 @@ const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::E
 const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2)
 {
 	sf::Vector2f ds = calculaColisao(ent1, ent2);
-	if (ds.x > 0.0f && ds.y > 0.0f)
+	if (ds.x > 0.0f && ds.y > 0.0f && ent1->getAtiva() && ent2->getAtiva())
 		return true;
 	return false;
 }
@@ -151,6 +151,8 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 	for (list<Entidades::Obstaculos::Obstaculo*>::iterator itO = LOs.begin(); itO != LOs.end(); ++itO) {
 		if ((*itO)->afetaInimigos()) { // se o obstÃ¡culo afeta inimigos, ou seja, eles colidem com ele e sÃ£o empurrados para fora
 			for (int i = 0; i < LIs.size(); i++) {
+				if (!LIs[i]->getAtiva()) continue; // nao empurra inimigo morto
+
 				sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(*itO));
 				if (ds.x > 0.0f && ds.y > 0.0f) { // se colidiu
 					(*itO)->resolverColisao(LIs[i], ds); // passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do inimigo
@@ -178,6 +180,8 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 	//Checar se os inimigos estÃ£o colidindo com o chao
 	for (int i = 0; i < LIs.size(); i++)
 	{
+		if (!LIs[i]->getAtiva()) continue; // nao empurra inimigo morto
+
 		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(chao));
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
@@ -221,6 +225,8 @@ void Gerenciador::GerenciadorColisoes::tratarAtaqueJogador()
 
 	for (int i = 0; i < (int)LIs.size(); i++)
 	{
+		if (!LIs[i]->getAtiva()) continue; // nao acerta inimigo morto
+
 		sf::Vector2f posInim = LIs[i]->getCorpo().getPosition();
 		float dx = posInim.x - posJog.x;
 		bool naFrente = paraEsquerda ? (dx < 0.0f) : (dx >= 0.0f);

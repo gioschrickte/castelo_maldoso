@@ -163,8 +163,9 @@ void Jogo::Fases::Fase::executar()
         {
             for (int i = 0; i < listaEntidade.getTam(); i++)
             {
+                if (!listaEntidade[i]->getAtiva()) continue; // nao executa IA/movimento de mortos
                 cout << "Executando entidade: " << i << endl;
-                listaEntidade[i]->executar(); 
+                listaEntidade[i]->executar();
             }
                       
         }                                  
@@ -176,8 +177,8 @@ void Jogo::Fases::Fase::executar()
         pGG->desenhaSprite(spriteFundo); 
         for (int i = 0; i < listaEntidade.getTam(); i++)
         {
-			listaEntidade[i]->desenhar();                          // 4. desenha tudo
-
+            if(listaEntidade[i]->getAtiva())
+                listaEntidade[i]->desenhar();                          // 4. desenha tudo
         }
         pGG->mostraElementos();
     }

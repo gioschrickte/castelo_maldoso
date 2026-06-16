@@ -28,7 +28,13 @@ namespace Entidades {
 		virtual void salvarDataBuffer();
 		virtual void salvar() = 0;
 
-		void setAtiva(bool ativa);
-		bool getAtiva() const;
+		void setAtiva(bool ativa)
+		{
+			this->ativa = ativa;
+		}
+		bool getAtiva() const
+		{
+			return ativa;
+		}
 	};
 }

@@ -111,7 +111,7 @@ float Entidades::Personagens::Personagem::getVidaMax() const
 
 void Entidades::Personagens::Personagem::atualizaVida()
 {
-	if (vida < 0.0f)
+	if (vida <= 0.0f)
 	{
 		vida = 0.0f;
 		setAtiva(false); // desativa a entidade se a vida chegar a 0
