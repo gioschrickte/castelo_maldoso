@@ -3,7 +3,7 @@
 #include "fstream"
 
 
-
+//d
 #define DURACAO_ATAQUE  0.05f
 #define COOLDOWN_ATAQUE 0.5f
 

@@ -16,6 +16,9 @@ namespace Gerenciador {
 	private:
 		GerenciadorGrafico* pGrafico;
 		Entidades::Personagens::Jogadores::Jogador* pJogador;
+		Entidades::Personagens::Jogadores::Jogador* pJogador2;
+
+
 		Jogo::Fases::Fase* pFase;
 		
 
@@ -25,6 +28,7 @@ namespace Gerenciador {
 		~GerenciadorEvento();
 		static GerenciadorEvento* getGerenciadorEvento();
 		void setJogador(Entidades::Personagens::Jogadores::Jogador* pJ);
+		void setJogador2(Entidades::Personagens::Jogadores::Jogador* pJ2);
 		void verificaTeclaPressionada(sf::Keyboard::Key tecla);
 		void verificaTeclaSolta(sf::Keyboard::Key tecla);
 		void executar();
