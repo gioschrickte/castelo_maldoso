@@ -1,15 +1,15 @@
-﻿#include "Chefao.h"
+#include "Mago.h"
 #include "Projetil.h"
 #include "Jogador.h"
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
 
-#define RAIO_CHEFAO   400.0f
+#define RAIO_MAGO   400.0f
 #define COOLDOWN_TIRO 1.5f
 
-Entidades::Personagens::Inimigos::Chefao::Chefao(Jogadores::Jogador* j, const sf::Vector2f pos)
-	: Inimigo(j, pos, sf::Vector2f(100.0f, 100.0f), 150.0f, IDs::IDs::chefao),
+Entidades::Personagens::Inimigos::Mago::Mago(Jogadores::Jogador* j, const sf::Vector2f pos)
+	: Inimigo(j, pos, sf::Vector2f(100.0f, 100.0f), 150.0f, IDs::IDs::mago),
 	forca(5), projetil(nullptr), projetilEstavaAtivo(false), moveAleatorio(0)
 {
 	corpo.setFillColor(sf::Color::Yellow);
@@ -31,24 +31,24 @@ Entidades::Personagens::Inimigos::Chefao::Chefao(Jogadores::Jogador* j, const sf
 	vida = vidaMax;
 }
 
-Entidades::Personagens::Inimigos::Chefao::~Chefao() {}
+Entidades::Personagens::Inimigos::Mago::~Mago() {}
 
-void Entidades::Personagens::Inimigos::Chefao::danificar(Jogadores::Jogador* pJog)
+void Entidades::Personagens::Inimigos::Mago::danificar(Jogadores::Jogador* pJog)
 {
 	if (!podeHitar()) return;
 	pJog->tomarDano(dano);
-	std::cout << "O chefao encostou no jogador! (dano=" << dano << ")\n";
+	std::cout << "O mago encostou no jogador! (dano=" << dano << ")\n";
 	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
 
-void Entidades::Personagens::Inimigos::Chefao::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posChefao)
+void Entidades::Personagens::Inimigos::Mago::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posMago)
 {
-	if (posJogador.x - posChefao.x > 0.0f) andar(false);
+	if (posJogador.x - posMago.x > 0.0f) andar(false);
 	else                                   andar(true);
 }
 
-void Entidades::Personagens::Inimigos::Chefao::movAleatorio()
+void Entidades::Personagens::Inimigos::Mago::movAleatorio()
 {
 	if (moveAleatorio == 0)      andar(false);
 	else if (moveAleatorio == 1) andar(true);
@@ -61,16 +61,16 @@ void Entidades::Personagens::Inimigos::Chefao::movAleatorio()
 	}
 }
 
-void Entidades::Personagens::Inimigos::Chefao::executar()
+void Entidades::Personagens::Inimigos::Mago::executar()
 {
 	float dt = calcularDt();
 
 	sf::Vector2f posJogador = getAlvo()->getCorpo().getPosition();
-	sf::Vector2f posChefao = corpo.getPosition();
+	sf::Vector2f posMago = corpo.getPosition();
 
-	if (fabs(posJogador.x - posChefao.x) <= RAIO_CHEFAO &&
-		fabs(posJogador.y - posChefao.y) <= RAIO_CHEFAO)
-		persegueJogador(posJogador, posChefao);
+	if (fabs(posJogador.x - posMago.x) <= RAIO_MAGO &&
+		fabs(posJogador.y - posMago.y) <= RAIO_MAGO)
+		persegueJogador(posJogador, posMago);
 	else
 		movAleatorio();
 
@@ -80,7 +80,7 @@ void Entidades::Personagens::Inimigos::Chefao::executar()
 	atualizarTiro();
 }
 
-void Entidades::Personagens::Inimigos::Chefao::atualizarTiro()
+void Entidades::Personagens::Inimigos::Mago::atualizarTiro()
 {
 	if (!projetil) return;
 
@@ -94,25 +94,25 @@ void Entidades::Personagens::Inimigos::Chefao::atualizarTiro()
 		}
 		else if (relogioTiro.getElapsedTime().asSeconds() >= COOLDOWN_TIRO)
 		{
-			sf::Vector2f centroChefao = corpo.getPosition() + corpo.getSize() / 2.0f;
+			sf::Vector2f centroMago = corpo.getPosition() + corpo.getSize() / 2.0f;
 			Entidades::Personagens::Jogadores::Jogador* alvo = getAlvo();
 			sf::Vector2f centroJog = alvo->getCorpo().getPosition()
 				+ alvo->getCorpo().getSize() / 2.0f;
-			projetil->lancar(centroChefao, centroJog);
+			projetil->lancar(centroMago, centroJog);
 		}
 	}
 
 	projetilEstavaAtivo = ativoAgora;
 }
 
-void Entidades::Personagens::Inimigos::Chefao::salvar()
+void Entidades::Personagens::Inimigos::Mago::salvar()
 {
 	buffer.str("");
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
 	ofstream arquivo("save.txt", ios::app);
-	
+
 	if (!arquivo.is_open())//debug
     {
         cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
@@ -121,13 +121,12 @@ void Entidades::Personagens::Inimigos::Chefao::salvar()
 
 	arquivo << buffer.str() << "\n";
 	arquivo.close();
-	 
+
 	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
 }
 
-void Entidades::Personagens::Inimigos::Chefao::salvarDataBuffer()
+void Entidades::Personagens::Inimigos::Mago::salvarDataBuffer()
 {
 	Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer();
 	// mais nada pra salvard
 }
-

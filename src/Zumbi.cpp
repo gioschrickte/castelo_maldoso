@@ -1,14 +1,14 @@
-﻿// InimigoFacil.cpp
+// Zumbi.cpp
 #include <cmath>
-#include "InimigoFacil.h"
+#include "Zumbi.h"
 #include "Jogador.h"
 #include <fstream>
 
-Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
+Entidades::Personagens::Inimigos::Zumbi::Zumbi(
     Jogadores::Jogador* j, const sf::Vector2f pos)
-    : Inimigo(j, pos, sf::Vector2f(50.0f, 50.0f), 90.0f, IDs::IDs::inimigoFacil), moveAleatorio(0)
+    : Inimigo(j, pos, sf::Vector2f(50.0f, 50.0f), 90.0f, IDs::IDs::zumbi), moveAleatorio(0)
 {
-    corpo.setFillColor(sf::Color::Red); 
+    corpo.setFillColor(sf::Color::Red);
 
     textura = pGG->carregarTextura("assets/zombie.png");
     sprite.setTexture(textura);
@@ -28,20 +28,20 @@ Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
 	dano = 1.0f;
 }
 
-Entidades::Personagens::Inimigos::InimigoFacil::~InimigoFacil() {}
+Entidades::Personagens::Inimigos::Zumbi::~Zumbi() {}
 
 
-void Entidades::Personagens::Inimigos::InimigoFacil::danificar(
+void Entidades::Personagens::Inimigos::Zumbi::danificar(
     Jogadores::Jogador* pJog)
 {
 	if (!podeHitar()) return;
 	pJog->tomarDano(dano);
-    std::cout << "InimigoFacil causou dano leve! (dano=" << dano << ")\n";
+    std::cout << "Zumbi causou dano leve! (dano=" << dano << ")\n";
 	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
 
-void Entidades::Personagens::Inimigos::InimigoFacil::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
+void Entidades::Personagens::Inimigos::Zumbi::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
 {
 	if (posJogador.x - posInimigo.x > 0.0f) { andar(false); }
 	else
@@ -50,7 +50,7 @@ void Entidades::Personagens::Inimigos::InimigoFacil::persegueJogador(sf::Vector2
 	}
 }
 
-void Entidades::Personagens::Inimigos::InimigoFacil::movAleatorio()
+void Entidades::Personagens::Inimigos::Zumbi::movAleatorio()
 {
 	if (moveAleatorio == 0)
 	{
@@ -72,7 +72,7 @@ void Entidades::Personagens::Inimigos::InimigoFacil::movAleatorio()
 
 }
 
-void Entidades::Personagens::Inimigos::InimigoFacil::executar()
+void Entidades::Personagens::Inimigos::Zumbi::executar()
 {
 	float dt = calcularDt();
 
@@ -88,14 +88,14 @@ void Entidades::Personagens::Inimigos::InimigoFacil::executar()
 	atualizarY(dt);
 }
 
-void Entidades::Personagens::Inimigos::InimigoFacil::salvar()
+void Entidades::Personagens::Inimigos::Zumbi::salvar()
 {
 	buffer.str("");
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
 	ofstream arquivo("save.txt", ios::app);
-	
+
 	if (!arquivo.is_open())//debug
     {
         cout << "[ERRO] nao foi possivel abrir o arquivo!" << endl;
@@ -104,12 +104,11 @@ void Entidades::Personagens::Inimigos::InimigoFacil::salvar()
 
 	arquivo << buffer.str() << "\n";
 	arquivo.close();
-	 
+
 	cout << "[SALVAR] gravado com sucesso!" << endl;//debug
 }
 
-void Entidades::Personagens::Inimigos::InimigoFacil::salvarDataBuffer()
+void Entidades::Personagens::Inimigos::Zumbi::salvarDataBuffer()
 {
 	Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer();
 }
-

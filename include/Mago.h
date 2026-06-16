@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "Inimigo.h"
 
@@ -10,7 +10,7 @@ namespace Entidades
 	{
 		namespace Inimigos
 		{
-			class Chefao : public Inimigo
+			class Mago : public Inimigo
 			{
 			private:
 				short int forca;
@@ -21,15 +21,15 @@ namespace Entidades
 
 				void atualizarTiro();
 			public:
-				Chefao(Jogadores::Jogador* j,
+				Mago(Jogadores::Jogador* j,
 					const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f));
-				~Chefao();
+				~Mago();
 				void executar() override;
 				void danificar(Jogadores::Jogador* pJog) override;
 
 				void setProjetil(Entidades::Projetil* p) { projetil = p; }
 
-				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posChefao);
+				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posMago);
 				void movAleatorio();
                 void salvar();
 				void salvarDataBuffer();
