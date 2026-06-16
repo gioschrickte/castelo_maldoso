@@ -13,6 +13,7 @@ namespace Jogo {
         private:
             int numeroFase = 2; // numero identificador da fase
             const int maxLama;
+            const int maxChefoes;
         public:
             FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);

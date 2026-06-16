@@ -6,6 +6,7 @@
 //d
 #define DURACAO_ATAQUE  0.05f
 #define COOLDOWN_ATAQUE 0.5f
+#define VIDA_JOGADOR
 
 Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, const sf::Vector2f tam)
 	: Personagem(pos, tam, 200.0f, IDs::IDs::jogador), ataqueAtivo(false), danoAtaque(3.0f)
@@ -24,7 +25,7 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	sprite.setPosition(pos);
 	temSprite = true;
 	
-	vidaMax = 20.0f;
+	vidaMax = 100.0f;
 	vida = vidaMax;
 	barraVida.setFillColor(sf::Color::Red);
 }

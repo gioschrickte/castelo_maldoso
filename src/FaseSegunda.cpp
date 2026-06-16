@@ -3,9 +3,10 @@
 #include "Chefao.h"
 #include "Projetil.h"
 #define MAX_LAMA 5
+#define MAX_CHEFOES 5
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
-    : Fase(jogador, j2), maxLama(MAX_LAMA)
+    : Fase(jogador, j2), maxLama(MAX_LAMA), maxChefoes(MAX_CHEFOES)
 {
     criarInimigos();
     criarObstaculos();
@@ -22,7 +23,7 @@ Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador
 }
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2, bool carregando)
-    : Fase(jogador, j2, carregando), maxLama(MAX_LAMA)
+    : Fase(jogador, j2, carregando), maxLama(MAX_LAMA), maxChefoes(MAX_CHEFOES)
 {
     texturaFundo = pGG->carregarTextura("assets/fundo.png");
     spriteFundo.setTexture(texturaFundo);
@@ -70,9 +71,13 @@ void Jogo::Fases::FaseSegunda::criarLama()
 
 void Jogo::Fases::FaseSegunda::criarChefao()
 {
-	Entidades::Personagens::Inimigos::Chefao* chefao = new Entidades::Personagens::Inimigos::Chefao(jog1, posicaoInimigoAleatoria());
-	Entidades::Projetil* projetil = new Entidades::Projetil();
-	chefao->setProjetil(projetil);
-	adicionarInimigo(chefao);
-	adicionarProjetil(projetil);
+    int nChefoes = aleatorio(3, maxChefoes);
+    for(int i = 0; i < nChefoes; i++)
+    {
+        Entidades::Personagens::Inimigos::Chefao* chefao = new Entidades::Personagens::Inimigos::Chefao(jog1, posicaoInimigoAleatoria());
+        Entidades::Projetil* projetil = new Entidades::Projetil();
+        chefao->setProjetil(projetil);
+        adicionarInimigo(chefao);
+        adicionarProjetil(projetil);
+    }
 }
