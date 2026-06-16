@@ -123,7 +123,7 @@ sf::Vector2f Jogo::Fases::Fase::posicaoPlataformaAleatoria() const
     const float xMin = margem;
     const float xMax = largura - margem;
 
-    const float plataformaYMin = 500.0f;
+    const float plataformaYMin = 1500.0f;
     const float plataformaYMax = chaoTopo - 150.0f;
     return posicaoAleatoria(xMin, xMax, plataformaYMin, plataformaYMax);
 }
