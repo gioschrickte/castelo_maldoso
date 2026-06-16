@@ -3,6 +3,7 @@
 	
 #define VEL_PROJETIL 400.0f
 #define FORA_DA_TELA -1000.0f
+#define GRAVIDADE_PROJETIL 250.0f
 
 Entidades::Projetil::Projetil(int dano, const sf::Vector2f tam)
 	: Entidade(sf::Vector2f(FORA_DA_TELA, FORA_DA_TELA), tam, IDs::IDs::vazio),
@@ -49,7 +50,10 @@ void Entidades::Projetil::executar()
 	relogio.restart();
 	if (dt > 0.05f) dt = 0.05f;
 
+	velocidade.y += GRAVIDADE_PROJETIL * dt;
 	corpo.move(velocidade * dt);
+	
+
 
 	const sf::Vector2f p = corpo.getPosition();
 	const sf::Vector2f t = corpo.getSize();
