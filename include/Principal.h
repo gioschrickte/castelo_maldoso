@@ -17,6 +17,8 @@ private:
     void criarFase(int numFase);
 
 	Entidades::Personagens::Jogadores::Jogador* jogador1;
+	Entidades::Personagens::Jogadores::Jogador* jogador2;
+	int numJogadores;   // 1 ou 2, escolhido no menu
 public:
     Principal();
     ~Principal();

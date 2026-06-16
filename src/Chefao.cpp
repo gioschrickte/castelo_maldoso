@@ -65,7 +65,7 @@ void Entidades::Personagens::Inimigos::Chefao::executar()
 {
 	float dt = calcularDt();
 
-	sf::Vector2f posJogador = jogador->getCorpo().getPosition();
+	sf::Vector2f posJogador = getAlvo()->getCorpo().getPosition();
 	sf::Vector2f posChefao = corpo.getPosition();
 
 	if (fabs(posJogador.x - posChefao.x) <= RAIO_CHEFAO &&
@@ -95,8 +95,9 @@ void Entidades::Personagens::Inimigos::Chefao::atualizarTiro()
 		else if (relogioTiro.getElapsedTime().asSeconds() >= COOLDOWN_TIRO)
 		{
 			sf::Vector2f centroChefao = corpo.getPosition() + corpo.getSize() / 2.0f;
-			sf::Vector2f centroJog = jogador->getCorpo().getPosition()
-				+ jogador->getCorpo().getSize() / 2.0f;
+			Entidades::Personagens::Jogadores::Jogador* alvo = getAlvo();
+			sf::Vector2f centroJog = alvo->getCorpo().getPosition()
+				+ alvo->getCorpo().getSize() / 2.0f;
 			projetil->lancar(centroChefao, centroJog);
 		}
 	}

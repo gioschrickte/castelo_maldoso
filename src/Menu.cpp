@@ -8,9 +8,11 @@ static const sf::Color COR_FASE2_HOVER(210, 60, 60);
 static const sf::Color COR_FUNDO(30, 30, 30);
 static const sf::Color COR_SAVE_NORMAL(46, 139, 87);  // Verde
 static const sf::Color COR_SAVE_HOVER(60, 179, 113);  // Verde Claro
+static const sf::Color COR_MODO_NORMAL(120, 81, 169);  // Roxo
+static const sf::Color COR_MODO_HOVER(150, 111, 199);  // Roxo Claro
 
 Jogo::Menu::Menu()
-    : Ente(), fontCarregada(false)
+    : Ente(), numJogadores(1), fontCarregada(false)
 {
     const float W = static_cast<float>(pGG->getWindow()->getSize().x);
     const float H = static_cast<float>(pGG->getWindow()->getSize().y);
@@ -35,6 +37,11 @@ Jogo::Menu::Menu()
     botaoSave.setSize(tamBotao);
     botaoSave.setPosition(xInicio, yBotao + tamBotao.y + espacamentoY);
     botaoSave.setFillColor(COR_SAVE_NORMAL);
+
+    // Botão de modo (1/2 jogadores), abaixo do botão Fase 2
+    botaoModo.setSize(tamBotao);
+    botaoModo.setPosition(xInicio + tamBotao.x + espacamento, yBotao + tamBotao.y + espacamentoY);
+    botaoModo.setFillColor(COR_MODO_NORMAL);
 
     fontCarregada = carregarFonte();
     if (!fontCarregada) return;
@@ -77,6 +84,26 @@ Jogo::Menu::Menu()
     textoBotaoSave.setCharacterSize(22); // Fonte um pouco menor devido ao tamanho do texto
     textoBotaoSave.setFillColor(sf::Color::White);
     centralizarTexto(textoBotaoSave, botaoSave);
+
+    // Texto do botão de modo (1/2 jogadores)
+    textoBotaoModo.setFont(fonte);
+    textoBotaoModo.setCharacterSize(24);
+    textoBotaoModo.setFillColor(sf::Color::White);
+    atualizarTextoModo();   // define a string conforme numJogadores e centraliza
+}
+
+void Jogo::Menu::atualizarTextoModo()
+{
+    if (!fontCarregada) return;
+    textoBotaoModo.setString(numJogadores == 2 ? "2 Jogadores" : "1 Jogador");
+
+    // centraliza dentro de botaoModo
+    sf::FloatRect r = textoBotaoModo.getLocalBounds();
+    textoBotaoModo.setOrigin(r.left + r.width / 2.0f, r.top + r.height / 2.0f);
+    textoBotaoModo.setPosition(
+        botaoModo.getPosition().x + botaoModo.getSize().x / 2.0f,
+        botaoModo.getPosition().y + botaoModo.getSize().y / 2.0f
+    );
 }
 
 Jogo::Menu::~Menu() {}
@@ -102,6 +129,7 @@ void Jogo::Menu::atualizarHover(sf::Vector2i posMouse)
 {
     botaoFase1.setFillColor(clicouEm(botaoFase1, posMouse) ? COR_FASE1_HOVER : COR_FASE1_NORMAL);
     botaoFase2.setFillColor(clicouEm(botaoFase2, posMouse) ? COR_FASE2_HOVER : COR_FASE2_NORMAL);
+    botaoModo.setFillColor(clicouEm(botaoModo, posMouse) ? COR_MODO_HOVER : COR_MODO_NORMAL);
 }
 
 int Jogo::Menu::rodar()
@@ -131,6 +159,11 @@ int Jogo::Menu::rodar()
                 if (clicouEm(botaoFase1, pos)) escolha = 1;
                 else if (clicouEm(botaoFase2, pos)) escolha = 2;
                 else if (clicouEm(botaoSave, pos)) escolha = 3;
+                else if (clicouEm(botaoModo, pos)) // alterna 1/2 jogadores, sem sair do menu
+                {
+                    numJogadores = (numJogadores == 1) ? 2 : 1;
+                    atualizarTextoModo();
+                }
             }
 
             if (evento.type == sf::Event::KeyPressed &&
@@ -146,6 +179,7 @@ int Jogo::Menu::rodar()
         pGG->desenhaElemento(botaoFase1);
         pGG->desenhaElemento(botaoFase2);
         pGG->desenhaElemento(botaoSave);
+        pGG->desenhaElemento(botaoModo);
 
         if (fontCarregada)
         {
@@ -153,6 +187,7 @@ int Jogo::Menu::rodar()
             pGG->getWindow()->draw(textoBotao1);
             pGG->getWindow()->draw(textoBotao2);
             pGG->getWindow()->draw(textoBotaoSave);
+            pGG->getWindow()->draw(textoBotaoModo);
 
         }
         pGG->mostraElementos();

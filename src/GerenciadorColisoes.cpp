@@ -8,7 +8,7 @@
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
 
 Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
-	LIs(), LOs(), projeteis(), pJog1(nullptr), fase(nullptr)
+	LIs(), LOs(), projeteis(), pJog1(nullptr), pJog2(nullptr), fase(nullptr)
 {
 	// Aqui, o gerenciador de colisoes estÃ¡ com as listas vazias, e o ponteiro para o jogador Ã© nulo
 }
@@ -29,8 +29,13 @@ Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::getGerenciad
 
 void Gerenciador::GerenciadorColisoes::setJogador1(Entidades::Personagens::Jogadores::Jogador* p)
 {
-	// SerÃ¡ necessÃ¡ria ediÃ§Ã£o depois para incluir um segundo jogador
 	pJog1 = p;
+}
+
+void Gerenciador::GerenciadorColisoes::setJogador2(Entidades::Personagens::Jogadores::Jogador* p)
+{
+	// p pode ser nullptr (modo 1 jogador) -> limpa ponteiro obsoleto
+	pJog2 = p;
 }
 
 void Gerenciador::GerenciadorColisoes::setFase(Jogo::Fases::Fase* f)
@@ -117,39 +122,42 @@ void Gerenciador::GerenciadorColisoes::executar() {
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 {
-	if (!pJog1)
+	// Checar se cada jogador estÃ¡ colidindo com algum inimigo
+	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
+	for (int j = 0; j < 2; j++)
 	{
-		printf("Erro, pJog1 nulo");
-		return;
-	}
-	// Checar se o jogador estÃ¡ colidindo com algum inimigo
-	for (int i = 0; i < LIs.size(); i++)
-	{
-		bool col = verificarColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(LIs[i]));
-		if (col) // se colidiu
+		Entidades::Personagens::Jogadores::Jogador* jog = jogs[j];
+		if (!jog) continue; // verificarColisao ja ignora jogador morto
+
+		for (int i = 0; i < LIs.size(); i++)
 		{
-			pJog1->colidir(LIs[i]); // chama a funÃ§Ã£o de colidir do jogador, passando o inimigo
+			bool col = verificarColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(LIs[i]));
+			if (col) // se colidiu
+			{
+				jog->colidir(LIs[i]); // chama a funÃ§Ã£o de colidir do jogador, passando o inimigo
+			}
 		}
 	}
 }
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 {
-	if (!pJog1)
+	// Checar se cada jogador estÃ¡ colidindo com algum obstÃ¡culo
+	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
+	for (int j = 0; j < 2; j++)
 	{
-		printf("Erro, pJog1 nulo");
-		return;
-	}
+		Entidades::Personagens::Jogadores::Jogador* jog = jogs[j];
+		if (!jog || !jog->getAtiva()) continue;
 
-	// Checar se o jogador estÃ¡ colidindo com algum obstÃ¡culo
-	for (list<Entidades::Obstaculos::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
-	{
-		// calcula uma vez e reutiliza
-		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(*it));
-		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
+		for (list<Entidades::Obstaculos::Obstaculo*>::iterator it = LOs.begin(); it != LOs.end(); ++it)
 		{
-			// passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do jogador
-			(*it)->resolverColisao(pJog1, ds);
+			// calcula uma vez e reutiliza
+			sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(*it));
+			if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
+			{
+				// passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do jogador
+				(*it)->resolverColisao(jog, ds);
+			}
 		}
 	}
 }
@@ -173,16 +181,19 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 {
 	Entidades::Chao* chao = fase->getChao();
-	// Checar se o jogador estÃ¡ colidindo com o chÃ£o
-	if (!pJog1)
+
+	// Checar se cada jogador estÃ¡ colidindo com o chÃ£o
+	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
+	for (int j = 0; j < 2; j++)
 	{
-		printf("Erro, pJog1 nulo");
-		return;
-	}
-	sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(pJog1), static_cast<Entidades::Entidade*>(chao));
-	if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
-	{
-		chao->resolverColisao(pJog1, ds);
+		Entidades::Personagens::Jogadores::Jogador* jog = jogs[j];
+		if (!jog || !jog->getAtiva()) continue;
+
+		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(chao));
+		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
+		{
+			chao->resolverColisao(jog, ds);
+		}
 	}
 
 	//Checar se os inimigos estÃ£o colidindo com o chao
@@ -200,11 +211,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsProjeteis()
 {
-	if (!pJog1)
-	{
-		printf("Erro, pJog1 nulo");
-		return;
-	}
+	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
 
 	// So projeteis ATIVOS colidem; os inativos estao escondidos fora da tela.
 	for (set<Entidades::Projetil*>::iterator it = projeteis.begin(); it != projeteis.end(); ++it)
@@ -212,12 +219,19 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsProjeteis()
 		Entidades::Projetil* proj = *it;
 		if (!proj->estaAtivo()) continue;
 
-		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(pJog1),
-			static_cast<Entidades::Entidade*>(proj));
-		if (ds.x > 0.0f && ds.y > 0.0f) // acertou o jogador
+		for (int j = 0; j < 2; j++)
 		{
-			proj->atingir(); // exibe o dano no terminal e se desativa
-			pJog1->tomarDano(proj->getDano()); // o jogador toma dano
+			Entidades::Personagens::Jogadores::Jogador* jog = jogs[j];
+			if (!jog || !jog->getAtiva()) continue;
+
+			sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog),
+				static_cast<Entidades::Entidade*>(proj));
+			if (ds.x > 0.0f && ds.y > 0.0f) // acertou um jogador
+			{
+				proj->atingir(); // exibe o dano no terminal e se desativa
+				jog->tomarDano(proj->getDano()); // o jogador toma dano
+				break; // o projetil ja se desativou; nao acerta os dois
+			}
 		}
 	}
 }
@@ -225,25 +239,29 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsProjeteis()
 
 void Gerenciador::GerenciadorColisoes::tratarAtaqueJogador()
 {
-	if (!pJog1 || !pJog1->estaAtacando()) return;
-
-	sf::Vector2f posJog = pJog1->getCorpo().getPosition();
-	sf::Vector2f tamJog = pJog1->getCorpo().getSize();
-	bool paraEsquerda = pJog1->olhandoParaEsquerda();
-
-	for (int i = 0; i < (int)LIs.size(); i++)
+	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
+	for (int j = 0; j < 2; j++)
 	{
-		if (!LIs[i]->getAtiva()) continue; // nao acerta inimigo morto
+		Entidades::Personagens::Jogadores::Jogador* jog = jogs[j];
+		if (!jog || !jog->estaAtacando()) continue;
 
-		sf::Vector2f posInim = LIs[i]->getCorpo().getPosition();
-		float dx = posInim.x - posJog.x;
-		bool naFrente = paraEsquerda ? (dx < 0.0f) : (dx >= 0.0f);
-		if (!naFrente) continue;
-		if (fabs(dx) <= ALCANCE_ATAQUE_H && fabs(posInim.y - posJog.y) <= ALCANCE_ATAQUE_V)
+		sf::Vector2f posJog = jog->getCorpo().getPosition();
+		bool paraEsquerda = jog->olhandoParaEsquerda();
+
+		for (int i = 0; i < (int)LIs.size(); i++)
 		{
-			LIs[i]->tomarDano(pJog1->getDanoAtaque());
-			std::cout << "Jogador acertou inimigo! (dano=" << pJog1->getDanoAtaque() << ")\n";
-			std::cout << "Vida do inimigo: " << LIs[i]->getVida() << " / " << LIs[i]->getVidaMax() << std::endl;
+			if (!LIs[i]->getAtiva()) continue; // nao acerta inimigo morto
+
+			sf::Vector2f posInim = LIs[i]->getCorpo().getPosition();
+			float dx = posInim.x - posJog.x;
+			bool naFrente = paraEsquerda ? (dx < 0.0f) : (dx >= 0.0f);
+			if (!naFrente) continue;
+			if (fabs(dx) <= ALCANCE_ATAQUE_H && fabs(posInim.y - posJog.y) <= ALCANCE_ATAQUE_V)
+			{
+				LIs[i]->tomarDano(jog->getDanoAtaque());
+				std::cout << "Jogador acertou inimigo! (dano=" << jog->getDanoAtaque() << ")\n";
+				std::cout << "Vida do inimigo: " << LIs[i]->getVida() << " / " << LIs[i]->getVidaMax() << std::endl;
+			}
 		}
 	}
 }
@@ -254,5 +272,6 @@ void Gerenciador::GerenciadorColisoes::limpar()
 	LOs.clear();
 	projeteis.clear();
 	pJog1 = nullptr;
+	pJog2 = nullptr;
 	fase = nullptr;
 }

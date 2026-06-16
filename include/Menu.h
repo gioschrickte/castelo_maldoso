@@ -17,6 +17,10 @@ namespace Jogo {
         sf::RectangleShape botaoSave;
         sf::Text textoBotaoSave;
 
+        sf::RectangleShape botaoModo;   // alterna 1 / 2 jogadores
+        sf::Text textoBotaoModo;
+        int numJogadores;               // 1 (default) ou 2
+
         //Jogo* pjog;
 
         bool fontCarregada;
@@ -24,6 +28,7 @@ namespace Jogo {
         bool carregarFonte();
         bool clicouEm(const sf::RectangleShape& botao, sf::Vector2i posMouse) const;
         void atualizarHover(sf::Vector2i posMouse);
+        void atualizarTextoModo();      // sincroniza o texto do botao com numJogadores
 
     public:
         Menu();
@@ -34,5 +39,8 @@ namespace Jogo {
 
         // Chamado pela Principal. Retorna 1, 2 ou -1 (janela fechada)
         int rodar();
+
+        // Quantidade de jogadores escolhida no menu (1 ou 2)
+        int getNumJogadores() const { return numJogadores; }
     };
 }

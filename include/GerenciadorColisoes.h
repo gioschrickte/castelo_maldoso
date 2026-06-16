@@ -18,10 +18,8 @@ namespace Gerenciador {
 		list<Entidades::Obstaculos::Obstaculo*>LOs;
 		set<Entidades::Projetil*> projeteis;
 		Entidades::Personagens::Jogadores::Jogador* pJog1;
+		Entidades::Personagens::Jogadores::Jogador* pJog2;
 		Jogo::Fases::Fase* fase;
-
-
-		//Entidades::Personagens::Jogadores::Jogador* pJog2;		
 		GerenciadorColisoes();	 // PadrÃ£o singleton
 		static GerenciadorColisoes* pGC;
 
@@ -29,6 +27,7 @@ namespace Gerenciador {
 		~GerenciadorColisoes();
 		static GerenciadorColisoes* getGerenciadorColisoes();
 		void setJogador1(Entidades::Personagens::Jogadores::Jogador* p);
+		void setJogador2(Entidades::Personagens::Jogadores::Jogador* p);
 		const sf::Vector2f calculaColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
 		void executar();
 

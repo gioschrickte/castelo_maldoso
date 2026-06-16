@@ -37,7 +37,7 @@ void Entidades::Personagens::Inimigos::InimigoMedio::executar()
 {
 	// O inimigo mÃ©dio vai ficar pulando e perseguindo o jogador, ou seja, a direÃ§Ã£o do pulo Ã© determinada pelo jogador
 	
-	sf::Vector2f posJogador = jogador->getPosicao();
+	sf::Vector2f posJogador = getAlvo()->getPosicao();
 	sf::Vector2f posInimigo = getPosicao();
 	float distancia = sqrt(pow(posJogador.x - posInimigo.x, 2) + pow(posJogador.y - posInimigo.y, 2));
 	if (distancia <= RAIO_PERSEGUIR)

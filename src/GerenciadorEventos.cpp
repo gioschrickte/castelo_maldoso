@@ -8,7 +8,7 @@
 Gerenciador::GerenciadorEvento* Gerenciador::GerenciadorEvento::pEvento(nullptr);
 
 Gerenciador::GerenciadorEvento::GerenciadorEvento()
-	: pJogador(nullptr), pGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico())
+	: pJogador(nullptr), pJogador2(nullptr), pGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico())
 {
 
 }
@@ -34,7 +34,7 @@ void Gerenciador::GerenciadorEvento::setJogador(Entidades::Personagens::Jogadore
 	pJogador = pJ;
 }
 
-void Gerenciador::GerenciadorEvento::setJogador(Entidades::Personagens::Jogadores::Jogador* pJ2)
+void Gerenciador::GerenciadorEvento::setJogador2(Entidades::Personagens::Jogadores::Jogador* pJ2)
 {
 	pJogador2 = pJ2;
 }
@@ -78,8 +78,8 @@ void Gerenciador::GerenciadorEvento::verificaTeclaPressionada(sf::Keyboard::Key 
         if (tecla == sf::Keyboard::Left)     pJogador2->andar(true);
         else if (tecla == sf::Keyboard::Right) pJogador2->andar(false);
         else if (tecla == sf::Keyboard::Up)    pJogador2->pular();
-        else if (tecla == sf::Keyboard::X)     pJogador2->atacar();
-		
+        else if (tecla == sf::Keyboard::RControl) pJogador2->atacar();
+
     }
 
 }
@@ -92,7 +92,7 @@ void Gerenciador::GerenciadorEvento::verificaTeclaSolta(sf::Keyboard::Key tecla)
 		pJogador->parar();
 	}
 
-	if (tecla == sf::Keyboard::Left || tecla == sf::Keyboard::Right)
+	if (pJogador2 && (tecla == sf::Keyboard::Left || tecla == sf::Keyboard::Right))
 	{
 		pJogador2->parar();
 	}

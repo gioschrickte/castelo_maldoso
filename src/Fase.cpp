@@ -27,7 +27,9 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
 
     gerColisoes->setFase(this);
     gerColisoes->setJogador1(jog1);
+    gerColisoes->setJogador2(jog2);   // jog2 pode ser nullptr (limpa ponteiro obsoleto)
     gerEventos->setJogador(jog1);
+    gerEventos->setJogador2(jog2);     // idem
     gerEventos->setFase(this);
 }
 
@@ -46,6 +48,7 @@ void Jogo::Fases::Fase::criarChao()
 
 void Jogo::Fases::Fase::adicionarInimigo(Entidades::Personagens::Inimigos::Inimigo* i)
 {
+    i->setJogador2(jog2);   // segundo alvo para a IA (nullptr em 1 jogador)
     listaEntidade.addEntidade(i);
     gerColisoes->incluirInimigo(i);
 }
@@ -184,10 +187,9 @@ void Jogo::Fases::Fase::executar()
         pGG->mostraElementos();
 
         // Fim de fase: a Principal le getResultado() para decidir o proximo passo.
-        // TODO: incluir jog2 quando existir.
-        if (!jog1->getAtiva())
+        if (!haJogadorVivo())
         {
-            resultado = ResultadoFase::JogadorMorreu;   // game over -> menu
+            resultado = ResultadoFase::JogadorMorreu;   // ambos mortos -> menu
             return;
         }
         if (!gerColisoes->haInimigosVivos())

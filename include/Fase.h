@@ -41,6 +41,9 @@ namespace Jogo {
             sf::Vector2f posicaoInimigoAleatoria() const;
             sf::Vector2f posicaoPlataformaAleatoria() const;
 
+            // true se ao menos um jogador continua vivo (co-op: game over so com os dois mortos)
+            bool haJogadorVivo() const { return jog1->getAtiva() || (jog2 && jog2->getAtiva()); }
+
             void adicionarInimigo(Entidades::Personagens::Inimigos::Inimigo* i);
             void adicionarObstaculo(Entidades::Obstaculos::Obstaculo* o);
             void adicionarProjetil(Entidades::Projetil* p); // na lista de entidades + no gerenciador

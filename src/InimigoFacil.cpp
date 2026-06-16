@@ -76,7 +76,7 @@ void Entidades::Personagens::Inimigos::InimigoFacil::executar()
 {
 	float dt = calcularDt();
 
-	sf::Vector2f posJogador = jogador->getCorpo().getPosition();
+	sf::Vector2f posJogador = getAlvo()->getCorpo().getPosition();
 	sf::Vector2f posInimigo = corpo.getPosition();
 
 	if (fabs(posJogador.x - posInimigo.x) <= RAIO_PERSEGUIR && fabs(posJogador.y - posInimigo.y) <= RAIO_PERSEGUIR)
