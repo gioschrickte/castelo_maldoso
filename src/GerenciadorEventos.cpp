@@ -63,6 +63,9 @@ void Gerenciador::GerenciadorEvento::verificaTeclaPressionada(sf::Keyboard::Key 
 			pFase->setPausado(true);
 		}
 	}
+	else if (tecla == sf::Keyboard::M){
+		pFase->SalvarTudo();
+	}
 }
 
 

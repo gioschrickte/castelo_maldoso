@@ -71,7 +71,7 @@ void Entidades::Obstaculos::Espinho::salvar()
 void Entidades::Obstaculos::Espinho::salvarDataBuffer()
 {
 	Entidades::Obstaculos::Obstaculo::salvarDataBuffer();
-	//mais nada pra salvar, so posiçao e Id
+	//mais nada pra salvar, so posiçao e Idd
 }
 
 

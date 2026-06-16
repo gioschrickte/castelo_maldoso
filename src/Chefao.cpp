@@ -127,6 +127,6 @@ void Entidades::Personagens::Inimigos::Chefao::salvar()
 void Entidades::Personagens::Inimigos::Chefao::salvarDataBuffer()
 {
 	Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer();
-	// mais nada pra salvar
+	// mais nada pra salvard
 }
 

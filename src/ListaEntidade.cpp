@@ -58,7 +58,7 @@ void Lista::ListaEntidade::salvarEntidades()
     {
         if (*it != nullptr)
         {
-            (*it)->salvarDataBuffer();
+            (*it)->salvar();
         }
     }
 }

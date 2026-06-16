@@ -184,5 +184,7 @@ void Jogo::Fases::Fase::executar()
 
 void Jogo::Fases::Fase::SalvarTudo()
 {
+    
+    
     listaEntidade.salvarEntidades();
 }
