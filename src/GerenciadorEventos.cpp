@@ -115,3 +115,4 @@ void Gerenciador::GerenciadorEvento::executar()
 		}
 	}
 }
+//d

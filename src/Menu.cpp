@@ -234,3 +234,4 @@ int Jogo::Menu::rodar()
 
     return escolha;
 }
+//d
