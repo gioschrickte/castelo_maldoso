@@ -98,6 +98,14 @@ const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidad
 	return false;
 }
 
+bool Gerenciador::GerenciadorColisoes::haInimigosVivos() const
+{
+	for (size_t i = 0; i < LIs.size(); i++)
+		if (LIs[i]->getAtiva())
+			return true;
+	return false;
+}
+
 void Gerenciador::GerenciadorColisoes::executar() {
 	tratarColisoesJogsInimgs();
 	tratarColisoesInimgsObstacs();

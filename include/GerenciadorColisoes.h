@@ -33,6 +33,7 @@ namespace Gerenciador {
 		void executar();
 
 		const bool verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
+		bool haInimigosVivos() const; // true se algum inimigo ainda esta ativo
 		void tratarColisoesJogsObstacs();
 		void tratarColisoesJogsInimgs();
 		void tratarColisoesJogsProjeteis();

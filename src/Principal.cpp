@@ -37,10 +37,13 @@ void Principal::criarFase(int numFase)
 {
 	if (faseAtual)
 	{
-		delete faseAtual;
+		delete faseAtual;      // o destrutor da fase deleta o jogador (esta na lista de entidades)
 		faseAtual = nullptr;
 		pColisoes->limpar();   // limpa listas do gerenciador antes de recriar a fase
 	}
+
+	// Jogador novo a cada fase (vida cheia e ativo); a fase passa a ser dona dele
+	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));
 
 	if (numFase == 1) faseAtual = new Jogo::Fases::FasePrimeira(jogador1);
 	else if (numFase == 2) faseAtual = new Jogo::Fases::FaseSegunda(jogador1);
@@ -54,16 +57,17 @@ void Principal::executar()
 	srand(time(NULL));
 	Jogo::Ente::setGG(pGrafico);
 
-	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));	
-	
-	Jogo::Menu menu;
-	int escolha = menu.rodar();   // exibe o menu e aguarda o clique
+	// Laco principal: menu -> fase -> (morte ou fase limpa) -> menu de novo
+	while (pGrafico->verificaJanelaAberta())
+	{
+		Jogo::Menu menu;
+		int escolha = menu.rodar();   // exibe o menu e aguarda o clique
 
-	if (escolha == -1) return;    // jogador fechou a janela no menu
+		if (escolha == -1) break;             // fechou a janela no menu
+		if (escolha != 1 && escolha != 2)     // "Continuar" ainda nao implementado
+			continue;                         // reexibe o menu
 
-	criarFase(escolha);
-
-	cout << "CHEGOU AQUI" << endl;
-	faseAtual->executar();
-	// antes de criar a segunda fase, tem q dar delete(faseAtual)
+		criarFase(escolha);
+		if (faseAtual) faseAtual->executar(); // retorna ao morrer/limpar a fase -> volta ao menu
+	}
 }

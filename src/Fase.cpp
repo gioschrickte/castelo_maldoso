@@ -181,6 +181,12 @@ void Jogo::Fases::Fase::executar()
                 listaEntidade[i]->desenhar();                          // 4. desenha tudo
         }
         pGG->mostraElementos();
+
+        // Fim de fase -> volta ao menu (a Principal decide o que fazer):
+        // sem jogador vivo (game over) ou sem inimigos vivos (fase limpa).
+        // TODO: incluir jog2 quando existir.
+        if (!jog1->getAtiva() || !gerColisoes->haInimigosVivos())
+            return;
     }
 }
 
