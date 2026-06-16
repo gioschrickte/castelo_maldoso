@@ -25,7 +25,7 @@ Entidades::Obstaculos::Espinho::Espinho(const sf::Vector2f pos, const sf::Vector
 
 Entidades::Obstaculos::Espinho::~Espinho() {}
 
-void Entidades::Obstaculos::Espinho::resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
+void Entidades::Obstaculos::Espinho::obstaculizar(Personagens::Personagem* p, sf::Vector2f ds)
 {
     sf::Vector2f posOutra = p->getCorpo().getPosition();
     sf::Vector2f tamOutra = p->getCorpo().getSize();

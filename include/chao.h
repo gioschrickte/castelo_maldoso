@@ -13,7 +13,7 @@ namespace Entidades {
                 corpo.setFillColor(sf::Color::Cyan);
 			}
 
-            void resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
+            void obstaculizar(Personagens::Personagem* p, sf::Vector2f ds)
             {
                 sf::Vector2f posOutra = p->getCorpo().getPosition();
                 sf::Vector2f tamOutra = p->getCorpo().getSize();

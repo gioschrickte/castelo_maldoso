@@ -15,7 +15,7 @@ namespace Entidades {
 
 
             void executar();
-			virtual void resolverColisao(Personagens::Personagem* p, sf::Vector2f ds) = 0; // MÃ©todo para resolver a colisÃ£o, que pode ser implementado de forma diferente em cada tipo de obstÃ¡culo
+			virtual void obstaculizar(Personagens::Personagem* p, sf::Vector2f ds) = 0; // MÃ©todo para resolver a colisÃ£o, que pode ser implementado de forma diferente em cada tipo de obstÃ¡culo
             virtual void salvar() = 0;
             virtual void salvarDataBuffer();
         };

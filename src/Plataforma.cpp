@@ -32,7 +32,7 @@ Entidades::Obstaculos::Plataforma::~Plataforma() {}
 
 void Entidades::Obstaculos::Plataforma::executar()
 {
-    // O afundamento acontece em resolverColisao (la temos o personagem em
+    // O afundamento acontece em obstaculizar (la temos o personagem em
     // contato para descer junto). Aqui so tratamos o RETORNO: se ninguem
     // estava apoiado no frame anterior, a plataforma sobe de volta a origem.
     if (!alguemEmCima)
@@ -47,7 +47,7 @@ void Entidades::Obstaculos::Plataforma::executar()
     alguemEmCima = false;
 }
 
-void Entidades::Obstaculos::Plataforma::resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
+void Entidades::Obstaculos::Plataforma::obstaculizar(Personagens::Personagem* p, sf::Vector2f ds)
 {
     sf::Vector2f posOutra = p->getCorpo().getPosition();
     sf::Vector2f tamOutra = p->getCorpo().getSize();

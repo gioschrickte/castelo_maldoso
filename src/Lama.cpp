@@ -14,7 +14,7 @@ Entidades::Obstaculos::Lama::Lama(const sf::Vector2f pos, const sf::Vector2f tam
 
 Entidades::Obstaculos::Lama::~Lama() {}
 
-void Entidades::Obstaculos::Lama::resolverColisao(Personagens::Personagem* p, sf::Vector2f ds)
+void Entidades::Obstaculos::Lama::obstaculizar(Personagens::Personagem* p, sf::Vector2f ds)
 {
 	p->aplicarLentidao(multiplicadorVelocidade, multiplicadorPulo);
 

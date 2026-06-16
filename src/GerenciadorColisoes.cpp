@@ -156,7 +156,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 			if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 			{
 				// passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do jogador
-				(*it)->resolverColisao(jog, ds);
+				(*it)->obstaculizar(jog, ds);
 			}
 		}
 	}
@@ -171,7 +171,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 
 				sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(*itO));
 				if (ds.x > 0.0f && ds.y > 0.0f) { // se colidiu
-					(*itO)->resolverColisao(LIs[i], ds); // passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do inimigo
+					(*itO)->obstaculizar(LIs[i], ds); // passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do inimigo
 				}
 			}
 		}
@@ -192,7 +192,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(chao));
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
-			chao->resolverColisao(jog, ds);
+			chao->obstaculizar(jog, ds);
 		}
 	}
 
@@ -204,7 +204,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(chao));
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
-			chao->resolverColisao(LIs[i], ds);
+			chao->obstaculizar(LIs[i], ds);
 		}
 	}
 }
