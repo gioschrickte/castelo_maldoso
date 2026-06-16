@@ -1,8 +1,8 @@
 ﻿// FasePrimeira.hpp
 #pragma once
 #include "Fase.h"
-#include "InimigoFacil.h"
-#include "InimigoMedio.h"
+#include "Zumbi.h"
+#include "Ork.h"
 #include "Plataforma.h"
 #include "Espinho.h"
 

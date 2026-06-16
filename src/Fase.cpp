@@ -3,11 +3,11 @@
 #include "Entidade.h"
 #include "GerenciadorColisoes.h"
 #include "GerenciadorGrafico.h"
-#include "InimigoFacil.h" 
-#include "Plataforma.h" 
+#include "Zumbi.h"
+#include "Plataforma.h"
 #include "Projetil.h"
-#include "InimigoMedio.h"
-#include "Chefao.h"
+#include "Ork.h"
+#include "Mago.h"
 #include "Espinho.h"
 #include "Lama.h"
 #include <cstdlib>
@@ -133,7 +133,7 @@ void Jogo::Fases::Fase::criarInimigosFaceis()
     using namespace Entidades::Personagens::Inimigos;
     int n = aleatorio(3, MAX_INIMIGOS_FACEIS);
     for (int i = 0; i < n; i++)
-        adicionarInimigo(new InimigoFacil(jog1, posicaoInimigoAleatoria()));
+        adicionarInimigo(new Zumbi(jog1, posicaoInimigoAleatoria()));
 }
 
 void Jogo::Fases::Fase::criarPlataformas()
@@ -280,27 +280,27 @@ void Jogo::Fases::Fase::carregarEntidades(const std::string& arquivo)
             }
             break;
         }
-        case IDs::IDs::inimigoFacil:
+        case IDs::IDs::zumbi:
         {
-            InimigoFacil* i = new InimigoFacil(jog1, pos);
+            Zumbi* i = new Zumbi(jog1, pos);
             i->setVelFinal(vel);
             i->setVida(vida);
             i->setAtiva(ativa);
             adicionarInimigo(i);
             break;
         }
-        case IDs::IDs::inimigoMedio:
+        case IDs::IDs::ork:
         {
-            InimigoMedio* i = new InimigoMedio(jog1, pos);
+            Ork* i = new Ork(jog1, pos);
             i->setVelFinal(vel);
             i->setVida(vida);
             i->setAtiva(ativa);
             adicionarInimigo(i);
             break;
         }
-        case IDs::IDs::chefao:
+        case IDs::IDs::mago:
         {
-            Chefao* c = new Chefao(jog1, pos);
+            Mago* c = new Mago(jog1, pos);
             Projetil* p = new Projetil();
             c->setProjetil(p);
             c->setVelFinal(vel);

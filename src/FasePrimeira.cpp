@@ -62,7 +62,7 @@ void Jogo::Fases::FasePrimeira::criarInimigosMedios()
 	using namespace Entidades::Personagens::Inimigos;
 	int nMedios = aleatorio(3, maxInimigosMedios);
 	for (int i = 0; i < nMedios; i++)
-		adicionarInimigo(new InimigoMedio(jog1, posicaoInimigoAleatoria()));
+		adicionarInimigo(new Ork(jog1, posicaoInimigoAleatoria()));
 }
 
 void Jogo::Fases::FasePrimeira::criarObstaculos()

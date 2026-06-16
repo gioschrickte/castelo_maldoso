@@ -1,12 +1,12 @@
 ﻿// FaseSegunda.cpp
 #include "FaseSegunda.h"
-#include "Chefao.h"
+#include "Mago.h"
 #include "Projetil.h"
 #define MAX_LAMA 5
-#define MAX_CHEFOES 5
+#define MAX_MAGOS 5
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
-    : Fase(jogador, j2), maxLama(MAX_LAMA), maxChefoes(MAX_CHEFOES)
+    : Fase(jogador, j2), maxLama(MAX_LAMA), maxMagos(MAX_MAGOS)
 {
     criarInimigos();
     criarObstaculos();
@@ -23,7 +23,7 @@ Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador
 }
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2, bool carregando)
-    : Fase(jogador, j2, carregando), maxLama(MAX_LAMA), maxChefoes(MAX_CHEFOES)
+    : Fase(jogador, j2, carregando), maxLama(MAX_LAMA), maxMagos(MAX_MAGOS)
 {
     texturaFundo = pGG->carregarTextura("assets/fundo.png");
     spriteFundo.setTexture(texturaFundo);
@@ -44,7 +44,7 @@ Jogo::Fases::FaseSegunda::~FaseSegunda() {}
 void Jogo::Fases::FaseSegunda::criarInimigos()
 {
     criarInimigosFaceis();   // COMUM -> definido na base (Fase)
-    criarChefao();
+    criarMago();
 }
 
 void Jogo::Fases::FaseSegunda::criarObstaculos()
@@ -69,15 +69,15 @@ void Jogo::Fases::FaseSegunda::criarLama()
 	}
 }
 
-void Jogo::Fases::FaseSegunda::criarChefao()
+void Jogo::Fases::FaseSegunda::criarMago()
 {
-    int nChefoes = aleatorio(3, maxChefoes);
-    for(int i = 0; i < nChefoes; i++)
+    int nMagos = aleatorio(3, maxMagos);
+    for(int i = 0; i < nMagos; i++)
     {
-        Entidades::Personagens::Inimigos::Chefao* chefao = new Entidades::Personagens::Inimigos::Chefao(jog1, posicaoInimigoAleatoria());
+        Entidades::Personagens::Inimigos::Mago* mago = new Entidades::Personagens::Inimigos::Mago(jog1, posicaoInimigoAleatoria());
         Entidades::Projetil* projetil = new Entidades::Projetil();
-        chefao->setProjetil(projetil);
-        adicionarInimigo(chefao);
+        mago->setProjetil(projetil);
+        adicionarInimigo(mago);
         adicionarProjetil(projetil);
     }
 }

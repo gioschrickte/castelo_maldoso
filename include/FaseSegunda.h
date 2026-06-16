@@ -1,9 +1,9 @@
 ﻿// FaseSegunda.hpp
 #pragma once
 #include "Fase.h"
-#include "InimigoFacil.h"
-#include "InimigoMedio.h"
-// #include "Chefao.h" (a implementar)
+#include "Zumbi.h"
+#include "Ork.h"
+// #include "Mago.h" (a implementar)
 #include "Plataforma.h"
 #include "Lama.h"
 
@@ -13,7 +13,7 @@ namespace Jogo {
         private:
             int numeroFase = 2; // numero identificador da fase
             const int maxLama;
-            const int maxChefoes;
+            const int maxMagos;
         public:
             FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
@@ -24,8 +24,8 @@ namespace Jogo {
             void criarInimigos()   override;
             void criarObstaculos() override;
             void criarLama();
-            void criarChefao();
-			//void criarChefao();
+            void criarMago();
+			//void criarMago();
         };
     }
 }

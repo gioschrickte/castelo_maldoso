@@ -10,9 +10,9 @@ namespace IDs {
 		lama,
 		espinho,
 		// Ids distintos por tipo de inimigo (usados para recriar na carga do save)
-		inimigoFacil,
-		inimigoMedio,
-		chefao
+		zumbi,
+		ork,
+		mago
 		// Adicione mais IDs conforme necessário
 	};
 }
