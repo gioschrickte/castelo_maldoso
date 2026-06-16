@@ -21,11 +21,14 @@ namespace Jogo {
         sf::Text textoBotaoModo;
         int numJogadores;               // 1 (default) ou 2
 
+        sf::Text textoRanking;          // lista de pontuacoes exibida no menu
+
         //Jogo* pjog;
 
         bool fontCarregada;
 
         bool carregarFonte();
+        void carregarRanking();         // le ranking.txt e monta o texto do ranking
         bool clicouEm(const sf::RectangleShape& botao, sf::Vector2i posMouse) const;
         void atualizarHover(sf::Vector2i posMouse);
         void atualizarTextoModo();      // sincroniza o texto do botao com numJogadores

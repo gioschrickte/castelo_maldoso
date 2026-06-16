@@ -1,4 +1,8 @@
 ﻿#include "Menu.h"
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <string>
 
 // Cores dos botÃµes
 static const sf::Color COR_FASE1_NORMAL(70, 130, 180);
@@ -90,6 +94,40 @@ Jogo::Menu::Menu()
     textoBotaoModo.setCharacterSize(24);
     textoBotaoModo.setFillColor(sf::Color::White);
     atualizarTextoModo();   // define a string conforme numJogadores e centraliza
+
+    // Ranking (lista de pontuacoes), exibido no canto superior esquerdo
+    textoRanking.setFont(fonte);
+    textoRanking.setCharacterSize(22);
+    textoRanking.setFillColor(sf::Color::White);
+    textoRanking.setPosition(20.0f, 20.0f);
+    carregarRanking();
+}
+
+void Jogo::Menu::carregarRanking()
+{
+    if (!fontCarregada) return;
+
+    // Le pares "nome pontuacao" do arquivo e ordena por pontuacao (maior primeiro).
+    std::vector<std::pair<int, std::string>> entradas;
+    std::ifstream in("ranking.txt");
+    std::string nome;
+    int pontos;
+    while (in >> nome >> pontos)
+        entradas.push_back(std::make_pair(pontos, nome));
+
+    std::sort(entradas.begin(), entradas.end(),
+        [](const std::pair<int, std::string>& a, const std::pair<int, std::string>& b)
+        { return a.first > b.first; });
+
+    std::string texto = "RANKING\n";
+    const int MAX_LINHAS = 5;
+    for (int i = 0; i < (int)entradas.size() && i < MAX_LINHAS; i++)
+        texto += std::to_string(i + 1) + ". " + entradas[i].second +
+                 " - " + std::to_string(entradas[i].first) + "\n";
+    if (entradas.empty())
+        texto += "(sem partidas ainda)";
+
+    textoRanking.setString(texto);
 }
 
 void Jogo::Menu::atualizarTextoModo()
@@ -188,6 +226,7 @@ int Jogo::Menu::rodar()
             pGG->getWindow()->draw(textoBotao2);
             pGG->getWindow()->draw(textoBotaoSave);
             pGG->getWindow()->draw(textoBotaoModo);
+            pGG->getWindow()->draw(textoRanking);
 
         }
         pGG->mostraElementos();

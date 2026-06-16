@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Personagem.h"
+#include <string>
 // nÃ£o incluir Inimigo.hpp aqui; forward declare:
 namespace Entidades {
 	namespace Personagens {
@@ -12,6 +13,8 @@ namespace Entidades {
 				bool ataqueAtivo;
 				sf::Clock relogioAtaque;
 				float danoAtaque;
+				std::string nome = "Jogador"; // nome do usuario (para o ranking)
+				int pontuacao = 0;            // incrementada ao neutralizar inimigos
 			public:
 				Jogador(const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f), const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f));
 				~Jogador();
@@ -23,6 +26,13 @@ namespace Entidades {
 				float getDanoAtaque() const;
 				void salvar();
 				void salvarDataBuffer();
+
+				// Nome e pontuacao do usuario (usados no save e no ranking)
+				void addPonto() { pontuacao++; }
+				int getPontuacao() const { return pontuacao; }
+				void setPontuacao(int p) { pontuacao = p; }
+				const std::string& getNome() const { return nome; }
+				void setNome(const std::string& n) { nome = n; }
 			};
 		}
 	}

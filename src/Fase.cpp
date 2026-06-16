@@ -231,7 +231,9 @@ void Jogo::Fases::Fase::SalvarTudo()
     std::ofstream arquivo("save.txt", std::ios::trunc);
     if (arquivo.is_open())
     {
-        arquivo << numFase << " " << (jog2 ? 2 : 1) << "\n";
+        // cabecalho: numFase numJogadores nome pontuacao (nome e pontuacao do jogador do usuario)
+        arquivo << numFase << " " << (jog2 ? 2 : 1) << " "
+                << jog1->getNome() << " " << jog1->getPontuacao() << "\n";
         arquivo.close();
     }
 
@@ -247,9 +249,10 @@ void Jogo::Fases::Fase::carregarEntidades(const std::string& arquivo)
     std::ifstream in(arquivo);
     if (!in.is_open()) return;
 
-    // Descarta o cabecalho (numFase numJogadores) - ja lido pela Principal.
-    int faseSalva, jogSalvos;
-    in >> faseSalva >> jogSalvos;
+    // Descarta o cabecalho (numFase numJogadores nome pontuacao) - ja lido pela Principal.
+    int faseSalva, jogSalvos, pontSalva;
+    std::string nomeSalvo;
+    in >> faseSalva >> jogSalvos >> nomeSalvo >> pontSalva;
 
     int jogLidos = 0;
     int id;

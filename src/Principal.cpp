@@ -17,7 +17,9 @@ Principal::Principal()
 	faseAtual(nullptr),
 	jogador1(nullptr),
 	jogador2(nullptr),
-	numJogadores(1)
+	numJogadores(1),
+	nomeJogador("Jogador"),
+	pontuacaoJogador(0)
 {
 	executar();
 }
@@ -48,6 +50,8 @@ void Principal::criarFase(int numFase)
 
 	// Jogador(es) novo(s) a cada fase (vida cheia e ativos); a fase passa a ser dona deles
 	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));
+	jogador1->setNome(nomeJogador);
+	jogador1->setPontuacao(pontuacaoJogador);   // mantem a pontuacao entre fases sequenciais
 	jogador2 = (numJogadores == 2)
 		? new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(160.0f, 100.0f))
 		: nullptr;
@@ -69,6 +73,8 @@ void Principal::carregarFase(int numFase)
 
 	// Jogador(es) com posicao provisoria; a carga sobrescreve posicao/vida/estado.
 	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));
+	jogador1->setNome(nomeJogador);
+	jogador1->setPontuacao(pontuacaoJogador);   // nome/pontuacao vieram do cabecalho do save
 	jogador2 = (numJogadores == 2)
 		? new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(160.0f, 100.0f))
 		: nullptr;
@@ -100,12 +106,17 @@ void Principal::executar()
 		{
 			numJogadores = menu.getNumJogadores();   // 1 ou 2, para esta partida
 			numFase = escolha;
+
+			cout << "Digite seu nome: ";
+			cin >> nomeJogador;          // nome de uma palavra (sem espacos)
+			pontuacaoJogador = 0;        // partida nova comeca zerada
 		}
 		else if (escolha == 3)   // "Continuar" -> carrega o jogo salvo
 		{
 			ifstream save("save.txt");
 			int numFaseSalva, numJogSalvos;
-			if (!save.is_open() || !(save >> numFaseSalva >> numJogSalvos))
+			// cabecalho: numFase numJogadores nome pontuacao
+			if (!save.is_open() || !(save >> numFaseSalva >> numJogSalvos >> nomeJogador >> pontuacaoJogador))
 			{
 				cout << "Nenhum jogo salvo para continuar." << endl;
 				continue;                         // volta ao menu
@@ -135,6 +146,8 @@ void Principal::executar()
 			if (!faseAtual) break;
 			faseAtual->executar();
 
+			pontuacaoJogador = jogador1->getPontuacao();   // carrega a pontuacao p/ a proxima fase e o ranking
+
 			switch (faseAtual->getResultado())
 			{
 			case Jogo::Fases::ResultadoFase::FaseConcluida:
@@ -146,5 +159,10 @@ void Principal::executar()
 				break;
 			}
 		}
+
+		// Fim da partida: registra a pontuacao no ranking.
+		ofstream ranking("ranking.txt", ios::app);
+		if (ranking.is_open())
+			ranking << nomeJogador << " " << pontuacaoJogador << "\n";
 	}
 }

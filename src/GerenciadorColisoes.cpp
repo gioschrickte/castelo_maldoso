@@ -261,6 +261,12 @@ void Gerenciador::GerenciadorColisoes::tratarAtaqueJogador()
 				LIs[i]->tomarDano(jog->getDanoAtaque());
 				std::cout << "Jogador acertou inimigo! (dano=" << jog->getDanoAtaque() << ")\n";
 				std::cout << "Vida do inimigo: " << LIs[i]->getVida() << " / " << LIs[i]->getVidaMax() << std::endl;
+
+				// Pontua quando o jogador do usuario (pJog1) da o golpe final no inimigo.
+				// O inimigo ainda esta ativo aqui; sera desativado no proximo frame (atualizaVida),
+				// entao o ponto e contado uma unica vez.
+				if (jog == pJog1 && LIs[i]->getAtiva() && LIs[i]->getVida() <= 0.0f)
+					pJog1->addPonto();
 			}
 		}
 	}
