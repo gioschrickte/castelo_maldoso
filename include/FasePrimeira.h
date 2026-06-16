@@ -11,6 +11,8 @@ namespace Jogo {
         class FasePrimeira : public Fase {
         private:
             int numeroFase = 1; // numero identificador da fase
+            const int maxInimigosMedios;
+            const int maxEspinhos;
         protected:
            
         public:

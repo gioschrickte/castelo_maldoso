@@ -5,7 +5,7 @@
 #define MAX_LAMA 5
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2)
-    : Fase(jogador, j2)
+    : Fase(jogador, j2), maxLama(MAX_LAMA)
 {
     criarInimigos();
     criarObstaculos();
@@ -22,7 +22,7 @@ Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador
 }
 
 Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2, bool carregando)
-    : Fase(jogador, j2, carregando)
+    : Fase(jogador, j2, carregando), maxLama(MAX_LAMA)
 {
     texturaFundo = pGG->carregarTextura("assets/fundo.png");
     spriteFundo.setTexture(texturaFundo);
@@ -60,7 +60,7 @@ void Jogo::Fases::FaseSegunda::criarLama()
 	const float chaoTopo = chao->getPosicao().y;
 	const float margem = 100.0f;
 	const float lamaY = chaoTopo - 30.0f;
-	int nLamas = aleatorio(3, MAX_LAMA);
+	int nLamas = aleatorio(3, maxLama);
 	for (int i = 0; i < nLamas; i++)
 	{
 		float x = static_cast<float>(aleatorio(static_cast<int>(margem), static_cast<int>(largura - margem)));

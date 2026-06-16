@@ -21,7 +21,7 @@ Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador*
 	temSprite = true;
 
 	dano = 2.0f;
-	vidaMax = 10.0f;
+	vidaMax = 5.0f * nivelDificuldade;
 	vida = vidaMax;
 }
 
