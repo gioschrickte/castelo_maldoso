@@ -27,5 +27,8 @@ namespace Entidades {
 		void mover(sf::Vector2f ds);
 		virtual void salvarDataBuffer();
 		virtual void salvar() = 0;
+
+		void setAtiva(bool ativa);
+		bool getAtiva() const;
 	};
 }
