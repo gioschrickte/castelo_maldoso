@@ -6,6 +6,8 @@
 #include "Menu.h"
 using namespace std;
 
+#define MAX_FASES 2   // numero de fases jogaveis em sequencia
+
 Principal::Principal()
 	: listaEntidade(), 
 	pGrafico(Gerenciador::GerenciadorGrafico::getGerenciadorGrafico()),
@@ -57,7 +59,7 @@ void Principal::executar()
 	srand(time(NULL));
 	Jogo::Ente::setGG(pGrafico);
 
-	// Laco principal: menu -> fase -> (morte ou fase limpa) -> menu de novo
+	// Laco principal: menu -> fase(s) sequenciais -> menu de novo
 	while (pGrafico->verificaJanelaAberta())
 	{
 		Jogo::Menu menu;
@@ -67,7 +69,24 @@ void Principal::executar()
 		if (escolha != 1 && escolha != 2)     // "Continuar" ainda nao implementado
 			continue;                         // reexibe o menu
 
-		criarFase(escolha);
-		if (faseAtual) faseAtual->executar(); // retorna ao morrer/limpar a fase -> volta ao menu
+		int numFase = escolha;
+		bool jogando = true;
+		while (jogando && pGrafico->verificaJanelaAberta())
+		{
+			criarFase(numFase);
+			if (!faseAtual) break;
+			faseAtual->executar();
+
+			switch (faseAtual->getResultado())
+			{
+			case Jogo::Fases::ResultadoFase::FaseConcluida:
+				if (numFase < MAX_FASES) numFase++;   // avanca para a proxima fase
+				else jogando = false;                 // zerou o jogo -> volta ao menu
+				break;
+			default:                                  // JogadorMorreu ou JanelaFechada
+				jogando = false;                      // volta ao menu (ou encerra, se a janela fechou)
+				break;
+			}
+		}
 	}
 }

@@ -16,7 +16,8 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     gerColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()),
     gerEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
     chao(nullptr),
-    pausado(false)
+    pausado(false),
+    resultado(ResultadoFase::JanelaFechada)
 {
     criarChao();
    
@@ -182,12 +183,20 @@ void Jogo::Fases::Fase::executar()
         }
         pGG->mostraElementos();
 
-        // Fim de fase -> volta ao menu (a Principal decide o que fazer):
-        // sem jogador vivo (game over) ou sem inimigos vivos (fase limpa).
+        // Fim de fase: a Principal le getResultado() para decidir o proximo passo.
         // TODO: incluir jog2 quando existir.
-        if (!jog1->getAtiva() || !gerColisoes->haInimigosVivos())
+        if (!jog1->getAtiva())
+        {
+            resultado = ResultadoFase::JogadorMorreu;   // game over -> menu
             return;
+        }
+        if (!gerColisoes->haInimigosVivos())
+        {
+            resultado = ResultadoFase::FaseConcluida;    // fase limpa -> proxima fase
+            return;
+        }
     }
+    resultado = ResultadoFase::JanelaFechada;            // saiu pelo fechamento da janela
 }
 
 void Jogo::Fases::Fase::SalvarTudo()

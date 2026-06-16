@@ -13,6 +13,13 @@ namespace Entidades { class Projetil; } // forward declare
 
 namespace Jogo {
     namespace Fases {
+        // Como a fase terminou, lido pela Principal para decidir o proximo passo
+        enum class ResultadoFase {
+            JanelaFechada,   // o jogador fechou a janela
+            JogadorMorreu,   // nao ha jogador vivo  -> volta ao menu
+            FaseConcluida    // nao ha inimigo vivo  -> proxima fase (ou menu, se for a ultima)
+        };
+
         class Fase : public Jogo::Ente {
         protected:
             Entidades::Personagens::Jogadores::Jogador* jog1;
@@ -42,12 +49,14 @@ namespace Jogo {
             sf::Sprite  spriteFundo;
 
             bool pausado;
+            ResultadoFase resultado;   // preenchido por executar(), lido pela Principal
         public:
             Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
             virtual ~Fase();
 
             void executar() override;                      // loop comum a todas as fases
+            ResultadoFase getResultado() const { return resultado; }
             Entidades::Chao* getChao() { return chao; }
 
             virtual void criarInimigos() = 0;            // cada fase acrescenta os seus
