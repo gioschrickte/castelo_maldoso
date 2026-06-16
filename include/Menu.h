@@ -3,6 +3,7 @@
 #include "Ente.h"
 #include "GerenciadorGrafico.h"
 #include <SFML/Graphics.hpp>
+#include <string>
 
 namespace Jogo {
 
@@ -23,6 +24,11 @@ namespace Jogo {
 
         sf::Text textoRanking;          // lista de pontuacoes exibida no menu
 
+        sf::RectangleShape caixaNome;   // campo onde o usuario digita o nome
+        sf::Text textoLabelNome;        // rotulo "Nome:" acima da caixa
+        sf::Text textoNome;             // texto digitado exibido dentro da caixa
+        std::string nomeJogador;        // nome digitado (uma palavra, sem espacos)
+
         //Jogo* pjog;
 
         bool fontCarregada;
@@ -32,6 +38,7 @@ namespace Jogo {
         bool clicouEm(const sf::RectangleShape& botao, sf::Vector2i posMouse) const;
         void atualizarHover(sf::Vector2i posMouse);
         void atualizarTextoModo();      // sincroniza o texto do botao com numJogadores
+        void atualizarTextoNome();      // sincroniza o texto exibido com nomeJogador
 
     public:
         Menu();
@@ -45,5 +52,8 @@ namespace Jogo {
 
         // Quantidade de jogadores escolhida no menu (1 ou 2)
         int getNumJogadores() const { return numJogadores; }
+
+        // Nome digitado no menu; "Jogador" caso o campo tenha ficado vazio
+        std::string getNomeJogador() const { return nomeJogador.empty() ? "Jogador" : nomeJogador; }
     };
 }

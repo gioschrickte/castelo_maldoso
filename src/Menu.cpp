@@ -14,9 +14,12 @@ static const sf::Color COR_SAVE_NORMAL(46, 139, 87);  // Verde
 static const sf::Color COR_SAVE_HOVER(60, 179, 113);  // Verde Claro
 static const sf::Color COR_MODO_NORMAL(120, 81, 169);  // Roxo
 static const sf::Color COR_MODO_HOVER(150, 111, 199);  // Roxo Claro
+static const sf::Color COR_CAIXA_NOME(50, 50, 50);     // Fundo do campo de nome
+
+static const unsigned MAX_CHARS_NOME = 12;             // limite de caracteres do nome
 
 Jogo::Menu::Menu()
-    : Ente(), numJogadores(1), fontCarregada(false)
+    : Ente(), numJogadores(1), nomeJogador(""), fontCarregada(false)
 {
     const float W = static_cast<float>(pGG->getWindow()->getSize().x);
     const float H = static_cast<float>(pGG->getWindow()->getSize().y);
@@ -46,6 +49,14 @@ Jogo::Menu::Menu()
     botaoModo.setSize(tamBotao);
     botaoModo.setPosition(xInicio + tamBotao.x + espacamento, yBotao + tamBotao.y + espacamentoY);
     botaoModo.setFillColor(COR_MODO_NORMAL);
+
+    // Campo de nome, centralizado entre o titulo e os botoes
+    const sf::Vector2f tamCaixa(totalLarg, 50.0f);
+    caixaNome.setSize(tamCaixa);
+    caixaNome.setPosition(xInicio, H * 0.44f);
+    caixaNome.setFillColor(COR_CAIXA_NOME);
+    caixaNome.setOutlineColor(sf::Color::White);
+    caixaNome.setOutlineThickness(2.0f);
 
     fontCarregada = carregarFonte();
     if (!fontCarregada) return;
@@ -101,6 +112,38 @@ Jogo::Menu::Menu()
     textoRanking.setFillColor(sf::Color::White);
     textoRanking.setPosition(20.0f, 20.0f);
     carregarRanking();
+
+    // Rotulo "Nome:" acima do campo
+    textoLabelNome.setFont(fonte);
+    textoLabelNome.setString("Digite seu nome:");
+    textoLabelNome.setCharacterSize(24);
+    textoLabelNome.setFillColor(sf::Color::White);
+    {
+        sf::FloatRect r = textoLabelNome.getLocalBounds();
+        textoLabelNome.setOrigin(r.left, r.top);
+        textoLabelNome.setPosition(caixaNome.getPosition().x,
+                                   caixaNome.getPosition().y - 32.0f);
+    }
+
+    // Texto digitado, exibido dentro da caixa de nome
+    textoNome.setFont(fonte);
+    textoNome.setCharacterSize(28);
+    textoNome.setFillColor(sf::Color::White);
+    atualizarTextoNome();
+}
+
+void Jogo::Menu::atualizarTextoNome()
+{
+    if (!fontCarregada) return;
+
+    // Cursor "_" indica que o campo aceita digitacao
+    textoNome.setString(nomeJogador + "_");
+    sf::FloatRect r = textoNome.getLocalBounds();
+    textoNome.setOrigin(r.left, r.top + r.height / 2.0f);
+    textoNome.setPosition(
+        caixaNome.getPosition().x + 12.0f,
+        caixaNome.getPosition().y + caixaNome.getSize().y / 2.0f
+    );
 }
 
 void Jogo::Menu::carregarRanking()
@@ -210,6 +253,24 @@ int Jogo::Menu::rodar()
                 pGG->fecharJanela();
                 return -1;
             }
+
+            // Digitacao do nome no proprio menu
+            if (evento.type == sf::Event::TextEntered)
+            {
+                sf::Uint32 c = evento.text.unicode;
+                if (c == 8)   // Backspace: apaga o ultimo caractere
+                {
+                    if (!nomeJogador.empty()) nomeJogador.pop_back();
+                    atualizarTextoNome();
+                }
+                // Aceita apenas caracteres imprimiveis (sem espacos, pois o
+                // ranking/save guarda "nome pontuacao" separados por espaco)
+                else if (c > 32 && c < 127 && nomeJogador.size() < MAX_CHARS_NOME)
+                {
+                    nomeJogador += static_cast<char>(c);
+                    atualizarTextoNome();
+                }
+            }
         }
 
         // Desenha o menu
@@ -218,6 +279,7 @@ int Jogo::Menu::rodar()
         pGG->desenhaElemento(botaoFase2);
         pGG->desenhaElemento(botaoSave);
         pGG->desenhaElemento(botaoModo);
+        pGG->desenhaElemento(caixaNome);
 
         if (fontCarregada)
         {
@@ -227,6 +289,8 @@ int Jogo::Menu::rodar()
             pGG->getWindow()->draw(textoBotaoSave);
             pGG->getWindow()->draw(textoBotaoModo);
             pGG->getWindow()->draw(textoRanking);
+            pGG->getWindow()->draw(textoLabelNome);
+            pGG->getWindow()->draw(textoNome);
 
         }
         pGG->mostraElementos();
