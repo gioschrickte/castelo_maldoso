@@ -4,7 +4,7 @@
 
 
 Entidades::Obstaculos::Espinho::Espinho(const sf::Vector2f pos, const sf::Vector2f tam)
-    : Entidades::Obstaculos::Obstaculo(pos, tam, IDs::IDs::plataforma) // reaproveita o id; crie IDs::espinho se quiser distinguir
+    : Entidades::Obstaculos::Obstaculo(pos, tam, IDs::IDs::espinho)
 {
     corpo.setFillColor(sf::Color(150, 30, 30)); // vermelho escuro
     danoso = true; // indica que o espinho Ã© dano

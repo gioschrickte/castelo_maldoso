@@ -5,7 +5,7 @@
 #define RAIO_PERSEGUIR 400.0f
 
 Entidades::Personagens::Inimigos::InimigoMedio::InimigoMedio(Jogadores::Jogador* j, const sf::Vector2f pos)
-    : Inimigo(j, pos, sf::Vector2f(60.0f, 60.0f), 150.0f)
+    : Inimigo(j, pos, sf::Vector2f(60.0f, 60.0f), 150.0f, IDs::IDs::inimigoMedio)
 {
     corpo.setFillColor(sf::Color::Magenta);
 	textura = pGG->carregarTextura("assets/ork.png");

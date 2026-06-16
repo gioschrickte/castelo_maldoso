@@ -21,6 +21,23 @@ Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador
 	numFase = 2;
 }
 
+Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2, bool carregando)
+    : Fase(jogador, j2, carregando)
+{
+    texturaFundo = pGG->carregarTextura("assets/fundo.png");
+    spriteFundo.setTexture(texturaFundo);
+    sf::Vector2u tamJanela = pGG->getWindow()->getSize();
+    sf::Vector2u tamTextura = texturaFundo.getSize();
+    spriteFundo.setScale(
+    (float)tamJanela.x / tamTextura.x,
+    (float)tamJanela.y / tamTextura.y
+    );
+
+    numFase = 2;
+
+    carregarEntidades("save.txt");   // recria inimigos/obstaculos a partir do arquivo
+}
+
 Jogo::Fases::FaseSegunda::~FaseSegunda() {}
 
 void Jogo::Fases::FaseSegunda::criarInimigos()

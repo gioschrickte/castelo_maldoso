@@ -3,6 +3,7 @@
 #include "FasePrimeira.h"
 #include "FaseSegunda.h"
 #include <iostream>
+#include <fstream>
 #include "Menu.h"
 using namespace std;
 
@@ -57,6 +58,27 @@ void Principal::criarFase(int numFase)
 	if (!faseAtual) printf("Erro ao criar fase %d\n", numFase);
 }
 
+void Principal::carregarFase(int numFase)
+{
+	if (faseAtual)
+	{
+		delete faseAtual;
+		faseAtual = nullptr;
+		pColisoes->limpar();
+	}
+
+	// Jogador(es) com posicao provisoria; a carga sobrescreve posicao/vida/estado.
+	jogador1 = new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(100.0f, 100.0f));
+	jogador2 = (numJogadores == 2)
+		? new Entidades::Personagens::Jogadores::Jogador(sf::Vector2f(160.0f, 100.0f))
+		: nullptr;
+
+	if (numFase == 1) faseAtual = new Jogo::Fases::FasePrimeira(jogador1, jogador2, true);
+	else if (numFase == 2) faseAtual = new Jogo::Fases::FaseSegunda(jogador1, jogador2, true);
+
+	if (!faseAtual) printf("Erro ao carregar fase %d\n", numFase);
+}
+
 
 void Principal::executar()
 {
@@ -70,16 +92,46 @@ void Principal::executar()
 		int escolha = menu.rodar();   // exibe o menu e aguarda o clique
 
 		if (escolha == -1) break;             // fechou a janela no menu
-		if (escolha != 1 && escolha != 2)     // "Continuar" ainda nao implementado
-			continue;                         // reexibe o menu
 
-		numJogadores = menu.getNumJogadores();   // 1 ou 2, para esta partida
+		int numFase;
+		bool carregar = false;
 
-		int numFase = escolha;
+		if (escolha == 1 || escolha == 2)
+		{
+			numJogadores = menu.getNumJogadores();   // 1 ou 2, para esta partida
+			numFase = escolha;
+		}
+		else if (escolha == 3)   // "Continuar" -> carrega o jogo salvo
+		{
+			ifstream save("save.txt");
+			int numFaseSalva, numJogSalvos;
+			if (!save.is_open() || !(save >> numFaseSalva >> numJogSalvos))
+			{
+				cout << "Nenhum jogo salvo para continuar." << endl;
+				continue;                         // volta ao menu
+			}
+			save.close();
+			numFase = numFaseSalva;
+			numJogadores = numJogSalvos;
+			carregar = true;
+		}
+		else
+		{
+			continue;                             // valor inesperado: reexibe o menu
+		}
+
 		bool jogando = true;
 		while (jogando && pGrafico->verificaJanelaAberta())
 		{
-			criarFase(numFase);
+			if (carregar)
+			{
+				carregarFase(numFase);   // primeira fase vem do save
+				carregar = false;        // proximas fases sao geradas normalmente
+			}
+			else
+			{
+				criarFase(numFase);
+			}
 			if (!faseAtual) break;
 			faseAtual->executar();
 

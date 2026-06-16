@@ -9,7 +9,7 @@
 #define COOLDOWN_TIRO 1.5f
 
 Entidades::Personagens::Inimigos::Chefao::Chefao(Jogadores::Jogador* j, const sf::Vector2f pos)
-	: Inimigo(j, pos, sf::Vector2f(100.0f, 100.0f), 150.0f),
+	: Inimigo(j, pos, sf::Vector2f(100.0f, 100.0f), 150.0f, IDs::IDs::chefao),
 	forca(5), projetil(nullptr), projetilEstavaAtivo(false), moveAleatorio(0)
 {
 	corpo.setFillColor(sf::Color::Yellow);

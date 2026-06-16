@@ -32,6 +32,12 @@ namespace Entidades {
 		{
 			this->ativa = ativa;
 		}
+		// Define a posicao absoluta (usado ao carregar o jogo do arquivo).
+		void setPosicao(sf::Vector2f p)
+		{
+			corpo.setPosition(p);
+			if (temSprite) sprite.setPosition(p);
+		}
 		bool getAtiva() const
 		{
 			return ativa;

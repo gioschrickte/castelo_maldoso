@@ -6,7 +6,13 @@
 #include "InimigoFacil.h" 
 #include "Plataforma.h" 
 #include "Projetil.h"
+#include "InimigoMedio.h"
+#include "Chefao.h"
+#include "Espinho.h"
+#include "Lama.h"
 #include <cstdlib>
+#include <fstream>
+#include <string>
 
 #define MAX_INIMIGOS_FACEIS 4
 #define MAX_PLATAFORMAS 5
@@ -19,8 +25,25 @@ Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Ent
     pausado(false),
     resultado(ResultadoFase::JanelaFechada)
 {
+    inicializar();
+}
+
+Jogo::Fases::Fase::Fase(Entidades::Personagens::Jogadores::Jogador* jogador, Entidades::Personagens::Jogadores::Jogador* j2, bool /*carregando*/)
+    : Ente(), jog1(jogador), jog2(j2), listaEntidade(),
+    gerColisoes(Gerenciador::GerenciadorColisoes::getGerenciadorColisoes()),
+    gerEventos(Gerenciador::GerenciadorEvento::getGerenciadorEvento()),
+    chao(nullptr),
+    pausado(false),
+    resultado(ResultadoFase::JanelaFechada)
+{
+    inicializar();
+    // As entidades (inimigos/obstaculos) sao recriadas pela classe derivada,
+    // que chama carregarEntidades() apos definir o fundo e o numFase.
+}
+
+void Jogo::Fases::Fase::inicializar()
+{
     criarChao();
-   
 
     listaEntidade.addEntidade(jog1);
     if (jog2) listaEntidade.addEntidade(jog2);
@@ -203,7 +226,111 @@ void Jogo::Fases::Fase::executar()
 
 void Jogo::Fases::Fase::SalvarTudo()
 {
-    //salvar o numero da fase
-    
-    listaEntidade.salvarEntidades();
+    // Trunca o arquivo e grava o cabecalho (numero da fase + numero de jogadores).
+    // Em seguida cada entidade salva a si mesma (em modo append), preservando o polimorfismo.
+    std::ofstream arquivo("save.txt", std::ios::trunc);
+    if (arquivo.is_open())
+    {
+        arquivo << numFase << " " << (jog2 ? 2 : 1) << "\n";
+        arquivo.close();
+    }
+
+    listaEntidade.salvarEntidades();   // cada salvar() abre em append e grava sua linha
+}
+
+void Jogo::Fases::Fase::carregarEntidades(const std::string& arquivo)
+{
+    using namespace Entidades;
+    using namespace Entidades::Personagens::Inimigos;
+    using namespace Entidades::Obstaculos;
+
+    std::ifstream in(arquivo);
+    if (!in.is_open()) return;
+
+    // Descarta o cabecalho (numFase numJogadores) - ja lido pela Principal.
+    int faseSalva, jogSalvos;
+    in >> faseSalva >> jogSalvos;
+
+    int jogLidos = 0;
+    int id;
+    float x, y, vx, vy, vida;
+    bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        const sf::Vector2f pos(x, y);
+        const sf::Vector2f vel(vx, vy);
+
+        switch (static_cast<IDs::IDs>(id))
+        {
+        case IDs::IDs::jogador:
+        {
+            // Os jogadores ja foram criados; aqui apenas aplicamos o estado salvo.
+            Personagens::Jogadores::Jogador* alvo = (jogLidos == 0) ? jog1 : jog2;
+            jogLidos++;
+            if (alvo)
+            {
+                alvo->setPosicao(pos);
+                alvo->setVelFinal(vel);
+                alvo->setVida(vida);
+                alvo->setAtiva(ativa);
+            }
+            break;
+        }
+        case IDs::IDs::inimigoFacil:
+        {
+            InimigoFacil* i = new InimigoFacil(jog1, pos);
+            i->setVelFinal(vel);
+            i->setVida(vida);
+            i->setAtiva(ativa);
+            adicionarInimigo(i);
+            break;
+        }
+        case IDs::IDs::inimigoMedio:
+        {
+            InimigoMedio* i = new InimigoMedio(jog1, pos);
+            i->setVelFinal(vel);
+            i->setVida(vida);
+            i->setAtiva(ativa);
+            adicionarInimigo(i);
+            break;
+        }
+        case IDs::IDs::chefao:
+        {
+            Chefao* c = new Chefao(jog1, pos);
+            Projetil* p = new Projetil();
+            c->setProjetil(p);
+            c->setVelFinal(vel);
+            c->setVida(vida);
+            c->setAtiva(ativa);
+            adicionarInimigo(c);
+            adicionarProjetil(p);
+            break;
+        }
+        case IDs::IDs::plataforma:
+        {
+            Plataforma* o = new Plataforma(pos);
+            o->setAtiva(ativa);
+            adicionarObstaculo(o);
+            break;
+        }
+        case IDs::IDs::espinho:
+        {
+            Espinho* o = new Espinho(pos);
+            o->setAtiva(ativa);
+            adicionarObstaculo(o);
+            break;
+        }
+        case IDs::IDs::lama:
+        {
+            Lama* o = new Lama(pos);
+            o->setAtiva(ativa);
+            adicionarObstaculo(o);
+            break;
+        }
+        default:
+            // chao, vazio (projetil), etc.: recriados de outra forma; ignorados.
+            break;
+        }
+    }
+    in.close();
 }

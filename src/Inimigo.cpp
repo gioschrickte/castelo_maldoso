@@ -4,8 +4,8 @@
 
 #define COOLDOWN_HIT 1.0f
 
-Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel)
-	: Personagem(pos, tam, 100.0f, IDs::IDs::inimigo), jogador(pjogador), jogador2(nullptr), relogioAleatorio(), relogioHit(), primeiroHit(true), dano(0.0f)
+Entidades::Personagens::Inimigos::Inimigo::Inimigo(Jogadores::Jogador* pjogador, const sf::Vector2f pos, const sf::Vector2f tam, const float vel, const IDs::IDs id)
+	: Personagem(pos, tam, 100.0f, id), jogador(pjogador), jogador2(nullptr), relogioAleatorio(), relogioHit(), primeiroHit(true), dano(0.0f)
 {
 	temSprite = false;
 }

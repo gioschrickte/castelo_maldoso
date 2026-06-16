@@ -43,10 +43,12 @@ void Entidades::Entidade::mover(sf::Vector2f ds)
 
 void Entidades::Entidade::salvarDataBuffer()
 {
+	// Grava apenas "id x y " (com espaco final). Os campos velocidade/ativa/vida
+	// sao acrescentados pelos ramos (Personagem/Obstaculo) para manter o schema
+	// uniforme: id x y velX velY ativa vida
 	buffer << static_cast<int>(getId()) << " "
 		   << getPosicao().x            << " "
-		   << getPosicao().y			<< " "
-		   << ativa;
+		   << getPosicao().y			<< " ";
 }//d
 
 

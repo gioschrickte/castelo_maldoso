@@ -16,6 +16,8 @@ void Entidades::Obstaculos::Obstaculo::executar() {
 void Entidades::Obstaculos::Obstaculo::salvarDataBuffer()
 {
 	Entidades::Entidade::salvarDataBuffer();
-	//so precisamos salvar a posiçao e o Id, ja que o dano nao muda
+	// Obstaculo nao tem velocidade nem vida: grava placeholders para manter
+	// o schema uniforme (id x y velX velY ativa vida).
+	buffer << "0 0 " << ativa << " 0";
 }
 

@@ -22,7 +22,8 @@ namespace Entidades {
 				Inimigo(Entidades::Personagens::Jogadores::Jogador* pjogador,
 					const sf::Vector2f pos = sf::Vector2f(0.0f, 0.0f),
 					const sf::Vector2f tam = sf::Vector2f(50.0f, 50.0f),
-					const float vel = 100.0f);
+					const float vel = 100.0f,
+					const IDs::IDs id = IDs::IDs::inimigo);
 				virtual ~Inimigo();
 				void setJogador2(Entidades::Personagens::Jogadores::Jogador* j2) { jogador2 = j2; }
 				bool podeHitar();

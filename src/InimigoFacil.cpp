@@ -6,7 +6,7 @@
 
 Entidades::Personagens::Inimigos::InimigoFacil::InimigoFacil(
     Jogadores::Jogador* j, const sf::Vector2f pos)
-    : Inimigo(j, pos, sf::Vector2f(50.0f, 50.0f), 90.0f), moveAleatorio(0)
+    : Inimigo(j, pos, sf::Vector2f(50.0f, 50.0f), 90.0f, IDs::IDs::inimigoFacil), moveAleatorio(0)
 {
     corpo.setFillColor(sf::Color::Red); 
 

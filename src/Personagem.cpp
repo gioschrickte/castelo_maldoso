@@ -150,6 +150,6 @@ void Entidades::Personagens::Personagem::tomarDano(float dano)
 void Entidades::Personagens::Personagem::salvarDataBuffer()
 {
 	Entidades::Entidade::salvarDataBuffer();
-	buffer << vida;
+	buffer << velFinal.x << " " << velFinal.y << " " << ativa << " " << vida;
 }
 

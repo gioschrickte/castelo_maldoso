@@ -49,6 +49,9 @@ namespace Entidades
 			void tomarDano(float dano);
 			float getVida() const;
 			float getVidaMax() const;
+			// Setters usados ao carregar o jogo do arquivo de save.
+			void setVelFinal(sf::Vector2f v) { velFinal = v; }
+			void setVida(float v) { vida = v; }
 			bool olhandoParaEsquerda() const { return paraEsquerda; }
 			void atualizaVida();
 			void desenhar();

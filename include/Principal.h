@@ -15,6 +15,7 @@ private:
 
 	Jogo::Fases::Fase* faseAtual;
     void criarFase(int numFase);
+    void carregarFase(int numFase);   // recria a fase salva a partir de save.txt
 
 	Entidades::Personagens::Jogadores::Jogador* jogador1;
 	Entidades::Personagens::Jogadores::Jogador* jogador2;

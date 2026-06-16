@@ -31,6 +31,8 @@ namespace Jogo {
 
             int numFase;
 
+            void inicializar();                            // setup comum as construtoras (chao + jogadores + gerenciadores)
+            void carregarEntidades(const std::string& arquivo); // recria entidades a partir do save
             void criarChao();                              // comum a todas as fases
             void criarInimigosFaceis();
             void criarPlataformas();
@@ -56,6 +58,10 @@ namespace Jogo {
         public:
             Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
+            // Construtora usada ao CARREGAR um jogo salvo: faz o setup comum mas
+            // nao gera inimigos/obstaculos aleatorios (eles vem do arquivo).
+            Fase(Entidades::Personagens::Jogadores::Jogador* jogador,
+                Entidades::Personagens::Jogadores::Jogador* j2, bool carregando);
             virtual ~Fase();
 
             void executar() override;                      // loop comum a todas as fases

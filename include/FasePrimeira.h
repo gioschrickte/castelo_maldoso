@@ -16,6 +16,9 @@ namespace Jogo {
         public:
             FasePrimeira(Entidades::Personagens::Jogadores::Jogador* jogador,
                 Entidades::Personagens::Jogadores::Jogador* j2 = nullptr);
+            // Construtora de carga: recria a fase a partir do arquivo de save.
+            FasePrimeira(Entidades::Personagens::Jogadores::Jogador* jogador,
+                Entidades::Personagens::Jogadores::Jogador* j2, bool carregando);
             ~FasePrimeira();
             void criarInimigos()   override;
             void criarObstaculos() override;
