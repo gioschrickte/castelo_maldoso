@@ -22,6 +22,8 @@ namespace Jogo {
             Gerenciador::GerenciadorEvento* gerEventos;
             Entidades::Chao* chao;
 
+            int numFase;
+
             void criarChao();                              // comum a todas as fases
             void criarInimigosFaceis();
             void criarPlataformas();

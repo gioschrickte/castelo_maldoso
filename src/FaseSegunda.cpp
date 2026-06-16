@@ -17,6 +17,8 @@ Jogo::Fases::FaseSegunda::FaseSegunda(Entidades::Personagens::Jogadores::Jogador
     (float)tamJanela.x / tamTextura.x,
     (float)tamJanela.y / tamTextura.y
     );
+
+	numFase = 2;
 }
 
 Jogo::Fases::FaseSegunda::~FaseSegunda() {}

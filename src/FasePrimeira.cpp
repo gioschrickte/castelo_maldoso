@@ -22,6 +22,8 @@ Jogo::Fases::FasePrimeira::FasePrimeira(Entidades::Personagens::Jogadores::Jogad
     (float)tamJanela.x / tamTextura.x,
     (float)tamJanela.y / tamTextura.y
     );
+
+    numFase = 1;
 }
 
 Jogo::Fases::FasePrimeira::~FasePrimeira() {}

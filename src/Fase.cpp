@@ -1,5 +1,6 @@
 ﻿// Fase.cpp
 #include "Fase.h"
+#include "Entidade.h"
 #include "GerenciadorColisoes.h"
 #include "GerenciadorGrafico.h"
 #include "InimigoFacil.h" 
@@ -184,7 +185,7 @@ void Jogo::Fases::Fase::executar()
 
 void Jogo::Fases::Fase::SalvarTudo()
 {
-    
+    //salvar o numero da fase
     
     listaEntidade.salvarEntidades();
 }
