@@ -110,8 +110,7 @@ void Principal::executar()
 			numJogadores = menu.getNumJogadores();   // 1 ou 2, para esta partida
 			numFase = escolha;
 
-			cout << "Digite seu nome: ";
-			cin >> nomeJogador;          // nome de uma palavra (sem espacos)
+			nomeJogador = menu.getNomeJogador();   // nome digitado no proprio menu
 			pontuacaoJogador = 0;        // partida nova comeca zerada
 		}
 		else if (escolha == 3)   // "Continuar" -> carrega o jogo salvo
