@@ -4,6 +4,9 @@
 #include "FaseSegunda.h"
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <algorithm>
+#include <string>
 #include "Menu.h"
 using namespace std;
 
@@ -160,9 +163,24 @@ void Principal::executar()
 			}
 		}
 
-		// Fim da partida: registra a pontuacao no ranking.
-		ofstream ranking("ranking.txt", ios::app);
-		if (ranking.is_open())
-			ranking << nomeJogador << " " << pontuacaoJogador << "\n";
+		// Fim da partida: registra a pontuacao e mantem so as 5 melhores no arquivo.
+		vector<pair<int, string>> ranking;
+		{
+			ifstream in("ranking.txt");
+			string nome;
+			int pontos;
+			while (in >> nome >> pontos)
+				ranking.push_back(make_pair(pontos, nome));
+		}
+		ranking.push_back(make_pair(pontuacaoJogador, nomeJogador));
+
+		sort(ranking.begin(), ranking.end(),
+			[](const pair<int, string>& a, const pair<int, string>& b)
+			{ return a.first > b.first; });
+
+		ofstream out("ranking.txt", ios::trunc);   // reescreve so o top 5
+		if (out.is_open())
+			for (int i = 0; i < (int)ranking.size() && i < 5; i++)
+				out << ranking[i].second << " " << ranking[i].first << "\n";
 	}
 }
