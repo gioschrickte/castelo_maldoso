@@ -60,13 +60,15 @@ Jogo::Fases::Fase::~Fase()
 {
     for (int i = 0; i < listaEntidade.getTam(); i++)
         delete listaEntidade[i];
+    if (chao) delete chao;   // chao fora da lista, liberado aqui
     gerColisoes->limpar();
 }
 
 void Jogo::Fases::Fase::criarChao()
 {
+    // O chao deriva de Ente (nao de Entidade), entao nao entra na listaEntidade;
+    // a Fase o guarda, desenha e libera diretamente.
     chao = new Entidades::Chao(sf::Vector2f(0.0f, 750.0f), sf::Vector2f(pGG->getWindow()->getSize().x, 20.0f));
-    listaEntidade.addEntidade(chao);
 }
 
 void Jogo::Fases::Fase::adicionarInimigo(Entidades::Personagens::Inimigos::Inimigo* i)
@@ -201,7 +203,8 @@ void Jogo::Fases::Fase::executar()
         pGG->limpaJanela();
 
 
-        pGG->desenhaSprite(spriteFundo); 
+        pGG->desenhaSprite(spriteFundo);
+        chao->desenhar();                                          // chao fora da lista
         for (int i = 0; i < listaEntidade.getTam(); i++)
         {
             if(listaEntidade[i]->getAtiva())

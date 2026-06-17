@@ -29,6 +29,21 @@ void Jogo::Ente::desenhar()
 		pGG->desenhaElemento(corpo);
 }
 
+const sf::RectangleShape Jogo::Ente::getCorpo() const
+{
+	return corpo;
+}
+
+const sf::Vector2f Jogo::Ente::getPosicao() const
+{
+	return corpo.getPosition();
+}
+
+const sf::Vector2f Jogo::Ente::getTamanho() const
+{
+	return corpo.getSize();
+}
+
 void Jogo::Ente::setGG(Gerenciador::GerenciadorGrafico* pgg) // serÃ¡ tratado na Principal, onde o GG Ã© criado e passado para as entidades, para que elas possam desenhar a si mesmas
 {
 	pGG = pgg;

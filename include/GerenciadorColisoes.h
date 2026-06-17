@@ -29,9 +29,11 @@ namespace Gerenciador {
 		void setJogador1(Entidades::Personagens::Jogadores::Jogador* p);
 		void setJogador2(Entidades::Personagens::Jogadores::Jogador* p);
 		const sf::Vector2f calculaColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
+		const sf::Vector2f calculaColisao(Entidades::Entidade* ent, Jogo::Ente* ente);
 		void executar();
 
 		const bool verificarColisao(Entidades::Entidade* ent1, Entidades::Entidade* ent2);
+		const bool verificarColisao(Entidades::Entidade* ent, Jogo::Ente* ente);
 		bool haInimigosVivos() const; // true se algum inimigo ainda esta ativo
 		void tratarColisoesJogsObstacs();
 		void tratarColisoesJogsInimgs();

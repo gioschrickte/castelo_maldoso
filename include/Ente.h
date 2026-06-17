@@ -25,6 +25,9 @@ namespace Jogo
 		virtual ~Ente();
 		virtual void executar() = 0;
 		virtual void desenhar();
+		const sf::RectangleShape getCorpo() const;
+		const sf::Vector2f getPosicao() const;
+		const sf::Vector2f getTamanho() const;
 		static void setGG(Gerenciador::GerenciadorGrafico* pgg);
 	};
 }

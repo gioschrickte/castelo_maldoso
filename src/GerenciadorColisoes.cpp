@@ -103,6 +103,34 @@ const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidad
 	return false;
 }
 
+// Sobrecarga para colidir uma Entidade com um Ente generico (ex.: o Chao),
+// que nÃ£o deriva de Entidade e nÃ£o possui estado 'ativa'.
+const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::Entidade* ent, Jogo::Ente* ente)
+{
+	sf::Vector2f pos1 = ent->getCorpo().getPosition();
+	sf::Vector2f pos2 = ente->getCorpo().getPosition();
+	sf::Vector2f tam1 = ent->getCorpo().getSize();
+	sf::Vector2f tam2 = ente->getCorpo().getSize();
+
+	sf::Vector2f centro1(pos1.x + tam1.x / 2.0f, pos1.y + tam1.y / 2.0f);
+	sf::Vector2f centro2(pos2.x + tam2.x / 2.0f, pos2.y + tam2.y / 2.0f);
+
+	float overlapX = (tam1.x / 2.0f + tam2.x / 2.0f) - fabs(centro1.x - centro2.x);
+	float overlapY = (tam1.y / 2.0f + tam2.y / 2.0f) - fabs(centro1.y - centro2.y);
+
+	// ambos > 0  =>  hÃ¡ colisÃ£o. Valores sÃ£o as profundidades de penetraÃ§Ã£o.
+	return sf::Vector2f(overlapX, overlapY);
+}
+
+// O Ente (ex.: o Chao) estÃ¡ sempre presente, entÃ£o so checamos a Entidade.
+const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidade* ent, Jogo::Ente* ente)
+{
+	sf::Vector2f ds = calculaColisao(ent, ente);
+	if (ds.x > 0.0f && ds.y > 0.0f && ent->getAtiva())
+		return true;
+	return false;
+}
+
 bool Gerenciador::GerenciadorColisoes::haInimigosVivos() const
 {
 	for (size_t i = 0; i < LIs.size(); i++)
@@ -189,7 +217,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 		Entidades::Personagens::Jogadores::Jogador* jog = jogs[j];
 		if (!jog || !jog->getAtiva()) continue;
 
-		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(chao));
+		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog), chao);
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
 			chao->obstaculizar(jog, ds);
@@ -201,7 +229,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesChao()
 	{
 		if (!LIs[i]->getAtiva()) continue; // nao empurra inimigo morto
 
-		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), static_cast<Entidades::Entidade*>(chao));
+		sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(LIs[i]), chao);
 		if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 		{
 			chao->obstaculizar(LIs[i], ds);

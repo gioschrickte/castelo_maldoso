@@ -1,14 +1,14 @@
 ﻿#pragma once
 
-#include "Entidade.h"
+#include "Ente.h"
 
 namespace Entidades {
-		class Chao : public Entidade {
+		class Chao : public Jogo::Ente {
 		private:
 			sf::Color cor = sf::Color::Cyan; // cor do chao
 		public:
 			Chao(const sf::Vector2f pos, const sf::Vector2f tam) :
-				Entidade(pos, tam, IDs::IDs::chao)
+				Jogo::Ente(pos, tam, IDs::IDs::chao)
 			{
                 corpo.setFillColor(sf::Color::Cyan);
 			}
@@ -45,6 +45,5 @@ namespace Entidades {
         }
 
         void executar() {}
-        void salvar() {}
 	};
 }
