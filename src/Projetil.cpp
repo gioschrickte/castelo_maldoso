@@ -1,5 +1,6 @@
 ﻿#include "Projetil.h"
 #include <cmath>
+#include <fstream>
 	
 #define VEL_PROJETIL 400.0f
 #define FORA_DA_TELA -1000.0f
@@ -80,5 +81,19 @@ int  Entidades::Projetil::getDano()   const { return dano; }
 
 void Entidades::Projetil::salvar()
 {
-	
+	buffer.str("");
+	buffer.clear();
+	salvarDataBuffer();
+	std::ofstream arquivo("projetil.txt", std::ios::app);
+	if (!arquivo.is_open()) return;
+
+	arquivo << buffer.str() << "\n";
+	arquivo.close();
+}
+
+void Entidades::Projetil::salvarDataBuffer()
+{
+	// Schema do projetil: id x y velX velY ativo dano
+	Entidades::Entidade::salvarDataBuffer();   // grava "id x y "
+	buffer << velocidade.x << " " << velocidade.y << " " << ativo << " " << dano;
 }

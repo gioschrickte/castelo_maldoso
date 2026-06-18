@@ -39,6 +39,7 @@ namespace Jogo {
             void carregarZumbis();
             void carregarOrks();
             void carregarMagos();
+            void carregarProjeteis();                      // recria os projeteis e os associa aos magos
             void carregarPlataformas();
             void carregarEspinhos();
             void carregarLamas();

@@ -21,6 +21,11 @@ namespace Entidades {
 		bool estaAtivo() const;
 		int  getDano()   const;
 
+		// Setters usados ao carregar o projetil do arquivo de save.
+		void setVelocidade(sf::Vector2f v) { velocidade = v; }
+		void setAtivo(bool a) { ativo = a; }
+
 		void salvar();
+		void salvarDataBuffer();
 	};
 }

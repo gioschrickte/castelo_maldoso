@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <string>
+#include <vector>
 
 #define MAX_INIMIGOS_FACEIS 4
 #define MAX_PLATAFORMAS 5
@@ -254,6 +255,7 @@ void Jogo::Fases::Fase::carregarEntidades()
     carregarZumbis();
     carregarOrks();
     carregarMagos();
+    carregarProjeteis();   // depois dos magos: associa cada projetil salvo a um mago
     carregarPlataformas();
     carregarEspinhos();
     carregarLamas();
@@ -317,8 +319,7 @@ void Jogo::Fases::Fase::carregarOrks()
 
 void Jogo::Fases::Fase::carregarMagos()
 {
-    using namespace Entidades;                       // Projetil
-    using namespace Entidades::Personagens::Inimigos; // Mago
+    using namespace Entidades::Personagens::Inimigos;
     std::ifstream in("mago.txt");
     if (!in.is_open()) return;
 
@@ -326,13 +327,41 @@ void Jogo::Fases::Fase::carregarMagos()
     while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
     {
         Mago* m = new Mago(jog1, sf::Vector2f(x, y));
-        Projetil* p = new Projetil();                // o Mago precisa do seu projetil
-        m->setProjetil(p);
         m->setVelFinal(sf::Vector2f(vx, vy));
         m->setVida(vida);
         m->setAtiva(ativa);
-        adicionarInimigo(m);
+        adicionarInimigo(m);   // o projetil sera associado por carregarProjeteis()
+    }
+}
+
+void Jogo::Fases::Fase::carregarProjeteis()
+{
+    using namespace Entidades;
+    using namespace Entidades::Personagens::Inimigos;
+    std::ifstream in("projetil.txt");
+    if (!in.is_open()) return;
+
+    // carregarMagos() ja rodou: junta os magos da fase para receberem um projetil cada
+    // (a ordem nao importa, basta cada mago ficar com o seu).
+    std::vector<Mago*> magos;
+    for (int i = 0; i < listaEntidade.getTam(); i++)
+        if (listaEntidade[i]->getId() == IDs::IDs::mago)
+            magos.push_back(static_cast<Mago*>(listaEntidade[i]));
+
+    size_t idx = 0;
+    int id; float x, y, vx, vy; bool ativo; int dano;
+    while (in >> id >> x >> y >> vx >> vy >> ativo >> dano)
+    {
+        Projetil* p = new Projetil(dano);
+        p->setPosicao(sf::Vector2f(x, y));
+        p->setVelocidade(sf::Vector2f(vx, vy));
+        p->setAtivo(ativo);
+
+        if (idx < magos.size())
+            magos[idx]->setProjetil(p);   // associa ao mago (so' precisa de um por mago)
+
         adicionarProjetil(p);
+        idx++;
     }
 }
 
@@ -387,7 +416,7 @@ void Jogo::Fases::Fase::limparArquivosEntidades()
     // Esvazia (trunca) o .txt de cada tipo, para que o save atual nao herde linhas de saves
     // anteriores nem de outra fase.
     const char* arquivos[] = {
-        "jogador.txt", "zumbi.txt", "ork.txt", "mago.txt",
+        "jogador.txt", "zumbi.txt", "ork.txt", "mago.txt", "projetil.txt",
         "plataforma.txt", "espinho.txt", "lama.txt"
     };
     for (const char* nome : arquivos)

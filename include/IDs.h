@@ -13,6 +13,5 @@ namespace IDs {
 		zumbi,
 		ork,
 		mago
-		// Adicione mais IDs conforme necessário
 	};
 }
