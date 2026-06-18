@@ -1,6 +1,5 @@
-﻿#pragma once
+#pragma once
 #include <iostream>
-#include "Elemento.h"
 using namespace std;
 
 namespace Lista {
@@ -8,16 +7,31 @@ namespace Lista {
 	template <class TL>
 	class Lista {
 	private:
-		Elemento<TL>* pInicio;
-		Elemento<TL>* pUltimo;
+		// Elemento e um detalhe interno da Lista (so existe como no encadeado dela),
+		// entao fica aninhado e privado. Por estar dentro do template, usa o proprio TL.
+		class Elemento {
+		private:
+			Elemento* pProx;
+			TL* elemento;
+		public:
+			Elemento() : pProx(nullptr), elemento(nullptr) {}
+			~Elemento() {}
+			void setProx(Elemento* prox) { pProx = prox; }
+			void setElemento(TL* elem) { elemento = elem; }
+			Elemento* getProx() { return pProx; }
+			TL* getElemento() { return elemento; }
+		};
+
+		Elemento* pInicio;
+		Elemento* pUltimo;
 		unsigned int tam;
 	public:
 		class Iterator
 		{
 		private:
-			Elemento<TL>* atual;
+			Elemento* atual;
 		public:
-			Iterator(Elemento<TL>* cabeca = nullptr)
+			Iterator(Elemento* cabeca = nullptr)
 				: atual(cabeca)
 			{
 			}
@@ -43,7 +57,7 @@ namespace Lista {
 			{
 				return atual != valor.atual;
 			}
-			Elemento<TL>* getAtual() const
+			Elemento* getAtual() const
 			{
 				return atual;
 			}
@@ -81,7 +95,7 @@ namespace Lista {
 	{
 		while (pInicio != pUltimo)
 		{
-			Elemento<TL>* pAux = pInicio;
+			Elemento* pAux = pInicio;
 			pInicio = pInicio->getProx();
 			delete(pAux);
 			pAux = nullptr;
@@ -96,14 +110,14 @@ namespace Lista {
 	{
 		if (pUltimo == nullptr)
 		{
-			pInicio = new Elemento<TL>;
+			pInicio = new Elemento;
 			pInicio->setProx(nullptr);
 			pUltimo = pInicio;
 			pInicio->setElemento(info);
 		}
 		else
 		{
-			pUltimo->setProx(new Elemento<TL>);
+			pUltimo->setProx(new Elemento);
 			pUltimo = pUltimo->getProx();
 			pUltimo->setElemento(info);
 			pUltimo->setProx(nullptr);
@@ -116,14 +130,14 @@ namespace Lista {
 	{
 		if (tam > 0)
 		{
-			Elemento<TL>* pAux = pInicio;
+			Elemento* pAux = pInicio;
 			while (pAux != nullptr && pAux->getElemento() != info)
 			{
 				pAux = pAux->getProx();
 			}
 			if (pAux != nullptr && pAux->getElemento() == info)
 			{
-				Elemento<TL>* pAux2 = pAux;
+				Elemento* pAux2 = pAux;
 				pAux = pAux->getProx();
 				delete(pAux2);
 				pAux2 = nullptr;
@@ -167,7 +181,7 @@ namespace Lista {
 	{
 		if (pos < (int)tam && tam > 0)
 		{
-			Elemento<TL>* pAux = pInicio;
+			Elemento* pAux = pInicio;
 			for (int c = 0; c < pos; c++)
 			{
 				pAux = pAux->getProx();

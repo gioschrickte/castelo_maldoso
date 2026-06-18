@@ -54,7 +54,7 @@ void Entidades::Obstaculos::Espinho::salvar()
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
-	ofstream arquivo("save.txt", ios::app);
+	ofstream arquivo("espinho.txt", ios::app);
 	
 	if (!arquivo.is_open())//debug
     {

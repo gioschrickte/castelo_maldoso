@@ -42,7 +42,7 @@ Jogo::Fases::FasePrimeira::FasePrimeira(Entidades::Personagens::Jogadores::Jogad
 
     numFase = 1;
 
-    carregarEntidades("save.txt");   // recria inimigos/obstaculos a partir do arquivo
+    carregarEntidades();   // recria inimigos/obstaculos a partir dos .txt de cada tipo
 }
 
 Jogo::Fases::FasePrimeira::~FasePrimeira() {}

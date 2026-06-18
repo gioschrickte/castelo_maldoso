@@ -3,6 +3,8 @@
 #include "Jogador.h"
 #include <fstream>
 #define RAIO_PERSEGUIR 400.0f
+#define FATOR_PULO_ORK 0.5f   // jogador pula com metade da forca
+#define DURACAO_PULO_ORK 3.0f // durante 3 segundos
 
 Entidades::Personagens::Inimigos::Ork::Ork(Jogadores::Jogador* j, const sf::Vector2f pos)
     : Inimigo(j, pos, sf::Vector2f(60.0f, 60.0f), 150.0f, IDs::IDs::ork)
@@ -29,7 +31,12 @@ void Entidades::Personagens::Inimigos::Ork::danificar(Jogadores::Jogador* pJog)
 {
 	if (!podeHitar()) return;
 	pJog->tomarDano(dano);
-	std::cout << "Ork causou dano medio! (dano=" << dano << ")\n";
+
+	// Algoritmo do Ork: alem do dano, enfraquece o pulo do jogador por alguns segundos
+	// (reaproveita o multiplicadorPulo da classe Personagem; a velocidade fica intacta).
+	pJog->aplicarLentidaoTemporaria(1.0f, FATOR_PULO_ORK, DURACAO_PULO_ORK);
+
+	std::cout << "Ork enfraqueceu o pulo do jogador! (dano=" << dano << ")\n";
 	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
@@ -67,7 +74,7 @@ void Entidades::Personagens::Inimigos::Ork::salvar()
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
-	ofstream arquivo("save.txt", ios::app);
+	ofstream arquivo("ork.txt", ios::app);
 
 	if (!arquivo.is_open())//debug
     {

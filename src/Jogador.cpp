@@ -6,7 +6,7 @@
 //d
 #define DURACAO_ATAQUE  0.05f
 #define COOLDOWN_ATAQUE 0.5f
-#define VIDA_JOGADOR
+#define VIDA_JOGADOR 200.0f
 
 Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, const sf::Vector2f tam)
 	: Personagem(pos, tam, 200.0f, IDs::IDs::jogador), ataqueAtivo(false), danoAtaque(3.0f)
@@ -25,7 +25,7 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 	sprite.setPosition(pos);
 	temSprite = true;
 	
-	vidaMax = 100.0f;
+	vidaMax = VIDA_JOGADOR;
 	vida = vidaMax;
 	barraVida.setFillColor(sf::Color::Red);
 }
@@ -69,7 +69,7 @@ void Entidades::Personagens::Jogadores::Jogador::salvar()
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
-	ofstream arquivo("save.txt", ios::app);
+	ofstream arquivo("jogador.txt", ios::app);
 	
 	if (!arquivo.is_open())//debug
     {

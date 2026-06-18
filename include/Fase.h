@@ -32,7 +32,18 @@ namespace Jogo {
             int numFase;
 
             void inicializar();                            // setup comum as construtoras (chao + jogadores + gerenciadores)
-            void carregarEntidades(const std::string& arquivo); // recria entidades a partir do save
+
+            // Carga do save: um metodo por tipo (cada um le o seu proprio .txt), sem switch.
+            void carregarEntidades();                      // orquestra: chama os carregarXxx() abaixo
+            void carregarJogadores();
+            void carregarZumbis();
+            void carregarOrks();
+            void carregarMagos();
+            void carregarPlataformas();
+            void carregarEspinhos();
+            void carregarLamas();
+            void limparArquivosEntidades();                // trunca os .txt de cada tipo (usado ao salvar)
+
             void criarChao();                              // comum a todas as fases
             void criarInimigosFaceis();
             void criarPlataformas();

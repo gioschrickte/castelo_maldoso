@@ -229,114 +229,167 @@ void Jogo::Fases::Fase::executar()
 
 void Jogo::Fases::Fase::SalvarTudo()
 {
-    // Trunca o arquivo e grava o cabecalho (numero da fase + numero de jogadores).
-    // Em seguida cada entidade salva a si mesma (em modo append), preservando o polimorfismo.
+    // save.txt agora guarda SO o cabecalho da partida (qual fase, quantos jogadores, nome e
+    // pontuacao). A Principal le essa linha na opcao "Continuar".
     std::ofstream arquivo("save.txt", std::ios::trunc);
     if (arquivo.is_open())
     {
-        // cabecalho: numFase numJogadores nome pontuacao (nome e pontuacao do jogador do usuario)
         arquivo << numFase << " " << (jog2 ? 2 : 1) << " "
                 << jog1->getNome() << " " << jog1->getPontuacao() << "\n";
         arquivo.close();
     }
 
-    listaEntidade.salvarEntidades();   // cada salvar() abre em append e grava sua linha
+    // Zera o .txt de cada tipo antes de regravar: como cada salvar() abre em append, sem isto
+    // os saves antigos se acumulariam (e ate ressuscitariam entidades de outra fase).
+    limparArquivosEntidades();
+
+    listaEntidade.salvarEntidades();   // cada entidade da append no .txt do seu proprio tipo
 }
 
-void Jogo::Fases::Fase::carregarEntidades(const std::string& arquivo)
+void Jogo::Fases::Fase::carregarEntidades()
 {
-    using namespace Entidades;
-    using namespace Entidades::Personagens::Inimigos;
-    using namespace Entidades::Obstaculos;
+    // Um metodo por tipo: cada um le o seu proprio .txt. Sem switch e sem cabecalho aqui
+    // (o cabecalho fica em save.txt e ja foi lido pela Principal).
+    carregarJogadores();
+    carregarZumbis();
+    carregarOrks();
+    carregarMagos();
+    carregarPlataformas();
+    carregarEspinhos();
+    carregarLamas();
+}
 
-    std::ifstream in(arquivo);
+void Jogo::Fases::Fase::carregarJogadores()
+{
+    std::ifstream in("jogador.txt");
     if (!in.is_open()) return;
 
-    // Descarta o cabecalho (numFase numJogadores nome pontuacao) - ja lido pela Principal.
-    int faseSalva, jogSalvos, pontSalva;
-    std::string nomeSalvo;
-    in >> faseSalva >> jogSalvos >> nomeSalvo >> pontSalva;
-
+    int id; float x, y, vx, vy, vida; bool ativa;
     int jogLidos = 0;
-    int id;
-    float x, y, vx, vy, vida;
-    bool ativa;
     while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
     {
-        const sf::Vector2f pos(x, y);
-        const sf::Vector2f vel(vx, vy);
-
-        // Ler cada tipo de data buffer gerado pelas entidades
-        switch (static_cast<IDs::IDs>(id))
+        // Os jogadores ja existem (jog1/jog2); aqui so aplicamos o estado salvo.
+        Entidades::Personagens::Jogadores::Jogador* alvo = (jogLidos == 0) ? jog1 : jog2;
+        jogLidos++;
+        if (alvo)
         {
-        case IDs::IDs::jogador:
-        {
-            // Os jogadores ja foram criados; aqui apenas aplicamos o estado salvo.
-            Personagens::Jogadores::Jogador* alvo = (jogLidos == 0) ? jog1 : jog2;
-            jogLidos++;
-            if (alvo)
-            {
-                alvo->setPosicao(pos);
-                alvo->setVelFinal(vel);
-                alvo->setVida(vida);
-                alvo->setAtiva(ativa);
-            }
-            break;
-        }
-        case IDs::IDs::zumbi:
-        {
-            Zumbi* i = new Zumbi(jog1, pos);
-            i->setVelFinal(vel);
-            i->setVida(vida);
-            i->setAtiva(ativa);
-            adicionarInimigo(i);
-            break;
-        }
-        case IDs::IDs::ork:
-        {
-            Ork* i = new Ork(jog1, pos);
-            i->setVelFinal(vel);
-            i->setVida(vida);
-            i->setAtiva(ativa);
-            adicionarInimigo(i);
-            break;
-        }
-        case IDs::IDs::mago:
-        {
-            Mago* c = new Mago(jog1, pos);
-            Projetil* p = new Projetil();
-            c->setProjetil(p);
-            c->setVelFinal(vel);
-            c->setVida(vida);
-            c->setAtiva(ativa);
-            adicionarInimigo(c);
-            adicionarProjetil(p);
-            break;
-        }
-        case IDs::IDs::plataforma:
-        {
-            Plataforma* o = new Plataforma(pos);
-            o->setAtiva(ativa);
-            adicionarObstaculo(o);
-            break;
-        }
-        case IDs::IDs::espinho:
-        {
-            Espinho* o = new Espinho(pos);
-            o->setAtiva(ativa);
-            adicionarObstaculo(o);
-            break;
-        }
-        case IDs::IDs::lama:
-        {
-            Lama* o = new Lama(pos);
-            o->setAtiva(ativa);
-            adicionarObstaculo(o);
-            break;
-        }
-        default:
-            break;
+            alvo->setPosicao(sf::Vector2f(x, y));
+            alvo->setVelFinal(sf::Vector2f(vx, vy));
+            alvo->setVida(vida);
+            alvo->setAtiva(ativa);
         }
     }
-    in.close();
+}
+
+void Jogo::Fases::Fase::carregarZumbis()
+{
+    using namespace Entidades::Personagens::Inimigos;
+    std::ifstream in("zumbi.txt");
+    if (!in.is_open()) return;
+
+    int id; float x, y, vx, vy, vida; bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        Zumbi* z = new Zumbi(jog1, sf::Vector2f(x, y));
+        z->setVelFinal(sf::Vector2f(vx, vy));
+        z->setVida(vida);
+        z->setAtiva(ativa);
+        adicionarInimigo(z);
+    }
+}
+
+void Jogo::Fases::Fase::carregarOrks()
+{
+    using namespace Entidades::Personagens::Inimigos;
+    std::ifstream in("ork.txt");
+    if (!in.is_open()) return;
+
+    int id; float x, y, vx, vy, vida; bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        Ork* o = new Ork(jog1, sf::Vector2f(x, y));
+        o->setVelFinal(sf::Vector2f(vx, vy));
+        o->setVida(vida);
+        o->setAtiva(ativa);
+        adicionarInimigo(o);
+    }
+}
+
+void Jogo::Fases::Fase::carregarMagos()
+{
+    using namespace Entidades;                       // Projetil
+    using namespace Entidades::Personagens::Inimigos; // Mago
+    std::ifstream in("mago.txt");
+    if (!in.is_open()) return;
+
+    int id; float x, y, vx, vy, vida; bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        Mago* m = new Mago(jog1, sf::Vector2f(x, y));
+        Projetil* p = new Projetil();                // o Mago precisa do seu projetil
+        m->setProjetil(p);
+        m->setVelFinal(sf::Vector2f(vx, vy));
+        m->setVida(vida);
+        m->setAtiva(ativa);
+        adicionarInimigo(m);
+        adicionarProjetil(p);
+    }
+}
+
+void Jogo::Fases::Fase::carregarPlataformas()
+{
+    using namespace Entidades::Obstaculos;
+    std::ifstream in("plataforma.txt");
+    if (!in.is_open()) return;
+
+    // Obstaculos so usam posicao + ativa; vx vy vida vem como placeholders e sao ignorados.
+    int id; float x, y, vx, vy, vida; bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        Plataforma* o = new Plataforma(sf::Vector2f(x, y));
+        o->setAtiva(ativa);
+        adicionarObstaculo(o);
+    }
+}
+
+void Jogo::Fases::Fase::carregarEspinhos()
+{
+    using namespace Entidades::Obstaculos;
+    std::ifstream in("espinho.txt");
+    if (!in.is_open()) return;
+
+    int id; float x, y, vx, vy, vida; bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        Espinho* o = new Espinho(sf::Vector2f(x, y));
+        o->setAtiva(ativa);
+        adicionarObstaculo(o);
+    }
+}
+
+void Jogo::Fases::Fase::carregarLamas()
+{
+    using namespace Entidades::Obstaculos;
+    std::ifstream in("lama.txt");
+    if (!in.is_open()) return;
+
+    int id; float x, y, vx, vy, vida; bool ativa;
+    while (in >> id >> x >> y >> vx >> vy >> ativa >> vida)
+    {
+        Lama* o = new Lama(sf::Vector2f(x, y));
+        o->setAtiva(ativa);
+        adicionarObstaculo(o);
+    }
+}
+
+void Jogo::Fases::Fase::limparArquivosEntidades()
+{
+    // Esvazia (trunca) o .txt de cada tipo, para que o save atual nao herde linhas de saves
+    // anteriores nem de outra fase.
+    const char* arquivos[] = {
+        "jogador.txt", "zumbi.txt", "ork.txt", "mago.txt",
+        "plataforma.txt", "espinho.txt", "lama.txt"
+    };
+    for (const char* nome : arquivos)
+        std::ofstream(nome, std::ios::trunc);   // abre em modo trunc e fecha: esvazia o arquivo
 }

@@ -27,7 +27,7 @@ void Entidades::Obstaculos::Lama::salvar()
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
-	ofstream arquivo("save.txt", ios::app);
+	ofstream arquivo("lama.txt", ios::app);
 	
 	if (!arquivo.is_open())//debug
     {

@@ -23,6 +23,13 @@ namespace Entidades
 			float multiplicadorVel;
 			float multiplicadorPulo;
 
+			// Lentidao com duracao (ex.: feitico do Mago). Enquanto o relogio nao passar de
+			// duracaoLentidao, atualizarY reaplica os fatores abaixo nos multiplicadores.
+			sf::Clock relogioLentidao;
+			float duracaoLentidao;
+			float fatorVelLentidao;
+			float fatorPuloLentidao;
+
 			float vida;
 			float vidaMax;
 			sf::RectangleShape barraVida;//d
@@ -45,6 +52,9 @@ namespace Entidades
 			// Chamado pelos obstaculos de "zona" (ex.: Lama) enquanto ha contato.
 			// Vale por 1 frame; se ninguem chamar, o personagem volta ao normal sozinho.
 			void aplicarLentidao(float fatorVel, float fatorPulo);
+
+			// Lentidao que dura 'duracao' segundos (ex.: feitico do Mago em danificar()).
+			void aplicarLentidaoTemporaria(float fatorVel, float fatorPulo, float duracao);
 
 			void tomarDano(float dano);
 			float getVida() const;

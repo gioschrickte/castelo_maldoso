@@ -95,7 +95,7 @@ void Entidades::Obstaculos::Plataforma::salvar()
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
-	ofstream arquivo("save.txt", ios::app);
+	ofstream arquivo("plataforma.txt", ios::app);
 	
 	if (!arquivo.is_open())//debug
     {

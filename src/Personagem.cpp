@@ -12,6 +12,10 @@ Entidades::Personagens::Personagem::Personagem(const sf::Vector2f pos, const sf:
 	multiplicadorVel = 1.0f;
 	multiplicadorPulo = 1.0f;
 
+	duracaoLentidao = 0.0f;     // sem lentidao temporaria ativa
+	fatorVelLentidao = 1.0f;
+	fatorPuloLentidao = 1.0f;
+
 	vidaMax = 10.0f;
 	vida = vidaMax;
 
@@ -71,6 +75,13 @@ void Entidades::Personagens::Personagem::atualizarY(float dt)
 
 	multiplicadorVel = 1.0f;
 	multiplicadorPulo = 1.0f;
+
+	// ...a menos que ainda haja uma lentidao temporaria em andamento (ex.: feitico do Mago).
+	if (relogioLentidao.getElapsedTime().asSeconds() < duracaoLentidao)
+	{
+		multiplicadorVel = fatorVelLentidao;
+		multiplicadorPulo = fatorPuloLentidao;
+	}
 }
 
 void Entidades::Personagens::Personagem::pular()
@@ -97,6 +108,15 @@ void Entidades::Personagens::Personagem::aplicarLentidao(float fatorVel, float f
 {
 	multiplicadorVel = fatorVel;
 	multiplicadorPulo = fatorPulo;
+}
+
+void Entidades::Personagens::Personagem::aplicarLentidaoTemporaria(float fatorVel, float fatorPulo, float duracao)
+{
+	// Guarda os fatores e reinicia o relogio; atualizarY os reaplica enquanto durar.
+	fatorVelLentidao = fatorVel;
+	fatorPuloLentidao = fatorPulo;
+	duracaoLentidao = duracao;
+	relogioLentidao.restart();
 }
 
 float Entidades::Personagens::Personagem::getVida() const

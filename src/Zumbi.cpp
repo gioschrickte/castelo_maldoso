@@ -94,7 +94,7 @@ void Entidades::Personagens::Inimigos::Zumbi::salvar()
 	buffer.clear();
 	salvarDataBuffer();
 	cout << "[SALVAR] " << buffer.str() << endl;//debug
-	ofstream arquivo("save.txt", ios::app);
+	ofstream arquivo("zumbi.txt", ios::app);
 
 	if (!arquivo.is_open())//debug
     {
