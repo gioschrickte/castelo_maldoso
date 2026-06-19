@@ -106,7 +106,7 @@ Jogo::Menu::Menu()
     textoBotaoModo.setFillColor(sf::Color::White);
     atualizarTextoModo();   // define a string conforme numJogadores e centraliza
 
-    // Ranking (lista de pontuacoes), exibido no canto superior esquerdo
+    // Ranking (lista de pontuacoes)
     textoRanking.setFont(fonte);
     textoRanking.setCharacterSize(22);
     textoRanking.setFillColor(sf::Color::White);
