@@ -4,6 +4,7 @@
 #include <string>
 #include <stdio.h>
 #include "Fase.h"
+#include "Menu.h"
 
 class Principal
 {

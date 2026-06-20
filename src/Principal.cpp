@@ -4,10 +4,8 @@
 #include "FaseSegunda.h"
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <algorithm>
-#include <string>
-#include "Menu.h"
+
 using namespace std;
 
 #define MAX_FASES 2   // numero de fases jogaveis em sequencia
@@ -94,10 +92,11 @@ void Principal::executar()
 	srand(time(NULL));
 	Jogo::Ente::setGG(pGrafico);
 
+	Jogo::Menu menu; // Perceba que menu só pode ser chamado após a principal tratar do Gerenciador Grafico. Caso tivessemos colocado na construtora (como atributo), Ente::pGG estaria como nullptr e teríamos um segfault.
+
 	// Laco principal: menu -> fase(s) sequenciais -> menu de novo
 	while (pGrafico->verificaJanelaAberta())
 	{
-		Jogo::Menu menu;
 		int escolha = menu.rodar();   // exibe o menu e aguarda o clique
 
 		if (escolha == -1) break;             // fechou a janela no menu
