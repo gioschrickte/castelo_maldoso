@@ -48,13 +48,6 @@ void Entidades::Personagens::Inimigos::Mago::danificar(Jogadores::Jogador* pJog)
 	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
-
-void Entidades::Personagens::Inimigos::Mago::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posMago)
-{
-	if (posJogador.x - posMago.x > 0.0f) andar(false);
-	else                                   andar(true);
-}
-
 void Entidades::Personagens::Inimigos::Mago::movAleatorio()
 {
 	if (moveAleatorio == 0)      andar(false);

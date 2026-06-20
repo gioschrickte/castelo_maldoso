@@ -40,16 +40,6 @@ void Entidades::Personagens::Inimigos::Zumbi::danificar(
 	std::cout << "Vida do jogador: " << pJog->getVida() << " / " << pJog->getVidaMax() << std::endl;
 }
 
-
-void Entidades::Personagens::Inimigos::Zumbi::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInimigo)
-{
-	if (posJogador.x - posInimigo.x > 0.0f) { andar(false); }
-	else
-	{
-		andar(true);
-	}
-}
-
 void Entidades::Personagens::Inimigos::Zumbi::movAleatorio()
 {
 	if (moveAleatorio == 0)

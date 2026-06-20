@@ -49,10 +49,8 @@ void Entidades::Personagens::Inimigos::Ork::executar()
 	float distancia = sqrt(pow(posJogador.x - posInimigo.x, 2) + pow(posJogador.y - posInimigo.y, 2));
 	if (distancia <= RAIO_PERSEGUIR)
 	{
-		// Persegue o jogador
-		if (posJogador.x < posInimigo.x) { andar(true); } // para esquerda
-		else { andar(false); } // para direita
-		if (noChao) { pular(); }
+		persegueJogador(posJogador, posInimigo);
+		if(noChao) {pular();}
 	}
 	else
 	{

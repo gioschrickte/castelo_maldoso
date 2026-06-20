@@ -31,6 +31,7 @@ namespace Entidades {
 				virtual void danificar(Entidades::Personagens::Jogadores::Jogador* pJog) = 0;
 				void salvarDataBuffer();
 				virtual void salvar() = 0;
+				virtual void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInim);
 				
 			};
 		}

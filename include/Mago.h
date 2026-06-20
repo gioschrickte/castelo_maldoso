@@ -29,7 +29,7 @@ namespace Entidades
 
 				void setProjetil(Entidades::Projetil* p) { projetil = p; }
 
-				void persegueJogador(sf::Vector2f posJogador, sf::Vector2f posMago);
+			
 				void movAleatorio();
                 void salvar();
 				void salvarDataBuffer();

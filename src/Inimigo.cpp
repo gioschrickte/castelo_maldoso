@@ -56,3 +56,9 @@ void Entidades::Personagens::Inimigos::Inimigo::salvarDataBuffer()
 	
 }
 
+void Entidades::Personagens::Inimigos::Inimigo::persegueJogador(sf::Vector2f posJogador, sf::Vector2f posInim)
+{
+	if(posJogador.x - posInim.x > 0.0f) {andar(false);}
+	else {andar(true);}
+}
+
