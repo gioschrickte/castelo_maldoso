@@ -60,14 +60,14 @@ void Entidades::Obstaculos::Plataforma::obstaculizar(Personagens::Personagem* p,
     // empurra pelo eixo de MENOR penetraÃ§Ã£o
     if (ds.x < ds.y) {
         if (centroOutra.x < centroEsta.x)
-            p->mover(sf::Vector2f(-ds.x, 0.0f)); // estÃ¡ Ã  esquerda -> empurra p/ esquerda
+            p->mover(sf::Vector2f(-ds.x, 0.0f)); // esta a esquerda -> empurra p/ esquerda
         else
-            p->mover(sf::Vector2f(ds.x, 0.0f)); // Ã  direita -> empurra p/ direita
+            p->mover(sf::Vector2f(ds.x, 0.0f)); //   direita -> empurra p/ direita
     }
     else {
         if (centroOutra.y < centroEsta.y)
         {
-            p->mover(sf::Vector2f(0.0f, -ds.y)); // estÃ¡ acima -> empurra p/ cima (encosta no topo)
+            p->mover(sf::Vector2f(0.0f, -ds.y)); // esta acima -> empurra p/ cima (encosta no topo)
             p->aterrissar();
             alguemEmCima = true; // ha um personagem apoiado em cima -> plataforma cede
 

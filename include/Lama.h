@@ -8,7 +8,7 @@ namespace Entidades {
 			float multiplicadorVelocidade;
 			float multiplicadorPulo;
 		public:
-			bool afetaInimigos() const override { return false; } // meio q o zumbi atravessa a lama d boa sla
+			bool afetaInimigos() const override { return false; } 
 
 			Lama(const sf::Vector2f pos, const sf::Vector2f tam = sf::Vector2f(100.0f, 30.0f));
 			~Lama();

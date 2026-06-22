@@ -95,7 +95,7 @@ void Entidades::Personagens::Personagem::pular()
 
 void Entidades::Personagens::Personagem::aterrissar()
 {
-	velFinal.y = 0.0f;   // sem isto a velocidade continua acumulando no chÃ£o
+	velFinal.y = 0.0f;   // sem isto a velocidade continua acumulando no chao
 	noChao = true;
 }
 
@@ -148,7 +148,7 @@ void Entidades::Personagens::Personagem::atualizaVida()
 	const float folga = 4.0f;
 	barraVida.setPosition(pos.x, pos.y - barraVida.getSize().y - folga);
 
-	// cor em funÃ§Ã£o da proporÃ§Ã£o (nÃ£o do valor absoluto)
+	// cor em funcao da proporcao (nao do valor absoluto)
 	if (proporcao > 0.6f)      barraVida.setFillColor(sf::Color::Green);
 	else if (proporcao > 0.3f) barraVida.setFillColor(sf::Color::Yellow);
 	else                       barraVida.setFillColor(sf::Color::Red);

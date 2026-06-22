@@ -12,7 +12,7 @@ namespace Entidades {
             float velocidade;      // deslocamento vertical por frame, em pixels
             bool  alguemEmCima;    // marcado pela obstaculizar a cada frame
         public:
-			bool afetaInimigos() const override { return true; } // Plataformas afetam inimigos, ou seja, eles tambÃ©m colidem com elas e sÃ£o empurrados para fora
+			bool afetaInimigos() const override { return true; } 
             Plataforma(const sf::Vector2f pos, const sf::Vector2f tam = sf::Vector2f(200.0f, 20.0f));
             ~Plataforma();
             void executar() override;   // faz a plataforma oscilar verticalmente, todo frame

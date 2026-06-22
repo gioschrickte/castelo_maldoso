@@ -23,22 +23,22 @@ namespace Entidades {
                 sf::Vector2f centroOutra(posOutra.x + tamOutra.x / 2.0f, posOutra.y + tamOutra.y / 2.0f);
                 sf::Vector2f centroEsta(posEsta.x + tamEsta.x / 2.0f, posEsta.y + tamEsta.y / 2.0f);
 
-                // empurra pelo eixo de MENOR penetraÃ§Ã£o
+                // empurra pelo eixo de MENOR penetracao
                 if (ds.x < ds.y) {
                     if (centroOutra.x < centroEsta.x)
-                        p->mover(sf::Vector2f(-ds.x, 0.0f)); // estÃ¡ Ã  esquerda -> empurra p/ esquerda
+                        p->mover(sf::Vector2f(-ds.x, 0.0f)); 
                     else
-                        p->mover(sf::Vector2f(ds.x, 0.0f)); // Ã  direita -> empurra p/ direita
+                        p->mover(sf::Vector2f(ds.x, 0.0f)); 
                 }
                 else {
                     if (centroOutra.y < centroEsta.y)
                     {
-                        p->mover(sf::Vector2f(0.0f, -ds.y)); // estÃ¡ acima -> empurra p/ cima
+                        p->mover(sf::Vector2f(0.0f, -ds.y)); 
                         p->aterrissar();
                     }
                     else
                     {
-                        p->mover(sf::Vector2f(0.0f, ds.y)); // abaixo -> empurra p/ baixo
+                        p->mover(sf::Vector2f(0.0f, ds.y)); 
                         p->baterCabeca();
                     }                        
             }

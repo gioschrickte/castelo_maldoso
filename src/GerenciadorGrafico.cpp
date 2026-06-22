@@ -9,7 +9,7 @@ Gerenciador::GerenciadorGrafico::GerenciadorGrafico()
 {
 	if (window == NULL)
 	{
-		cout << "Falha na criaÃ§Ã£o de janela! Encerrando programa..." << endl;
+		cout << "Falha na cria de janela! Encerrando programa..." << endl;
 		exit(1);
 	}
 
@@ -28,7 +28,7 @@ Gerenciador::GerenciadorGrafico* Gerenciador::GerenciadorGrafico::getGerenciador
 {
 	if (pGrafico == nullptr)
 	{
-		pGrafico = new Gerenciador::GerenciadorGrafico(); // criaÃ§Ã£o da instÃ¢ncia Ãºnica de GG
+		pGrafico = new Gerenciador::GerenciadorGrafico(); 
 	}
 	return pGrafico;
 }

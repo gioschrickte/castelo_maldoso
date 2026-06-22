@@ -1,6 +1,6 @@
 ﻿#include "Ente.h"
 
-// DefiniÃ§Ã£o do membro estÃ¡tico (uma Ãºnica vez em todo o projeto)
+
 Gerenciador::GerenciadorGrafico* Jogo::Ente::pGG = nullptr;	
 
 Jogo::Ente::Ente()
@@ -44,7 +44,7 @@ const sf::Vector2f Jogo::Ente::getTamanho() const
 	return corpo.getSize();
 }
 
-void Jogo::Ente::setGG(Gerenciador::GerenciadorGrafico* pgg) // serÃ¡ tratado na Principal, onde o GG Ã© criado e passado para as entidades, para que elas possam desenhar a si mesmas
+void Jogo::Ente::setGG(Gerenciador::GerenciadorGrafico* pgg) 
 {
 	pGG = pgg;
 }

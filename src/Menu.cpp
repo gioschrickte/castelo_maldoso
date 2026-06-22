@@ -61,7 +61,7 @@ Jogo::Menu::Menu()
     fontCarregada = carregarFonte();
     if (!fontCarregada) return;
 
-    // TÃ­tulo
+    
     textoTitulo.setFont(fonte);
     textoTitulo.setString("CASTELO MALDOSO");
     textoTitulo.setCharacterSize(64);

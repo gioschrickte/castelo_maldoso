@@ -10,7 +10,7 @@ Entidades::Obstaculos::Obstaculo::~Obstaculo() {}
 
 void Entidades::Obstaculos::Obstaculo::executar() {
 	// ObstÃ¡culos podem ter comportamentos especÃ­ficos, como se moverem ou mudarem de estado.
-	// Por exemplo, um obstÃ¡culo danoso poderia piscar ou se mover para dificultar a passagem do jogador.
+	// Por exemplo, um obstaculo danoso poderia piscar ou se mover para dificultar a passagem do jogador.
 }
 
 void Entidades::Obstaculos::Obstaculo::salvarDataBuffer()
