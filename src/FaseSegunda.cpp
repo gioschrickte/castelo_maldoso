@@ -56,7 +56,7 @@ void Jogo::Fases::FaseSegunda::criarObstaculos()
 void Jogo::Fases::FaseSegunda::criarLama()
 {
 	using namespace Entidades::Obstaculos;
-	// EspecÃ­fico da fase 2: lama rente ao chÃ£o.
+	
 	const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
 	const float chaoTopo = chao->getPosicao().y;
 	const float margem = 100.0f;

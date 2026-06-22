@@ -16,7 +16,7 @@ namespace Entidades {
 				bool primeiroHit;
 				float dano;
 
-				// Jogador vivo mais proximo entre 'jogador' e 'jogador2' (usado pela IA)
+				// Jogador vivo mais proximo entre 'jogador' e 'jogador2' 
 				Entidades::Personagens::Jogadores::Jogador* getAlvo() const;
 			public:
 				Inimigo(Entidades::Personagens::Jogadores::Jogador* pjogador,

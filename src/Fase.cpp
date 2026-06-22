@@ -144,7 +144,7 @@ void Jogo::Fases::Fase::criarPlataformas()
     using namespace Entidades::Obstaculos;
 
     const sf::Vector2f tam(200.0f, 20.0f);
-    const float folga = 40.0f;               // espaÃ§o mÃ­nimo exigido entre plataformas
+    const float folga = 40.0f;              
     const int  MAX_TENTATIVAS = 30;
 
     const float largura = static_cast<float>(pGG->getWindow()->getSize().x);
@@ -154,7 +154,7 @@ void Jogo::Fases::Fase::criarPlataformas()
     const float yMin = 250.0f;
     const float yMax = chaoTopo - 150.0f;
 
-    std::vector<sf::FloatRect> colocadas;    // o que jÃ¡ foi posicionado nesta fase
+    std::vector<sf::FloatRect> colocadas;    
 
     int n = aleatorio(3, MAX_PLATAFORMAS);
     for (int i = 0; i < n; i++)
@@ -193,14 +193,14 @@ void Jogo::Fases::Fase::executar()
         {
             for (int i = 0; i < listaEntidade.getTam(); i++)
             {
-                if (!listaEntidade[i]->getAtiva()) continue; // nao executa IA/movimento de mortos
+                if (!listaEntidade[i]->getAtiva()) continue; // 
                 cout << "Executando entidade: " << i << endl;
                 listaEntidade[i]->executar();
             }
                       
         }                                  
         
-        gerColisoes->executar();                                  // 3. colisÃµes corrigem / atualiza vida dos personagens
+        gerColisoes->executar();                                 
         pGG->limpaJanela();
 
 

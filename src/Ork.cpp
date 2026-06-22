@@ -42,7 +42,7 @@ void Entidades::Personagens::Inimigos::Ork::danificar(Jogadores::Jogador* pJog)
 
 void Entidades::Personagens::Inimigos::Ork::executar()
 {
-	// O inimigo mÃ©dio vai ficar pulando e perseguindo o jogador, ou seja, a direÃ§Ã£o do pulo Ã© determinada pelo jogador
+	// O inimigo medio vai ficar pulando e perseguindo o jogador, ou seja, a direcao do pulo determinada pelo jogador
 
 	sf::Vector2f posJogador = getAlvo()->getPosicao();
 	sf::Vector2f posInimigo = getPosicao();

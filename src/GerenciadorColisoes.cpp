@@ -2,7 +2,7 @@
 #include <cmath>
 
 #define ALCANCE_ATAQUE_H 80.0f  // alcance horizontal da espada
-#define ALCANCE_ATAQUE_V 60.0f  // tolerÃ¢ncia vertical
+#define ALCANCE_ATAQUE_V 60.0f  
 
 
 Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr);
@@ -10,7 +10,7 @@ Gerenciador::GerenciadorColisoes* Gerenciador::GerenciadorColisoes::pGC(nullptr)
 Gerenciador::GerenciadorColisoes::GerenciadorColisoes() :
 	LIs(), LOs(), projeteis(), pJog1(nullptr), pJog2(nullptr), fase(nullptr)
 {
-	// Aqui, o gerenciador de colisoes estÃ¡ com as listas vazias, e o ponteiro para o jogador Ã© nulo
+	// Aqui, o gerenciador de colisoes esta com as listas vazias, e o ponteiro para o jogador nao nulo
 }
 
 Gerenciador::GerenciadorColisoes::~GerenciadorColisoes()
@@ -90,7 +90,7 @@ const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::E
 	float overlapX = (tam1.x / 2.0f + tam2.x / 2.0f) - fabs(centro1.x - centro2.x);
 	float overlapY = (tam1.y / 2.0f + tam2.y / 2.0f) - fabs(centro1.y - centro2.y);
 
-	// ambos > 0  =>  hÃ¡ colisÃ£o. Valores sÃ£o as profundidades de penetraÃ§Ã£o.
+	
 	return sf::Vector2f(overlapX, overlapY);
 }
 
@@ -104,7 +104,7 @@ const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidad
 }
 
 // Sobrecarga para colidir uma Entidade com um Ente generico (ex.: o Chao),
-// que nÃ£o deriva de Entidade e nÃ£o possui estado 'ativa'.
+
 const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::Entidade* ent, Jogo::Ente* ente)
 {
 	sf::Vector2f pos1 = ent->getCorpo().getPosition();
@@ -118,11 +118,11 @@ const sf::Vector2f Gerenciador::GerenciadorColisoes::calculaColisao(Entidades::E
 	float overlapX = (tam1.x / 2.0f + tam2.x / 2.0f) - fabs(centro1.x - centro2.x);
 	float overlapY = (tam1.y / 2.0f + tam2.y / 2.0f) - fabs(centro1.y - centro2.y);
 
-	// ambos > 0  =>  hÃ¡ colisÃ£o. Valores sÃ£o as profundidades de penetraÃ§Ã£o.
+	
 	return sf::Vector2f(overlapX, overlapY);
 }
 
-// O Ente (ex.: o Chao) estÃ¡ sempre presente, entÃ£o so checamos a Entidade.
+// O Ente (ex.: o Chao) estão sempre presente, então so checamos a Entidade.
 const bool Gerenciador::GerenciadorColisoes::verificarColisao(Entidades::Entidade* ent, Jogo::Ente* ente)
 {
 	sf::Vector2f ds = calculaColisao(ent, ente);
@@ -150,7 +150,7 @@ void Gerenciador::GerenciadorColisoes::executar() {
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 {
-	// Checar se cada jogador estÃ¡ colidindo com algum inimigo
+	// Checar se cada jogador esta colidindo com algum inimigo
 	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
 	for (int j = 0; j < 2; j++)
 	{
@@ -162,7 +162,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 			bool col = verificarColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(LIs[i]));
 			if (col) // se colidiu
 			{
-				jog->colidir(LIs[i]); // chama a funÃ§Ã£o de colidir do jogador, passando o inimigo
+				jog->colidir(LIs[i]); 
 			}
 		}
 	}
@@ -170,7 +170,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsInimgs()
 
 void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 {
-	// Checar se cada jogador estÃ¡ colidindo com algum obstÃ¡culo
+	// Checar se cada jogador esta colidindo com algum obstaculo
 	Entidades::Personagens::Jogadores::Jogador* jogs[2] = { pJog1, pJog2 };
 	for (int j = 0; j < 2; j++)
 	{
@@ -183,7 +183,7 @@ void Gerenciador::GerenciadorColisoes::tratarColisoesJogsObstacs()
 			sf::Vector2f ds = calculaColisao(static_cast<Entidades::Entidade*>(jog), static_cast<Entidades::Entidade*>(*it));
 			if (ds.x > 0.0f && ds.y > 0.0f) // se colidiu
 			{
-				// passa a penetraÃ§Ã£o assinada para a rotina de resoluÃ§Ã£o do jogador
+				
 				(*it)->obstaculizar(jog, ds);
 			}
 		}

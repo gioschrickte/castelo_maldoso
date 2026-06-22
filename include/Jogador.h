@@ -2,7 +2,7 @@
 
 #include "Personagem.h"
 #include <string>
-// nÃ£o incluir Inimigo.hpp aqui; forward declare:
+
 namespace Entidades {
 	namespace Personagens {
 		namespace Inimigos { class Inimigo; }

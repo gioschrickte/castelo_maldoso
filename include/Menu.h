@@ -44,7 +44,7 @@ namespace Jogo {
         Menu();
         ~Menu();
 
-        // Satisfaz Ente::executar() â€” nÃ£o usado diretamente
+        
         void executar() override {}
 
         // Chamado pela Principal. Retorna 1, 2 ou -1 (janela fechada)

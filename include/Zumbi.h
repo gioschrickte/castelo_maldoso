@@ -1,4 +1,4 @@
-// Zumbi.hppd
+// Zumbi.hpp
 #pragma once
 #include "Inimigo.h"
 

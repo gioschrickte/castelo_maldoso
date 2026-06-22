@@ -7,7 +7,11 @@ O jogador controla um cavaleiro que percorre as fases do castelo enfrentando ini
 (magos, orks, zumbis) e desviando de obstáculos (espinhos, lama). O jogo conta com duas
 fases, modo para 1 ou 2 jogadores, sistema de salvamento e ranking de pontuações.
 
+<<<<<<< HEAD
 ---
+=======
+O programa pode ser utilizado tanto em Windows ou Linux, visto sua estrutura de CMake.
+>>>>>>> 70e0f080b10219ec999f17f992a20dd2814974de
 
 ## Estrutura do projeto
 

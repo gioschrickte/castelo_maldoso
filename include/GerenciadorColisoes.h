@@ -20,7 +20,7 @@ namespace Gerenciador {
 		Entidades::Personagens::Jogadores::Jogador* pJog1;
 		Entidades::Personagens::Jogadores::Jogador* pJog2;
 		Jogo::Fases::Fase* fase;
-		GerenciadorColisoes();	 // PadrÃ£o singleton
+		GerenciadorColisoes();	 
 		static GerenciadorColisoes* pGC;
 
 	public:
@@ -47,7 +47,7 @@ namespace Gerenciador {
 		void incluirObstaculo(Entidades::Obstaculos::Obstaculo* pObst);
 		void incluirProjetil(Entidades::Projetil* pProj);
 		void setFase(Jogo::Fases::Fase* f);
-		void limpar(); // Limpa as listas de inimigos e obstÃ¡culos
+		void limpar(); 
 
 	};
 }
