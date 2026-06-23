@@ -26,6 +26,7 @@ namespace Lista {
 		Elemento* pUltimo;
 		unsigned int tam;
 	public:
+		// Ref: Felipe Simbalista
 		class Iterator
 		{
 		private:

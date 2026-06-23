@@ -2,6 +2,8 @@
 #include "Jogador.h"
 #include "GerenciadorGrafico.h"
 
+// Ref: Giovane Limas Salvi
+
 
 namespace Jogo {
     namespace Fases {

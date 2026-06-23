@@ -20,6 +20,8 @@ Entidades::Obstaculos::Plataforma::Plataforma(const sf::Vector2f pos, const sf::
 
     sprite.setPosition(pos);
     temSprite = true;
+    //Os sprites foram criados com a IA Sprite-AI.
+    //link:https://www.sprite-ai.art/
 
     // Parametros do "ceder com o peso".
     yInicial       = pos.y;

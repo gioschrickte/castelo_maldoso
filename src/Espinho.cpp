@@ -21,6 +21,8 @@ Entidades::Obstaculos::Espinho::Espinho(const sf::Vector2f pos, const sf::Vector
 
     sprite.setPosition(pos);
     temSprite = true;
+    //Os sprites foram criados com a IA Sprite-AI.
+    //link:https://www.sprite-ai.art/
 }
 
 Entidades::Obstaculos::Espinho::~Espinho() {}

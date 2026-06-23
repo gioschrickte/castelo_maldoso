@@ -22,6 +22,8 @@ Entidades::Personagens::Inimigos::Zumbi::Zumbi(
 
     sprite.setPosition(pos);
     temSprite = true;
+	//Os sprites foram criados com a IA Sprite-AI.
+    //link:https://www.sprite-ai.art/
 
 	vidaMax = 5.0f;
 	vida = vidaMax;

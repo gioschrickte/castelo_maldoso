@@ -24,6 +24,8 @@ Entidades::Personagens::Jogadores::Jogador::Jogador(const sf::Vector2f pos, cons
 
 	sprite.setPosition(pos);
 	temSprite = true;
+	//Os sprites foram criados com a IA Sprite-AI.
+    //link:https://www.sprite-ai.art/
 	
 	vidaMax = VIDA_JOGADOR;
 	vida = vidaMax;

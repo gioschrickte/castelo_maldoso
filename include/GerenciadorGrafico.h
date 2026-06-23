@@ -3,6 +3,8 @@
 #include <iostream>
 using namespace std;
 
+// Ref: Giovane Limas Salvi
+
 namespace Gerenciador
 {
 	class GerenciadorGrafico

@@ -27,6 +27,8 @@ Entidades::Personagens::Inimigos::Mago::Mago(Jogadores::Jogador* j, const sf::Ve
 
 	sprite.setPosition(pos);
 	temSprite = true;
+	//Os sprites foram criados com a IA, Sprite-AI.
+    //link:https://www.sprite-ai.art/
 
 	dano = 3.0f;
 	vidaMax = 20.0f;

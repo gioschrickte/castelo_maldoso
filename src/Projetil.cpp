@@ -25,6 +25,8 @@ Entidades::Projetil::Projetil(int dano, const sf::Vector2f tam)
 
 	sprite.setPosition(this->getPosicao());
 	temSprite = true;
+	//Os sprites foram criados com a IA Sprite-AI.
+    //link:https://www.sprite-ai.art/
 }
 
 Entidades::Projetil::~Projetil() {}

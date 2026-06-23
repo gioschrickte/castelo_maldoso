@@ -9,6 +9,8 @@
 #include <list>
 #include <set>
 
+// Ref: Giovane Lima Salvi
+
 namespace Gerenciador {
 
 	class GerenciadorColisoes

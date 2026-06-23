@@ -21,6 +21,8 @@ Entidades::Personagens::Inimigos::Ork::Ork(Jogadores::Jogador* j, const sf::Vect
 
 	sprite.setPosition(pos);
 	temSprite = true;
+	//Os sprites foram criados com a IA Sprite-AI.
+    //link:https://www.sprite-ai.art/
 
 	dano = 2.0f;
 	vidaMax = 5.0f * nivelDificuldade;
